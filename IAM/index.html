@@ -44,67 +44,6 @@
   </script>
 
   <style>
-    /* Custom cursor styles (Applied on desktop pointer screens) */
-    @media (pointer: fine) {
-      body, a, button, input, select, textarea, [onclick] {
-        cursor: none !important;
-      }
-      .custom-cursor {
-        display: block;
-      }
-    }
-    @media (pointer: coarse) {
-      .custom-cursor {
-        display: none !important;
-      }
-    }
-    #cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #6C63FF;
-      border-radius: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
-      transition: width 0.2s, height 0.2s, background-color 0.2s, border-radius 0.2s;
-    }
-    #cursor-ring {
-      width: 28px;
-      height: 28px;
-      border: 1.5px solid rgba(108, 99, 255, 0.4);
-      border-radius: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9998;
-      transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s;
-    }
-    /* Cursor interactive states */
-    .cursor-hover #cursor-dot {
-      width: 12px;
-      height: 12px;
-      background-color: #F05032;
-    }
-    .cursor-hover #cursor-ring {
-      width: 42px;
-      height: 42px;
-      border-color: rgba(240, 80, 50, 0.6);
-      background-color: rgba(240, 80, 50, 0.05);
-    }
-    .cursor-terminal #cursor-dot {
-      width: 6px;
-      height: 14px;
-      border-radius: 1px;
-      background-color: #6C63FF;
-    }
-    .cursor-terminal #cursor-ring {
-      width: 32px;
-      height: 32px;
-      border-color: rgba(108, 99, 255, 0.7);
-      border-radius: 4px;
-    }
-
     ::selection {
       background-color: #111111;
       color: #F8F8F6;
@@ -160,14 +99,8 @@
 </head>
 <body class="bg-brandBg dark:bg-darkBg text-brandPrimary dark:text-gray-100 font-sans antialiased selection:bg-brandPrimary selection:text-brandBg transition-colors duration-300 overflow-x-hidden">
 
-  <!-- Interactive Canvas Particle Layer -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Custom Cursor Elements -->
-  <div id="cursor-dot" class="custom-cursor"></div>
-  <div id="cursor-ring" class="custom-cursor"></div>
-
-  <!-- NAVIGATION HEADER -->
   <header class="border-b border-brandPrimary/10 dark:border-darkBorder sticky top-0 bg-brandBg/80 dark:bg-darkBg/80 backdrop-blur-md z-50 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-3">
@@ -199,101 +132,100 @@
     </div>
   </header>
 
-  <!-- HERO SECTION (Editorial and Fully Responsive) -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
     <div class="lg:col-span-7 flex flex-col justify-center space-y-6 md:space-y-8">
       <!-- Tag Badge -->
       <div class="inline-flex items-center space-x-2 border border-brandPrimary/15 dark:border-darkBorder bg-white/40 dark:bg-darkSurface/40 self-start px-4 py-2 rounded-full text-xs font-mono">
         <i class="fa-solid fa-terminal text-brandGit"></i>
-        <span class="text-brandPrimary dark:text-gray-300 break-keep" data-i18n="hero_tag">Git & CLI Journey from Ground Zero</span>
+        <span class="text-brandPrimary dark:text-gray-300" data-i18n="hero_tag">Git & CLI Journey from Ground Zero</span>
       </div>
       
-      <!-- Responsive Editorial Title (Cormorant Garamond font applied explicitly via style & config) -->
-      <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif leading-[1.2] tracking-tight text-brandPrimary dark:text-white break-keep">
+      <!-- Editorial Title using Cormorant Garamond for premium typography -->
+      <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif leading-[1.1] tracking-tight text-brandPrimary dark:text-white">
         <span data-i18n="hero_title_1">명령어가 아닌,</span><br>
         <span class="italic text-brandAccent" data-i18n="hero_title_2">Git의 흐름</span><span data-i18n="hero_title_3">을 배우다.</span>
       </h1>
       
-      <!-- Subtitle -->
-      <p class="text-sm sm:text-base md:text-lg text-brandSecondary dark:text-gray-400 font-light leading-relaxed max-w-xl my-4 break-keep" data-i18n="hero_desc">
+      <!-- Subtitle with adjusted padding and line height -->
+      <p class="text-base sm:text-lg md:text-xl text-brandSecondary dark:text-gray-400 font-light leading-relaxed max-w-xl my-4" data-i18n="hero_desc">
         터미널 창 앞에서 외웠던 명령어들은 늘 머릿속을 맴돌다 사라집니다. <strong>git.flow</strong>는 보이지 않던 Git의 실시간 변화를 눈앞에 시각화하여, 원리부터 이해하도록 돕는 차세대 인터랙티브 런타임 공간입니다.
       </p>
 
-      <!-- CTA buttons -->
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-        <a href="#sandbox" class="px-6 py-3.5 bg-brandPrimary dark:bg-white text-brandBg dark:text-brandPrimary font-mono text-xs sm:text-sm tracking-wider rounded-xl text-center hover:bg-brandGit dark:hover:bg-brandGit dark:hover:text-white transition-all duration-300 shadow-lg break-keep" data-i18n="hero_cta_terminal">
+      <!-- CTA buttons with proper margins -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+        <a href="#sandbox" class="px-8 py-4 bg-brandPrimary dark:bg-white text-brandBg dark:text-brandPrimary font-mono text-sm tracking-wider rounded-xl text-center hover:bg-brandGit dark:hover:bg-brandGit dark:hover:text-white transition-all duration-300 shadow-lg" data-i18n="hero_cta_terminal">
           터미널 실습 시작하기 &rarr;
         </a>
-        <a href="#story" class="px-6 py-3.5 border border-brandPrimary/15 dark:border-darkBorder bg-white/20 dark:bg-darkSurface/20 font-mono text-xs sm:text-sm tracking-wider text-center rounded-xl hover:bg-white/70 dark:hover:bg-darkSurface/70 transition-all duration-300 text-brandPrimary dark:text-white break-keep" data-i18n="hero_cta_story">
+        <a href="#story" class="px-8 py-4 border border-brandPrimary/15 dark:border-darkBorder bg-white/20 dark:bg-darkSurface/20 font-mono text-sm tracking-wider text-center rounded-xl hover:bg-white/70 dark:hover:bg-darkSurface/70 transition-all duration-300 text-brandPrimary dark:text-white" data-i18n="hero_cta_story">
           SSAFY 성장 여정 보기
         </a>
       </div>
 
-      <!-- Quick Stats -->
-      <div class="pt-6 mt-4 border-t border-brandPrimary/10 dark:border-darkBorder flex items-center space-x-6 sm:space-x-8">
+      <!-- Quick Stats inside responsive columns with elegant line separators -->
+      <div class="pt-8 mt-6 border-t border-brandPrimary/10 dark:border-darkBorder flex items-center space-x-6 sm:space-x-8">
         <div>
-          <span class="block text-xl sm:text-2xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_1_val">3단계</span>
-          <span class="text-[9px] sm:text-[10px] text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_1_lbl">영역 완벽 시각화</span>
+          <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_1_val">3단계</span>
+          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_1_lbl">영역 완벽 시각화</span>
         </div>
-        <div class="w-[1px] h-8 bg-brandPrimary/10 dark:bg-darkBorder"></div>
+        <div class="w-[1px] h-10 bg-brandPrimary/10 dark:bg-darkBorder"></div>
         <div>
-          <span class="block text-xl sm:text-2xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_2_val">6가지</span>
-          <span class="text-[9px] sm:text-[10px] text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_2_lbl">코어 CLI 챌린지</span>
+          <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_2_val">6가지</span>
+          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_2_lbl">코어 CLI 챌린지</span>
         </div>
-        <div class="w-[1px] h-8 bg-brandPrimary/10 dark:bg-darkBorder"></div>
+        <div class="w-[1px] h-10 bg-brandPrimary/10 dark:bg-darkBorder"></div>
         <div>
-          <span class="block text-xl sm:text-2xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_3_val">0%</span>
-          <span class="text-[9px] sm:text-[10px] text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_3_lbl">진입 장벽 보장</span>
+          <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_3_val">0%</span>
+          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_3_lbl">진입 장벽 보장</span>
         </div>
       </div>
     </div>
 
     <!-- Right Side Illustration Box -->
-    <div class="lg:col-span-5 relative flex justify-center mt-6 lg:mt-0">
+    <div class="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0">
       <div class="absolute inset-0 bg-gradient-to-tr from-brandAccent/10 to-transparent rounded-3xl filter blur-3xl -z-10"></div>
-      <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-xl relative overflow-hidden transition-colors duration-300">
+      <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder rounded-2xl p-6 sm:p-8 w-full max-w-md shadow-xl relative overflow-hidden transition-colors duration-300">
         <!-- Highlight top bar -->
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brandAccent to-brandGit"></div>
         
-        <div class="flex justify-between items-center mb-5">
+        <div class="flex justify-between items-center mb-6">
           <div class="flex items-center space-x-1.5">
-            <span class="w-2 h-2 bg-red-400 rounded-full"></span>
-            <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
-            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+            <span class="w-2.5 h-2.5 bg-red-400 rounded-full"></span>
+            <span class="w-2.5 h-2.5 bg-yellow-400 rounded-full"></span>
+            <span class="w-2.5 h-2.5 bg-green-400 rounded-full"></span>
           </div>
-          <span class="font-mono text-[9px] sm:text-[10px] text-brandSecondary">interactive-canvas.sh</span>
+          <span class="font-mono text-[10px] sm:text-[11px] text-brandSecondary">interactive-canvas.sh</span>
         </div>
 
-        <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-brandPrimary/5 dark:border-darkBorder pb-3">
-            <span class="text-xs font-semibold tracking-wide" data-i18n="working_tree">Working Tree</span>
-            <span class="text-[9px] px-1.5 py-0.5 bg-brandGit/10 text-brandGit font-mono rounded">main.js</span>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between border-b border-brandPrimary/5 dark:border-darkBorder pb-4">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide" data-i18n="working_tree">Working Tree</span>
+            <span class="text-[10px] px-2 py-0.5 bg-brandGit/10 text-brandGit font-mono rounded-md">main.js</span>
           </div>
           
-          <div class="relative pl-5 border-l border-dashed border-brandAccent/30 py-1 space-y-3">
+          <div class="relative pl-6 border-l-2 border-dashed border-brandAccent/30 py-2 space-y-4">
             <!-- Stage Node -->
             <div class="relative flex items-center space-x-3">
-              <span class="absolute -left-[24px] w-3 h-3 bg-brandAccent rounded-full border-2 border-white dark:border-darkSurface shadow-sm"></span>
-              <div class="bg-brandBg dark:bg-darkBg px-2.5 py-1.5 rounded-lg border border-brandPrimary/5 dark:border-darkBorder text-[11px] w-full flex justify-between items-center">
+              <span class="absolute -left-[31px] w-4 h-4 bg-brandAccent rounded-full border-4 border-white dark:border-darkSurface shadow-sm"></span>
+              <div class="bg-brandBg dark:bg-darkBg px-3 py-2 rounded-lg border border-brandPrimary/5 dark:border-darkBorder text-xs w-full flex justify-between items-center">
                 <span class="font-mono text-brandPrimary dark:text-white font-semibold">staging area</span>
-                <span class="text-[9px] text-brandSecondary">ready to commit</span>
+                <span class="text-[9px] sm:text-[10px] text-brandSecondary">ready to record</span>
               </div>
             </div>
             
             <!-- Commit Node -->
-            <div class="relative flex items-center space-x-3 pt-1">
-              <span class="absolute -left-[24px] w-3 h-3 bg-brandGit rounded-full border-2 border-white dark:border-darkSurface shadow-sm success-pulse"></span>
-              <div class="bg-brandPrimary text-brandBg px-2.5 py-1.5 rounded-lg text-[11px] w-full flex justify-between items-center shadow-lg">
+            <div class="relative flex items-center space-x-3 pt-2">
+              <span class="absolute -left-[31px] w-4 h-4 bg-brandGit rounded-full border-4 border-white dark:border-darkSurface shadow-sm success-pulse"></span>
+              <div class="bg-brandPrimary text-brandBg px-3 py-2 rounded-lg text-xs w-full flex justify-between items-center shadow-lg">
                 <div>
-                  <span class="font-mono text-[8px] opacity-70">commit (9fa4b2)</span>
-                  <p class="font-mono text-[9px] sm:text-[10px] text-brandGit font-semibold">"feat: first commit"</p>
+                  <span class="font-mono text-[9px] sm:text-[10px] opacity-70">commit (9fa4b2)</span>
+                  <p class="font-mono text-[10px] sm:text-[11px] text-brandGit font-semibold mt-0.5">"feat: first commit"</p>
                 </div>
-                <span class="font-mono text-[8px] bg-white/20 text-white px-1 py-0.5 rounded">main</span>
+                <span class="font-mono text-[9px] sm:text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded">main</span>
               </div>
             </div>
           </div>
 
-          <div class="text-[10px] sm:text-[11px] text-center text-brandSecondary italic font-serif mt-2 block break-keep" data-i18n="concept_quote">
+          <div class="text-[11px] text-center text-brandSecondary italic font-serif mt-4 block" data-i18n="concept_quote">
             "이해하는 순간, 명령어가 그림으로 펼쳐집니다."
           </div>
         </div>
@@ -301,40 +233,39 @@
     </div>
   </section>
 
-  <!-- STORYTELLING HISTORY SECTION -->
-  <section id="story" class="bg-brandPrimary dark:bg-[#0c0c0d] text-brandBg py-16 md:py-24 relative overflow-hidden transition-colors duration-300">
-    <div class="absolute right-0 bottom-0 w-80 h-80 bg-brandAccent/10 rounded-full filter blur-3xl"></div>
-    <div class="absolute left-0 top-0 w-72 h-72 bg-brandGit/5 rounded-full filter blur-2xl"></div>
+  <section id="story" class="bg-brandPrimary dark:bg-[#0c0c0d] text-brandBg py-20 md:py-32 relative overflow-hidden transition-colors duration-300">
+    <div class="absolute right-0 bottom-0 w-96 h-96 bg-brandAccent/10 rounded-full filter blur-3xl"></div>
+    <div class="absolute left-0 top-0 w-80 h-80 bg-brandGit/5 rounded-full filter blur-2xl"></div>
     
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       
       <!-- Left Column: Philosophy Description -->
-      <div class="lg:col-span-5 flex flex-col justify-between space-y-6 lg:space-y-0">
+      <div class="lg:col-span-5 flex flex-col justify-between space-y-8 lg:space-y-0">
         <div class="space-y-4">
           <span class="text-xs uppercase font-mono tracking-widest text-brandGit block font-bold" data-i18n="story_badge">SSAFY LIFE-CYCLE STORY</span>
-          <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif leading-tight text-white break-keep">
+          <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif leading-tight text-white">
             <span data-i18n="story_title_1">처음엔 낯설어도,</span><br>
             <span data-i18n="story_title_2">결국</span> <span class="italic text-brandAccent" data-i18n="story_title_3">자유롭게</span><br>
             <span data-i18n="story_title_4">다루게 된다.</span>
           </h2>
         </div>
-        <div class="pt-6 lg:pt-12">
-          <p class="font-mono text-[11px] text-brandSecondary leading-relaxed border-l-2 border-brandGit pl-3 py-1 break-keep" data-i18n="story_footer_quote">
+        <div class="pt-8 lg:pt-16">
+          <p class="font-mono text-xs text-brandSecondary leading-relaxed border-l-2 border-brandGit pl-4 py-1" data-i18n="story_footer_quote">
             "협업 프로젝트 전날 터진 Git conflict에 팀원 모두가 눈앞이 캄캄해졌던 경험, 혹시 있으신가요? 명령어를 단순 암기하면, 예상치 못한 흐름에 무너지게 됩니다."
           </p>
         </div>
       </div>
 
       <!-- Right Column: Growth Milestones -->
-      <div class="lg:col-span-7 space-y-8">
+      <div class="lg:col-span-7 space-y-10 sm:space-y-12">
         
         <!-- Stage 01 -->
-        <div class="border-b border-white/10 pb-5 sm:pb-6">
-          <div class="flex items-start space-x-3 sm:space-x-4">
-            <span class="font-serif text-2xl sm:text-3xl text-brandAccent italic">01</span>
-            <div class="space-y-1">
-              <h3 class="text-base sm:text-lg font-semibold tracking-wide text-white break-keep" data-i18n="stage1_title">알 수 없는 검은 창, CLI의 두려움</h3>
-              <p class="text-xs sm:text-sm text-brandSecondary leading-relaxed font-light break-keep" data-i18n="stage1_desc">
+        <div class="border-b border-white/10 pb-6 sm:pb-8">
+          <div class="flex items-start space-x-4 sm:space-x-6">
+            <span class="font-serif text-3xl sm:text-4xl text-brandAccent italic">01</span>
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-semibold tracking-wide text-white" data-i18n="stage1_title">알 수 없는 검은 창, CLI의 두려움</h3>
+              <p class="text-xs sm:text-sm text-brandSecondary leading-relaxed font-light" data-i18n="stage1_desc">
                 SSAFY에 처음 들어와 마주한 터미널 창. 마우스 클릭도 없이 오직 키보드만으로 폴더를 탐색하고 파일을 옮겨야 하는 CLI 환경은 마냥 낯설고 조심스럽기만 합니다.
               </p>
             </div>
@@ -342,12 +273,12 @@
         </div>
 
         <!-- Stage 02 -->
-        <div class="border-b border-white/10 pb-5 sm:pb-6">
-          <div class="flex items-start space-x-3 sm:space-x-4">
-            <span class="font-serif text-2xl sm:text-3xl text-brandGit italic">02</span>
-            <div class="space-y-1">
-              <h3 class="text-base sm:text-lg font-semibold tracking-wide text-white break-keep" data-i18n="stage2_title">암기식 Git 명령어의 한계</h3>
-              <p class="text-xs sm:text-sm text-brandSecondary leading-relaxed font-light break-keep" data-i18n="stage2_desc">
+        <div class="border-b border-white/10 pb-6 sm:pb-8">
+          <div class="flex items-start space-x-4 sm:space-x-6">
+            <span class="font-serif text-3xl sm:text-4xl text-brandGit italic">02</span>
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-semibold tracking-wide text-white" data-i18n="stage2_title">암기식 Git 명령어의 한계</h3>
+              <p class="text-xs sm:text-sm text-brandSecondary leading-relaxed font-light" data-i18n="stage2_desc">
                 git add ., git commit -m, git push만 번갈아 기입하다 마주하는 Merge Conflict. 원리조차 모르다 보니 무서워 --force 플래그를 붙이고 말았던 아찔한 경험을 딛고 가야 합니다.
               </p>
             </div>
@@ -355,12 +286,12 @@
         </div>
 
         <!-- Stage 03 -->
-        <div class="border-b border-white/10 pb-5 sm:pb-6">
-          <div class="flex items-start space-x-3 sm:space-x-4">
-            <span class="font-serif text-2xl sm:text-3xl text-white italic">03</span>
-            <div class="space-y-1">
-              <h3 class="text-base sm:text-lg font-semibold tracking-wide text-white break-keep" data-i18n="stage3_title">원리를 시각적으로 꿰뚫는 순간</h3>
-              <p class="text-xs sm:text-sm text-brandSecondary leading-relaxed font-light break-keep" data-i18n="stage3_desc">
+        <div class="border-b border-white/10 pb-6 sm:pb-8">
+          <div class="flex items-start space-x-4 sm:space-x-6">
+            <span class="font-serif text-3xl sm:text-4xl text-white italic">03</span>
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-semibold tracking-wide text-white" data-i18n="stage3_title">원리를 시각적으로 꿰뚫는 순간</h3>
+              <p class="text-xs sm:text-sm text-brandSecondary leading-relaxed font-light" data-i18n="stage3_desc">
                 로컬 저장소의 3대 구역을 머릿속에 그림으로 그려낼 수 있다면, 어떤 Conflict가 발생해도 침착하게 히스토리를 정렬하고 협업의 중심으로 나아갈 수 있습니다.
               </p>
             </div>
@@ -371,113 +302,104 @@
     </div>
   </section>
 
-  <!-- SANDBOX INTERACTIVE PLAYGROUND -->
-  <section id="sandbox" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-20">
+  <section id="sandbox" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 md:py-24">
     <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4">
       <span class="text-xs uppercase font-mono tracking-widest text-brandGit px-3 py-1 bg-brandGit/10 rounded-full font-bold inline-block" data-i18n="sandbox_badge">CORE EXPERIENCE</span>
-      <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif text-brandPrimary dark:text-white leading-normal break-keep">
+      <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif text-brandPrimary dark:text-white leading-normal">
         <span data-i18n="sandbox_title_1">직접 타이핑하며 확인하는</span> <span class="italic text-brandAccent" data-i18n="sandbox_title_2">Git 샌드박스</span>
       </h2>
-      <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 font-light leading-relaxed break-keep" data-i18n="sandbox_desc">
+      <p class="text-xs sm:text-sm md:text-base text-brandSecondary dark:text-gray-400 font-light leading-relaxed my-2" data-i18n="sandbox_desc">
         아래 가상 터미널에 직접 명령어를 입력하거나 퀵 단추를 눌러보세요.<br>
         CLI 파일 생성부터 Git 영역 변동, 브랜치 전환 및 머지까지 완벽히 에뮬레이트됩니다!
       </p>
     </div>
 
-    <!-- Playground Grid Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+    <!-- Playground Grid Layout with generous grid gap and item stretches -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       
       <!-- Left Column: Challenge lists and Interactive Virtual Terminal -->
-      <div class="lg:col-span-5 flex flex-col space-y-4 justify-between">
+      <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
         
         <!-- Challenge Guide Panel -->
-        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-4 sm:p-5 rounded-2xl shadow-sm transition-colors duration-300">
-          <div class="flex justify-between items-center mb-3">
+        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-5 sm:p-6 rounded-2xl shadow-sm transition-colors duration-300">
+          <div class="flex justify-between items-center mb-4">
             <h3 class="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 font-bold" data-i18n="quest_board">Quest Board</h3>
             <span id="quest-progress" class="text-xs font-mono font-bold text-brandGit">0 / 6 Completed</span>
           </div>
           
-          <div class="space-y-2">
+          <div class="space-y-2.5">
             <!-- Mission 1 -->
-            <div id="mission-1-ui" class="flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder bg-brandBg dark:bg-darkBg transition-all duration-300">
-              <div class="flex items-center space-x-2.5 min-w-0">
-                <div id="mission-1-bullet" class="w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[8px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">1</div>
-                <span class="text-[11px] sm:text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m1_text">Git 저장소 시작하기 (<code>git init</code>)</span>
+            <div id="mission-1-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder bg-brandBg dark:bg-darkBg transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-1-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">1</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m1_text">Git 저장소 시작하기 (<code>git init</code>)</span>
               </div>
-              <span id="mission-1-status" class="text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0" data-i18n="status_ready">준비</span>
+              <span id="mission-1-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_ready">준비</span>
             </div>
             
             <!-- Mission 2 -->
-            <div id="mission-2-ui" class="flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
-              <div class="flex items-center space-x-2.5 min-w-0">
-                <div id="mission-2-bullet" class="w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[8px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">2</div>
-                <span class="text-[11px] sm:text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m2_text">가상 파일 생성하기 (<code>touch [파일명]</code>)</span>
+            <div id="mission-2-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-2-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">2</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m2_text">가상 파일 생성하기 (<code>touch [파일명]</code>)</span>
               </div>
-              <span id="mission-2-status" class="text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
+              <span id="mission-2-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
 
             <!-- Mission 3 -->
-            <div id="mission-3-ui" class="flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
-              <div class="flex items-center space-x-2.5 min-w-0">
-                <div id="mission-3-bullet" class="w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[8px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">3</div>
-                <span class="text-[11px] sm:text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m3_text">파일 스테이징하기 (<code>git add [파일명]</code>)</span>
+            <div id="mission-3-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-3-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">3</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m3_text">파일 스테이징하기 (<code>git add [파일명]</code>)</span>
               </div>
-              <span id="mission-3-status" class="text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
+              <span id="mission-3-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
 
             <!-- Mission 4 -->
-            <div id="mission-4-ui" class="flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
-              <div class="flex items-center space-x-2.5 min-w-0">
-                <div id="mission-4-bullet" class="w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[8px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">4</div>
-                <span class="text-[11px] sm:text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m4_text">버전 기록 저장 (<code>git commit -m "..."</code>)</span>
+            <div id="mission-4-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-4-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">4</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m4_text">버전 기록 저장 (<code>git commit -m "..."</code>)</span>
               </div>
-              <span id="mission-4-status" class="text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
+              <span id="mission-4-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
 
             <!-- Mission 5 -->
-            <div id="mission-5-ui" class="flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
-              <div class="flex items-center space-x-2.5 min-w-0">
-                <div id="mission-5-bullet" class="w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[8px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">5</div>
-                <span class="text-[11px] sm:text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m5_text">새 평행 우주 생성 (<code>git branch [이름]</code>)</span>
+            <div id="mission-5-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-5-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">5</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m5_text">새 평행 우주 생성 (<code>git branch [이름]</code>)</span>
               </div>
-              <span id="mission-5-status" class="text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
+              <span id="mission-5-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
 
             <!-- Mission 6 -->
-            <div id="mission-6-ui" class="flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
-              <div class="flex items-center space-x-2.5 min-w-0">
-                <div id="mission-6-bullet" class="w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[8px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">6</div>
-                <span class="text-[11px] sm:text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m6_text">새 우주로 차원 이동 (<code>git checkout [이름]</code>)</span>
+            <div id="mission-6-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-6-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">6</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m6_text">새 우주로 차원 이동 (<code>git checkout [이름]</code>)</span>
               </div>
-              <span id="mission-6-status" class="text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
+              <span id="mission-6-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
           </div>
         </div>
 
-        <!-- Terminal Panel -->
-        <div class="bg-[#18191a] text-[#F8F8F6] p-4 rounded-2xl flex-1 flex flex-col justify-between shadow-xl min-h-[360px] border border-white/5 relative">
-          <div class="flex justify-between items-center border-b border-white/5 pb-2.5 mb-3">
+        <div class="bg-[#18191a] text-[#F8F8F6] p-4 sm:p-6 rounded-2xl flex-1 flex flex-col justify-between shadow-xl min-h-[380px] border border-white/5 relative">
+          <div class="flex justify-between items-center border-b border-white/5 pb-3 mb-4">
             <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 bg-red-500 rounded-full inline-block"></span>
-              <span class="w-2 h-2 bg-yellow-500 rounded-full inline-block"></span>
-              <span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span>
-              <span class="text-[9px] font-mono text-brandSecondary pl-1">ssafy-terminal@git-flow</span>
+              <span class="w-2.5 h-2.5 bg-red-500 rounded-full inline-block"></span>
+              <span class="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block"></span>
+              <span class="w-2.5 h-2.5 bg-green-500 rounded-full inline-block"></span>
+              <span class="text-[10px] font-mono text-brandSecondary pl-1">ssafy-terminal@git-flow</span>
             </div>
-            
-            <!-- Sound controller badge -->
-            <div class="flex items-center space-x-2">
-              <button onclick="toggleAudio()" id="sound-toggle-btn" class="text-[9px] text-brandSecondary hover:text-white font-mono flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded transition-all">
-                <i class="fa-solid fa-volume-high"></i> Mute
-              </button>
-              <button onclick="resetSandbox()" class="text-[9px] text-brandSecondary hover:text-brandGit font-mono flex items-center gap-1 active:scale-95 transition-all">
-                <i class="fa-solid fa-rotate-right"></i> Reset
-              </button>
-            </div>
+            <button onclick="resetSandbox()" class="text-[10px] text-brandSecondary hover:text-brandGit font-mono flex items-center gap-1 active:scale-95 transition-all">
+              <i class="fa-solid fa-rotate-right"></i> Reset
+            </button>
           </div>
 
           <!-- Output Log Block -->
-          <div id="terminal-log" class="font-mono text-[10px] sm:text-[11px] text-brandBg/90 overflow-y-auto max-h-[220px] min-h-[160px] space-y-2 flex-1 custom-scroll pr-1.5 mb-3">
+          <div id="terminal-log" class="font-mono text-[11px] text-brandBg/90 overflow-y-auto max-h-[220px] min-h-[180px] space-y-2 flex-1 custom-scroll pr-2 mb-4">
             <div class="text-[#6B7280]" data-i18n="t_welcome_1">&lt; git.flow 터미널 시뮬레이터에 오신 것을 환영합니다! &gt;</div>
             <div class="text-[#6B7280]" data-i18n="t_welcome_2">우측의 Git 3대 요소를 보며 명령어를 연습하세요.</div>
             <div class="text-[#6B7280]" data-i18n="t_welcome_3">실제 리눅스 CLI 명령어(ls, touch, mkdir, rm)도 함께 지원됩니다.</div>
@@ -485,47 +407,45 @@
           </div>
 
           <!-- Input Bar -->
-          <div class="border-t border-white/5 pt-2.5">
+          <div class="border-t border-white/5 pt-3">
             <form id="terminal-form" onsubmit="handleCommand(event)" class="flex items-center">
-              <span class="font-mono text-brandGit text-[11px] sm:text-xs mr-1 font-bold select-none">ssafy:workspace$</span>
-              <input id="terminal-input" type="text" autocomplete="off" oninput="playTypingSound()" class="bg-transparent border-none outline-none focus:ring-0 text-[11px] sm:text-xs font-mono text-[#F8F8F6] flex-1 min-w-0" placeholder="명령어를 입력하세요...">
-              <button type="submit" class="px-2.5 py-1 bg-brandGit hover:bg-opacity-90 rounded text-[8px] sm:text-[9px] font-mono tracking-wider font-semibold text-white shrink-0 active:scale-95 transition-transform" data-i18n="enter_btn">ENTER</button>
+              <span class="font-mono text-brandGit text-xs mr-1.5 font-bold select-none">ssafy:workspace$</span>
+              <input id="terminal-input" type="text" autocomplete="off" class="bg-transparent border-none outline-none focus:ring-0 text-xs font-mono text-[#F8F8F6] flex-1 min-w-0" placeholder="명령어를 입력하세요...">
+              <button type="submit" class="px-3 py-1 bg-brandGit hover:bg-opacity-90 rounded text-[9px] font-mono tracking-wider font-semibold text-white shrink-0 active:scale-95 transition-transform" data-i18n="enter_btn">ENTER</button>
             </form>
           </div>
         </div>
 
-        <!-- Shortcuts panel (Now fully cleaner: Filenames and branch tags stripped from names/behaviors) -->
-        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-3.5 rounded-2xl transition-colors duration-300">
-          <span class="text-[9px] uppercase font-mono tracking-widest text-brandSecondary dark:text-gray-400 block mb-2.5 font-bold" data-i18n="smart_btn_title">퀵 스마트 단추 (터미널 자동 입력)</span>
-          <div class="flex flex-wrap gap-1">
-            <button onclick="triggerShortcut('git init')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all font-bold">
+        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-4 sm:p-5 rounded-2xl transition-colors duration-300">
+          <span class="text-[9px] uppercase font-mono tracking-widest text-brandSecondary dark:text-gray-400 block mb-3 font-semibold" data-i18n="smart_btn_title">퀵 스마트 단추 (터미널 자동 입력)</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="triggerShortcut('git init')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1 font-bold">
               <span>git init</span>
             </button>
-            <button onclick="triggerShortcut('touch')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all">
-              <span>touch</span>
+            <button onclick="triggerShortcut('touch app.js')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
+              <span>touch app.js</span>
             </button>
-            <button onclick="triggerShortcut('git add')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all">
-              <span>git add</span>
+            <button onclick="triggerShortcut('git add')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
+              <span>git add app.js</span>
             </button>
-            <button onclick="triggerShortcut('git commit')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all">
+            <button onclick="triggerShortcut('git commit -m')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git commit</span>
             </button>
-            <button onclick="triggerShortcut('git branch')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all">
-              <span>git branch</span>
+            <button onclick="triggerShortcut('git branch')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
+              <span>git branch feature/dev</span>
             </button>
-            <button onclick="triggerShortcut('git checkout')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all">
+            <button onclick="triggerShortcut('git checkout')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git checkout</span>
             </button>
-            <button onclick="triggerShortcut('git merge')" class="px-2 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[10px] font-mono bg-brandBg dark:bg-darkBg rounded hover:text-brandGit dark:text-white transition-all">
+            <button onclick="triggerShortcut('git merge')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git merge</span>
             </button>
-            
-            <!-- Status verification shortcuts -->
-            <button onclick="triggerShortcut('git status')" class="px-2 py-1.5 border border-brandAccent/25 hover:border-brandAccent text-[10px] font-mono bg-brandAccent/5 rounded text-brandAccent font-semibold transition-all flex items-center gap-1">
-              <i class="fa-solid fa-circle-question text-[9px]"></i> <span>git status</span>
+            <!-- NEW Status Verification Buttons added -->
+            <button onclick="triggerShortcut('git status')" class="px-2.5 py-1.5 border border-brandAccent/25 hover:border-brandAccent text-[11px] font-mono bg-brandAccent/5 rounded-lg text-brandAccent font-semibold transition-all flex items-center gap-1">
+              <i class="fa-solid fa-circle-question text-[10px]"></i> <span>git status</span>
             </button>
-            <button onclick="triggerShortcut('git log')" class="px-2 py-1.5 border border-brandSuccess/25 hover:border-brandSuccess text-[10px] font-mono bg-brandSuccess/5 rounded text-brandSuccess font-semibold transition-all flex items-center gap-1">
-              <i class="fa-solid fa-clock-rotate-left text-[9px]"></i> <span>git log</span>
+            <button onclick="triggerShortcut('git log')" class="px-2.5 py-1.5 border border-brandSuccess/25 hover:border-brandSuccess text-[11px] font-mono bg-brandSuccess/5 rounded-lg text-brandSuccess font-semibold transition-all flex items-center gap-1">
+              <i class="fa-solid fa-clock-rotate-left text-[10px]"></i> <span>git log</span>
             </button>
           </div>
         </div>
@@ -533,29 +453,29 @@
       </div>
 
       <!-- Right Column: Visualizer panel -->
-      <div class="lg:col-span-7 bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-5 sm:p-6 rounded-2xl shadow-sm flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
+      <div class="lg:col-span-7 bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-6 sm:p-8 rounded-2xl shadow-sm flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
         
         <!-- Interactive Success Celebration Overlay -->
         <div id="success-overlay" class="hidden absolute inset-0 bg-white/95 dark:bg-[#121212]/95 z-40 flex flex-col items-center justify-center text-center p-6 transition-all duration-500">
-          <div class="w-14 h-14 bg-brandSuccess/10 text-brandSuccess rounded-full flex items-center justify-center text-2xl mb-4 success-pulse">
+          <div class="w-16 h-16 bg-brandSuccess/10 text-brandSuccess rounded-full flex items-center justify-center text-3xl mb-4 success-pulse">
             <i class="fa-solid fa-trophy"></i>
           </div>
           <span class="text-xs uppercase font-mono tracking-widest text-brandSuccess font-bold" data-i18n="win_tag">Congratulation!</span>
-          <h3 class="text-xl sm:text-2xl font-serif text-brandPrimary dark:text-white mt-1 break-keep" data-i18n="win_title">Git 흐름 탐험 미션 완수</h3>
-          <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 max-w-sm mt-2 leading-relaxed break-keep" data-i18n="win_desc">
+          <h3 class="text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white mt-1" data-i18n="win_title">Git 흐름 탐험 미션 완수</h3>
+          <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 max-w-sm mt-2 leading-relaxed" data-i18n="win_desc">
             축하합니다! Git의 기본 주기와 로컬 아키텍처를 완벽히 정복하셨습니다. 이제 어떤 협업 환경에서도 자신감 있게 나아가세요!
           </p>
-          <button onclick="closeSuccessOverlay()" class="mt-5 px-5 py-2 bg-brandPrimary dark:bg-white text-brandBg dark:text-brandPrimary text-xs font-mono rounded-lg hover:bg-brandAccent hover:text-white dark:hover:bg-brandAccent transition-all" data-i18n="win_return">
+          <button onclick="closeSuccessOverlay()" class="mt-6 px-6 py-2.5 bg-brandPrimary dark:bg-white text-brandBg dark:text-brandPrimary text-xs font-mono rounded-lg hover:bg-brandAccent hover:text-white dark:hover:bg-brandAccent transition-all" data-i18n="win_return">
             시각화 샌드박스로 돌아가기
           </button>
         </div>
 
         <div>
           <!-- Visualization Header -->
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-brandPrimary/5 dark:border-darkBorder pb-3 mb-3">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-brandPrimary/5 dark:border-darkBorder pb-4 mb-4">
             <div>
               <span class="text-[9px] uppercase font-mono tracking-widest text-brandGit font-bold" data-i18n="v_badge">Real-time Runtime Graph</span>
-              <h3 class="text-base sm:text-lg font-semibold tracking-tight text-brandPrimary dark:text-white mt-0.5" data-i18n="v_title">Git 3단계 영역 시각화</h3>
+              <h3 class="text-lg sm:text-xl font-semibold tracking-tight text-brandPrimary dark:text-white mt-0.5" data-i18n="v_title">Git 3단계 영역 시각화</h3>
             </div>
             <div class="flex items-center space-x-2">
               <span class="text-xs font-mono text-brandSecondary dark:text-gray-400">HEAD pointer:</span>
@@ -564,88 +484,82 @@
           </div>
 
           <!-- Branch Topology Visualization -->
-          <div class="mb-4 p-3 bg-brandBg/60 dark:bg-darkBg/60 rounded-xl border border-brandPrimary/5 dark:border-darkBorder">
-            <h4 class="text-[9px] font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 mb-1.5 flex items-center justify-between font-bold">
+          <div class="mb-6 p-4 bg-brandBg/60 dark:bg-darkBg/60 rounded-xl border border-brandPrimary/5 dark:border-darkBorder">
+            <h4 class="text-[10px] font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 mb-2 flex items-center justify-between font-bold">
               <span data-i18n="branch_topology_title">Branch Pointer Map (활성 브랜치 구조)</span>
               <span class="text-[9px] text-brandAccent font-bold">Active: <span id="active-branch-desc">none</span></span>
             </h4>
-            <div id="branch-pointers-list" class="flex flex-wrap gap-1.5">
-              <span class="text-xs font-mono italic text-brandSecondary text-center w-full" data-i18n="no_branches">저장소 비활성 상태</span>
+            <div id="branch-pointers-list" class="flex flex-wrap gap-2">
+              <!-- Dynamically rendered branch nodes -->
+              <span class="text-xs font-mono italic text-brandSecondary" data-i18n="no_branches">저장소 비활성 상태</span>
             </div>
           </div>
 
           <!-- Interactive Columns with Proper Spacing -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
             
-            <!-- Column 1: Working Tree -->
-            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-3 rounded-xl flex flex-col justify-between min-h-[320px] transition-all">
+            <!-- Column 1: Working Tree & File System -->
+            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px] transition-all">
               <div>
-                <div class="flex items-center space-x-1.5 mb-1.5">
-                  <span class="w-2 h-2 bg-brandGit rounded-full"></span>
+                <div class="flex items-center space-x-1.5 mb-2">
+                  <span class="w-2.5 h-2.5 bg-brandGit rounded-full"></span>
                   <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-brandPrimary dark:text-white" data-i18n="col1_title">Working Tree</h4>
                 </div>
-                <p class="text-[10px] text-brandSecondary dark:text-gray-400 leading-normal mb-3" data-i18n="col1_desc">내 로컬 가상 드라이브에 존재하는 파일 목록</p>
+                <p class="text-[10px] text-brandSecondary dark:text-gray-400 leading-relaxed mb-4" data-i18n="col1_desc">내 로컬 가상 드라이브에 존재하는 파일 목록</p>
               </div>
 
               <!-- File System Representation -->
-              <div class="space-y-1.5 mt-auto">
-                <div id="working-tree-files" class="space-y-1.5 max-h-[220px] overflow-y-auto custom-scroll">
-                  <!-- Dynamically populated files -->
+              <div class="space-y-2 mt-auto">
+                <div id="working-tree-files" class="space-y-2 max-h-[180px] overflow-y-auto custom-scroll">
+                  <!-- Dynamically populated files via touch -->
                 </div>
                 
-                <div id="git-status-alert" class="p-2 bg-white/70 dark:bg-darkSurface/70 border border-brandPrimary/5 dark:border-darkBorder rounded-lg text-[9px] text-brandSecondary dark:text-gray-400 italic font-mono text-center" data-i18n="no_repo_alert">
+                <div id="git-status-alert" class="p-2.5 bg-white/70 dark:bg-darkSurface/70 border border-brandPrimary/5 dark:border-darkBorder rounded-lg text-[9px] text-brandSecondary dark:text-gray-400 italic font-mono text-center" data-i18n="no_repo_alert">
                   레포지토리가 초기화되지 않았습니다.
                 </div>
               </div>
             </div>
 
             <!-- Column 2: Staging Area -->
-            <div id="stage-col" class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-3 rounded-xl flex flex-col justify-between min-h-[320px] transition-all">
+            <div id="stage-col" class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px] transition-all">
               <div>
-                <div class="flex items-center space-x-1.5 mb-1.5">
-                  <span class="w-2 h-2 bg-brandAccent rounded-full"></span>
+                <div class="flex items-center space-x-1.5 mb-2">
+                  <span class="w-2.5 h-2.5 bg-brandAccent rounded-full"></span>
                   <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-brandPrimary dark:text-white" data-i18n="col2_title">Staging Area</h4>
                 </div>
-                <p class="text-[10px] text-brandSecondary dark:text-gray-400 leading-normal mb-3" data-i18n="col2_desc">커밋을 남기기 전, 임시로 대기시키는 가상 인덱스 영역</p>
+                <p class="text-[10px] text-brandSecondary dark:text-gray-400 leading-relaxed mb-4" data-i18n="col2_desc">커밋을 남기기 전, 임시로 대기시키는 가상 인덱스 영역</p>
               </div>
 
               <!-- Staged Items -->
-              <div class="space-y-1.5 mt-auto">
-                <div id="staged-files-list" class="space-y-1.5 max-h-[220px] overflow-y-auto custom-scroll">
+              <div class="space-y-2 mt-auto">
+                <div id="staged-files-list" class="space-y-2 max-h-[180px] overflow-y-auto custom-scroll">
                   <!-- Staged files populated here -->
                 </div>
-                <div id="staged-empty" class="p-3 bg-dashed border border-brandPrimary/10 dark:border-darkBorder rounded-lg text-center text-[10px] text-brandSecondary dark:text-gray-400 italic font-mono" data-i18n="stage_empty">
+                <div id="staged-empty" class="p-4 bg-dashed border border-brandPrimary/10 dark:border-darkBorder rounded-lg text-center text-[10px] text-brandSecondary dark:text-gray-400 italic font-mono" data-i18n="stage_empty">
                   대기 중인 파일 없음
                 </div>
               </div>
             </div>
 
-            <!-- Column 3: Local Repository (with real branches SVG Graph visualization) -->
-            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-3 rounded-xl flex flex-col justify-between min-h-[320px] transition-all">
+            <!-- Column 3: Local Repository -->
+            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px] transition-all">
               <div>
-                <div class="flex items-center space-x-1.5 mb-1.5">
+                <div class="flex items-center space-x-1.5 mb-2">
                   <span class="w-2.5 h-2.5 bg-brandPrimary dark:bg-white rounded-full"></span>
                   <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-brandPrimary dark:text-white" data-i18n="col3_title">Local Repo</h4>
                 </div>
-                <p class="text-[10px] text-brandSecondary dark:text-gray-400 leading-normal mb-3" data-i18n="col3_desc">스냅샷들이 정식 영구 버전으로 기록되는 로컬 공간 (.git)</p>
+                <p class="text-[10px] text-brandSecondary dark:text-gray-400 leading-relaxed mb-4" data-i18n="col3_desc">스냅샷들이 정식 영구 버전으로 기록되는 로컬 공간 (.git)</p>
               </div>
 
-              <!-- Commits Graph Container with dynamic SVG Branch visualizer -->
-              <div id="repo-canvas" class="flex-1 flex flex-col justify-start relative py-2 min-h-[180px]">
-                <div id="repo-empty" class="text-center text-[10px] text-brandSecondary dark:text-gray-400 italic font-mono my-auto" data-i18n="repo_empty">
+              <!-- Commits Graph Container -->
+              <div id="repo-canvas" class="flex-1 flex flex-col justify-center items-center relative py-4 min-h-[160px]">
+                <div id="repo-empty" class="text-center text-[10px] text-brandSecondary dark:text-gray-400 italic font-mono" data-i18n="repo_empty">
                   기록된 커밋 히스토리가 아직 없습니다.
                 </div>
                 
-                <!-- Joint Graph Viewport: Left branch lines drawing, Right custom Cards -->
-                <div id="graph-viewport" class="hidden flex w-full h-full max-h-[220px] overflow-y-auto custom-scroll pr-1">
-                  <!-- SVG Topology Lanes on the left side of local repo column -->
-                  <div class="w-[50px] shrink-0 relative mr-1 min-h-[160px]">
-                    <svg id="git-svg-graph" class="absolute inset-0 w-full h-full pointer-events-none" style="min-height: 100%;"></svg>
-                  </div>
-                  <!-- Cards list in parallel alignment -->
-                  <div id="commit-cards-list" class="flex-1 flex flex-col space-y-3 pb-4">
-                    <!-- Cards with accurate user-generated commit messages rendered here -->
-                  </div>
+                <!-- Commit tree container dynamically injected with explicit scroll heights -->
+                <div id="commit-tree" class="hidden w-full flex flex-col items-center justify-start space-y-3 max-h-[220px] overflow-y-auto custom-scroll pr-1">
+                  <!-- Active Commits with Memo & Metadata & Snapshots included -->
                 </div>
               </div>
             </div>
@@ -653,14 +567,13 @@
           </div>
         </div>
 
-        <!-- Tip Bar -->
-        <div id="learning-tip" class="mt-4 p-3 bg-brandBg dark:bg-darkBg rounded-xl border border-brandPrimary/5 dark:border-darkBorder flex items-start space-x-2.5 transition-colors duration-300">
-          <div class="w-7 h-7 bg-brandAccent/10 text-brandAccent rounded-full flex items-center justify-center shrink-0 text-xs">
+        <div id="learning-tip" class="mt-8 p-4 bg-brandBg dark:bg-darkBg rounded-xl border border-brandPrimary/5 dark:border-darkBorder flex items-start space-x-3 transition-colors duration-300">
+          <div class="w-8 h-8 bg-brandAccent/10 text-brandAccent rounded-full flex items-center justify-center shrink-0 text-sm">
             <i class="fa-solid fa-lightbulb"></i>
           </div>
-          <div class="space-y-0.5">
+          <div class="space-y-1">
             <h4 class="text-xs font-semibold text-brandPrimary dark:text-white" id="tip-title">준비 운동</h4>
-            <p class="text-[10px] sm:text-[11px] text-brandSecondary dark:text-gray-300 leading-relaxed" id="tip-desc">왼쪽의 스마트 단추에서 [git init] 단추를 누르거나 터미널에 <code class="font-mono bg-white dark:bg-darkSurface px-1">git init</code>을 치세요.</p>
+            <p class="text-[11px] text-brandSecondary dark:text-gray-300 leading-relaxed" id="tip-desc">왼쪽의 스마트 단추에서 [git init] 단추를 누르거나 터미널에 <code class="font-mono bg-white dark:bg-darkSurface px-1">git init</code>을 치세요.</p>
           </div>
         </div>
 
@@ -669,21 +582,20 @@
     </div>
   </section>
 
-  <!-- FEATURE ADVANTAGES SECTION -->
-  <section id="strengths" class="border-t border-brandPrimary/10 dark:border-darkBorder py-16 md:py-24 transition-colors duration-300">
+  <section id="strengths" class="border-t border-brandPrimary/10 dark:border-darkBorder py-20 md:py-28 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
       
-      <!-- Sub-headline layout -->
-      <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-10 sm:mb-14">
-        <div class="max-w-xl space-y-3">
+      <!-- Sub-headline layout with relaxed padding -->
+      <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12 sm:mb-16">
+        <div class="max-w-xl space-y-4">
           <span class="text-xs uppercase font-mono tracking-widest text-brandGit font-bold block" data-i18n="feat_badge">Why git.flow?</span>
-          <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif text-brandPrimary dark:text-white leading-normal break-keep">
+          <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif text-brandPrimary dark:text-white leading-normal">
             <span data-i18n="feat_title_1">어렵기만 한 버전을</span><br>
             <span data-i18n="feat_title_2">가장</span> <span class="italic text-brandAccent" data-i18n="feat_title_3">아름답게 관찰</span><span data-i18n="feat_title_4">하는 세 가지 방법.</span>
           </h2>
         </div>
         <div>
-          <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 max-w-sm leading-relaxed font-light mt-1 break-keep" data-i18n="feat_subtitle">
+          <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 max-w-sm leading-relaxed font-light mt-2" data-i18n="feat_subtitle">
             명령어를 기계적으로 외우지 않고도 자연스럽게 분산 관리 협업 흐름을 완전히 내 것으로 만드는 비전 제시.
           </p>
         </div>
@@ -693,45 +605,45 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         
         <!-- Feature 1 -->
-        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/5 dark:border-darkBorder p-5 sm:p-6 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/5 dark:border-darkBorder p-6 sm:p-8 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-all duration-300">
           <div>
-            <div class="w-10 h-10 bg-brandBg dark:bg-darkBg rounded-xl flex items-center justify-center text-md text-brandPrimary dark:text-white mb-5">
+            <div class="w-12 h-12 bg-brandBg dark:bg-darkBg rounded-xl flex items-center justify-center text-lg text-brandPrimary dark:text-white mb-6">
               <i class="fa-solid fa-eye text-brandGit"></i>
             </div>
-            <h3 class="text-base font-semibold tracking-wide text-brandPrimary dark:text-white mb-2" data-i18n="f1_title">내부의 3단계 흐름 시각화</h3>
-            <p class="text-xs text-brandSecondary dark:text-gray-400 leading-relaxed font-light break-keep" data-i18n="f1_desc">
+            <h3 class="text-base sm:text-lg font-semibold tracking-wide text-brandPrimary dark:text-white mb-3" data-i18n="f1_title">내부의 3단계 흐름 시각화</h3>
+            <p class="text-xs text-brandSecondary dark:text-gray-400 leading-relaxed font-light" data-i18n="f1_desc">
               로컬 폴더에서 수정한 코드가 어떤 경로를 통해 디스크에 영구 박제되는지, 징검다리 3대 영역을 명료하게 구조화하여 예기치 않은 데이터 유실이나 덮어쓰기를 원천 방지합니다.
             </p>
           </div>
-          <span class="text-[9px] font-mono text-brandPrimary/40 dark:text-gray-500 block mt-6 font-bold">01 / VISUALIZATION</span>
+          <span class="text-[10px] font-mono text-brandPrimary/40 dark:text-gray-500 block mt-8 font-semibold">01 / VISUALIZATION</span>
         </div>
 
         <!-- Feature 2 -->
-        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/5 dark:border-darkBorder p-5 sm:p-6 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/5 dark:border-darkBorder p-6 sm:p-8 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-all duration-300">
           <div>
-            <div class="w-10 h-10 bg-brandBg dark:bg-darkBg rounded-xl flex items-center justify-center text-md text-brandPrimary dark:text-white mb-5">
+            <div class="w-12 h-12 bg-brandBg dark:bg-darkBg rounded-xl flex items-center justify-center text-lg text-brandPrimary dark:text-white mb-6">
               <i class="fa-solid fa-gamepad text-brandAccent"></i>
             </div>
-            <h3 class="text-base font-semibold tracking-wide text-brandPrimary dark:text-white mb-2" data-i18n="f2_title">게임처럼 즐거운 퀘스트 달성</h3>
-            <p class="text-xs text-brandSecondary dark:text-gray-400 leading-relaxed font-light break-keep" data-i18n="f2_desc">
+            <h3 class="text-base sm:text-lg font-semibold tracking-wide text-brandPrimary dark:text-white mb-3" data-i18n="f2_title">게임처럼 즐거운 퀘스트 달성</h3>
+            <p class="text-xs text-brandSecondary dark:text-gray-400 leading-relaxed font-light" data-i18n="f2_desc">
               점진적인 난이도와 직관적인 실시간 알림, 성취형 보상 시스템(파티클 세레머니)을 제공하여 딱딱한 명령어 사용법을 오락 게임 클리어하듯 다정한 성취감으로 바꿉니다.
             </p>
           </div>
-          <span class="text-[9px] font-mono text-brandPrimary/40 dark:text-gray-500 block mt-6 font-bold">02 / INTERACTIVITY</span>
+          <span class="text-[10px] font-mono text-brandPrimary/40 dark:text-gray-500 block mt-8 font-semibold">02 / INTERACTIVITY</span>
         </div>
 
         <!-- Feature 3 -->
-        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/5 dark:border-darkBorder p-5 sm:p-6 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+        <div class="bg-white dark:bg-darkSurface border border-brandPrimary/5 dark:border-darkBorder p-6 sm:p-8 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-all duration-300">
           <div>
-            <div class="w-10 h-10 bg-brandBg dark:bg-darkBg rounded-xl flex items-center justify-center text-md text-brandPrimary dark:text-white mb-5">
+            <div class="w-12 h-12 bg-brandBg dark:bg-darkBg rounded-xl flex items-center justify-center text-lg text-brandPrimary dark:text-white mb-6">
               <i class="fa-solid fa-network-wired"></i>
             </div>
-            <h3 class="text-base font-semibold tracking-wide text-brandPrimary dark:text-white mb-2" data-i18n="f3_title">동작 방식의 본질적 통찰</h3>
-            <p class="text-xs text-brandSecondary dark:text-gray-400 leading-relaxed font-light break-keep" data-i18n="f3_desc">
+            <h3 class="text-base sm:text-lg font-semibold tracking-wide text-brandPrimary dark:text-white mb-3" data-i18n="f3_title">동작 방식의 본질적 통찰</h3>
+            <p class="text-xs text-brandSecondary dark:text-gray-400 leading-relaxed font-light" data-i18n="f3_desc">
               가지치기와 같은 복잡한 병렬 브랜치 개발 모델을 눈으로 직접 보며 손끝으로 실시간 변화를 주입해 보아, 팀 프로젝트 시 마주할 Conflict 해소와 수평적 커뮤니케이션을 가속시킵니다.
             </p>
           </div>
-          <span class="text-[9px] font-mono text-brandPrimary/40 dark:text-gray-500 block mt-6 font-bold">03 / REAL MECHANISM</span>
+          <span class="text-[10px] font-mono text-brandPrimary/40 dark:text-gray-500 block mt-8 font-semibold">03 / REAL MECHANISM</span>
         </div>
 
       </div>
@@ -739,43 +651,41 @@
     </div>
   </section>
 
-  <!-- CTA SUBSCRIPTION SECTION -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pb-16 md:pb-24">
-    <div class="bg-brandPrimary dark:bg-darkSurface text-brandBg rounded-3xl p-6 md:p-14 relative overflow-hidden flex flex-col items-center justify-center text-center">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pb-20 md:pb-28">
+    <div class="bg-brandPrimary dark:bg-darkSurface text-brandBg rounded-3xl p-8 md:p-16 relative overflow-hidden flex flex-col items-center justify-center text-center">
       <div class="absolute inset-0 bg-gradient-to-br from-brandAccent/20 to-transparent -z-10"></div>
       
-      <div class="max-w-2xl space-y-4 sm:space-y-5 relative">
+      <div class="max-w-2xl space-y-6 relative">
         <span class="text-xs font-mono uppercase tracking-widest text-brandGit font-bold block" data-i18n="cta_badge">SSAFY 13th & ALL JUNIORS</span>
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif leading-snug text-white break-keep">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif leading-normal text-white">
           <span data-i18n="cta_title_1">더 이상의 머뭇거림은 필요 없습니다.</span><br>
           <span data-i18n="cta_title_2">지금 Git의 진짜 원리로 깊게 스며드세요.</span>
         </h2>
-        <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 leading-relaxed font-light break-keep" data-i18n="cta_desc">
+        <p class="text-xs md:text-sm text-brandSecondary dark:text-gray-400 leading-relaxed font-light" data-i18n="cta_desc">
           이메일을 구독하고, 가상 샌드박스의 추가 퀘스트(Rebase, Merge, Stash) 패키지 업데이트 알림을 가장 먼저 받아보세요.
         </p>
 
         <!-- Newsletter Subscription Form -->
-        <div class="pt-4 max-w-md mx-auto">
-          <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-stretch gap-2.5">
-            <input type="email" id="subscriber-email" required placeholder="name@ssafy.com" class="px-4 py-2.5 bg-white/10 dark:bg-white/5 text-white rounded-xl outline-none focus:ring-2 focus:ring-brandGit text-xs font-mono placeholder:text-gray-500 flex-1 border border-white/5">
-            <button type="submit" class="px-5 py-2.5 bg-brandGit hover:bg-opacity-95 text-xs font-mono rounded-xl tracking-wider hover:scale-105 transition-all text-white font-bold active:scale-95" data-i18n="sub_btn">SUBSCRIBE</button>
+        <div class="pt-6 max-w-md mx-auto">
+          <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-stretch gap-3">
+            <input type="email" required placeholder="name@ssafy.com" class="px-4 py-3 bg-white/10 dark:bg-white/5 text-white rounded-xl outline-none focus:ring-2 focus:ring-brandGit text-xs font-mono placeholder:text-gray-500 flex-1 border border-white/5">
+            <button type="submit" class="px-6 py-3 bg-brandGit hover:bg-opacity-95 text-xs font-mono rounded-xl tracking-wider hover:scale-105 transition-all text-white font-bold active:scale-95" data-i18n="sub_btn">SUBSCRIBE</button>
           </form>
-          <p class="text-[9px] text-brandSecondary dark:text-gray-500 mt-2.5" data-i18n="cta_disclaimer">우리는 영리적인 목적으로 이메일을 오용하지 않으며 언제든 구독을 철회할 수 있습니다.</p>
+          <p class="text-[10px] text-brandSecondary dark:text-gray-500 mt-3" data-i18n="cta_disclaimer">우리는 영리적인 목적으로 이메일을 오용하지 않으며 언제든 구독을 철회할 수 있습니다.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-brandPrimary/10 dark:border-darkBorder py-10 bg-white dark:bg-darkBg transition-colors duration-300">
+  <footer class="border-t border-brandPrimary/10 dark:border-darkBorder py-12 bg-white dark:bg-darkBg transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex flex-col md:flex-row md:justify-between items-center gap-6">
       <div class="flex items-center space-x-2">
-        <span class="w-2 h-2 bg-brandGit rounded-full"></span>
+        <span class="w-2.5 h-2.5 bg-brandGit rounded-full"></span>
         <span class="text-sm font-semibold tracking-wide text-brandPrimary dark:text-white font-mono">git.flow</span>
-        <span class="text-xs text-brandSecondary dark:text-gray-400 break-keep" data-i18n="footer_title">| SSAFY 교육 수강생 및 주니어 개발자를 위한 실감형 기재소</span>
+        <span class="text-xs text-brandSecondary dark:text-gray-400" data-i18n="footer_title">| SSAFY 교육 수강생 및 주니어 개발자를 위한 실감형 기재소</span>
       </div>
       
-      <div class="flex items-center space-x-6 text-xs font-mono text-brandSecondary dark:text-gray-400">
+      <div class="flex items-center space-x-6 sm:space-x-8 text-xs font-mono text-brandSecondary dark:text-gray-400">
         <a href="#" class="hover:text-brandPrimary dark:hover:text-white transition-colors" data-i18n="footer_terms">이용약관</a>
         <a href="#" class="hover:text-brandPrimary dark:hover:text-white transition-colors" data-i18n="footer_privacy">개인정보처리방침</a>
         <a href="#sandbox" class="hover:text-brandPrimary dark:hover:text-white transition-colors text-brandGit font-bold" data-i18n="footer_offline">오프라인 학습 공간</a>
@@ -791,40 +701,37 @@
   <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none max-w-xs sm:max-w-sm"></div>
 
   <script>
-    // Audio Context state for Mech Keyboard sound synthesis
-    let audioContext = null;
-    let isMuted = true;
-
-    // Simulation Engine State
+    // State Management for Git & CLI Filesystem Simulator
     const state = {
       isInitialized: false,
       commitCount: 0,
-      commits: [], // { id, message, branch, author, date, files: [], parents: [] }
+      commits: [], // Stores { id, message, branch, author, date, files: [] }
       branches: {
-        'main': null // branchName -> lastCommitId
+        'main': null // maps branch name to commit ID
       },
       currentBranch: 'main',
       head: 'none',
-      missionStatus: [false, false, false, false, false, false],
+      missionStatus: [false, false, false, false, false, false], // Expanded to 6 stages
       
-      // Virtual Filesystem
-      files: {},
+      // Virtual File System (VFS)
+      files: {
+        // e.g. "app.js": { name: "app.js", isDir: false, status: "untracked" }
+      },
 
       lang: 'ko',
       theme: 'light',
 
-      // Mission validators - matching any dynamic file or branch names
+      // General-purpose missions checking ANY arbitrary custom file names / branch names instead of hardcoded ones
       missions: [
         { id: 1, check: () => state.isInitialized }, // Git Init
-        { id: 2, check: () => Object.keys(state.files).length > 0 }, // Touch file
-        { id: 3, check: () => Object.values(state.files).some(f => f.status === 'staged' || f.status === 'committed') }, // Git Add
+        { id: 2, check: () => Object.keys(state.files).length > 0 }, // Touch (Any custom file name)
+        { id: 3, check: () => Object.values(state.files).some(f => f.status === 'staged' || f.status === 'committed') }, // Git Add (Any file)
         { id: 4, check: () => state.commitCount > 0 }, // Git Commit
-        { id: 5, check: () => Object.keys(state.branches).length > 1 }, // Git Branch created
-        { id: 6, check: () => state.currentBranch !== 'main' } // Git Checkout (Moved out of main)
+        { id: 5, check: () => Object.keys(state.branches).length > 1 }, // Git Branch created (Any custom name)
+        { id: 6, check: () => state.currentBranch !== 'main' } // Git Checkout (Moved to any custom branch)
       ]
     };
 
-    // Dictionary definition
     const dictionary = {
       ko: {
         start_cta: "실습 시작하기",
@@ -988,7 +895,7 @@
         feat_title_2: "to Gaze into",
         feat_title_3: "the Beautiful Flow",
         feat_title_4: "of Versioning.",
-        feat_subtitle: "Ditch brute-force code syntax cramming. Elevate your development workflow through physical mechanics.",
+        feat_subtitle: "Ditch brute-force code syntax cramming. Elevate your development workflow through spatial mechanics.",
         f1_title: "Three-Stage Visual Tracker",
         f1_desc: "Map code changes from editor to disk. Visualize the physical zones of version control to avoid messy data loss and staging errors.",
         f2_title: "Gamified Mission Flow",
@@ -1008,7 +915,7 @@
       }
     };
 
-    // Stage tips localized definitions
+    // Expanded tips for 6 distinct stages
     const tipsDictionary = {
       ko: [
         { title: "준비 운동", desc: "가상 터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git init</code>을 치거나 퀵 단추를 눌러 저장소를 만드세요." },
@@ -1030,73 +937,6 @@
       ]
     };
 
-    // WEB AUDIO API Synthesizer (Mech Keyboard Sound & Beep Effects)
-    function initAudio() {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
-    }
-
-    function toggleAudio() {
-      initAudio();
-      isMuted = !isMuted;
-      const btn = document.getElementById('sound-toggle-btn');
-      if (isMuted) {
-        btn.innerHTML = `<i class="fa-solid fa-volume-mute"></i> Mute`;
-        btn.classList.add('opacity-60');
-      } else {
-        btn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Sound On`;
-        btn.classList.remove('opacity-60');
-        playBeep(440, 0.05); // Short pleasant startup beep
-      }
-    }
-
-    function playTypingSound() {
-      if (isMuted) return;
-      initAudio();
-      
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      
-      osc.connect(gain);
-      gain.connect(audioContext.destination);
-      
-      // Simulating a sharp plastic click sound
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(100 + Math.random() * 800, audioContext.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.03);
-      
-      gain.gain.setValueAtTime(0.08, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.03);
-      
-      osc.start();
-      osc.stop(audioContext.currentTime + 0.04);
-    }
-
-    function playBeep(frequency, duration, type = 'sine') {
-      if (isMuted) return;
-      initAudio();
-      
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      
-      osc.connect(gain);
-      gain.connect(audioContext.destination);
-      
-      osc.type = type;
-      osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
-      
-      gain.gain.setValueAtTime(0.12, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
-      
-      osc.start();
-      osc.stop(audioContext.currentTime + duration);
-    }
-
-    // Theme state switch
     function toggleTheme() {
       const html = document.documentElement;
       const icon = document.getElementById('theme-icon');
@@ -1114,7 +954,6 @@
       }
     }
 
-    // Language switcher
     function toggleLanguage() {
       state.lang = state.lang === 'ko' ? 'en' : 'ko';
       updateLanguageUI();
@@ -1143,7 +982,6 @@
       checkMissions();
     }
 
-    // Canvas Particle Explosion Engine (Explodes on completions and subscription clicks)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1160,12 +998,12 @@
         this.x = x;
         this.y = y;
         this.size = Math.random() * 4 + 2;
-        this.speedX = (Math.random() - 0.5) * 10;
-        this.speedY = (Math.random() - 0.5) * 10 - 4;
-        this.gravity = 0.12;
+        this.speedX = (Math.random() - 0.5) * 8;
+        this.speedY = (Math.random() - 0.5) * 8 - 4;
+        this.gravity = 0.15;
         this.color = `hsl(${Math.random() * 360}, 90%, 60%)`;
         this.alpha = 1;
-        this.decay = Math.random() * 0.01 + 0.01;
+        this.decay = Math.random() * 0.015 + 0.01;
       }
       update() {
         this.speedY += this.gravity;
@@ -1187,20 +1025,8 @@
     function triggerBurst() {
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      playBeep(523.25, 0.2, 'triangle'); // C5 note on success
-      setTimeout(() => playBeep(659.25, 0.15, 'triangle'), 100); // E5
-      setTimeout(() => playBeep(783.99, 0.3, 'triangle'), 200); // G5
-      
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 80; i++) {
         particles.push(new Particle(centerX, centerY));
-      }
-    }
-
-    function triggerBurstAt(x, y) {
-      playBeep(587.33, 0.15, 'sine'); // D5
-      setTimeout(() => playBeep(880, 0.25, 'sine'), 80); // A5
-      for (let i = 0; i < 60; i++) {
-        particles.push(new Particle(x, y));
       }
     }
 
@@ -1218,7 +1044,6 @@
     }
     requestAnimationFrame(animateParticles);
 
-    // Toast Notification generator
     function showToast(title, message, type = 'info') {
       const toastContainer = document.getElementById('toast-container');
       const toast = document.createElement('div');
@@ -1256,37 +1081,26 @@
       }, 3500);
     }
 
-    // Dynamic clean shortcut injection helper (Zero specific filenames in labels or actions)
     function triggerShortcut(cmd) {
       const input = document.getElementById('terminal-input');
-      
-      if (cmd === 'touch') {
-        input.value = 'touch ';
-      } else if (cmd === 'git add') {
-        input.value = 'git add ';
-      } else if (cmd === 'git commit') {
-        input.value = 'git commit -m ""';
-      } else if (cmd === 'git branch') {
-        input.value = 'git branch ';
-      } else if (cmd === 'git checkout') {
-        input.value = 'git checkout ';
-      } else if (cmd === 'git merge') {
-        input.value = 'git merge ';
-      } else {
-        input.value = cmd;
-      }
-      
+      input.value = cmd;
       input.focus();
       
-      // Auto position caret inside quotes for commit messages
-      if (cmd === 'git commit') {
-        setTimeout(() => {
-          input.setSelectionRange(15, 15);
-        }, 15);
+      if (cmd === 'git commit -m') {
+        input.value = 'git commit -m "feat: complete active layout"';
+      } else if (cmd === 'git branch') {
+        input.value = 'git branch feature/dev';
+      } else if (cmd === 'git checkout') {
+        if (Object.keys(state.branches).includes('feature/dev')) {
+          input.value = 'git checkout feature/dev';
+        } else {
+          input.value = 'git checkout feature/dev';
+        }
+      } else if (cmd === 'git merge') {
+        input.value = 'git merge feature/dev';
       }
     }
 
-    // Form capture
     function handleCommand(event) {
       event.preventDefault();
       const input = document.getElementById('terminal-input');
@@ -1321,7 +1135,6 @@
       log.scrollTop = log.scrollHeight;
     }
 
-    // Command Parser & Engine
     function processCommand(cmd) {
       const args = cmd.split(' ').map(s => s.trim()).filter(Boolean);
       const rootCommand = args[0];
@@ -1331,12 +1144,13 @@
         return;
       }
 
-      // VIRTUAL STANDARD CLI COMMANDS
+      // -------------------------------------------------------------
+      // 1. Virtual Standard Filesystem CLI Commands
+      // -------------------------------------------------------------
       if (rootCommand === 'touch') {
         const filename = args[1];
         if (!filename) {
           appendLog(state.lang === 'ko' ? "에러: 생성할 파일명을 기재해 주십시오. (예: touch app.js)" : "error: Touch filename required. (e.g., touch app.js)", "error");
-          playBeep(220, 0.15, 'sawtooth');
           return;
         }
         if (state.files[filename]) {
@@ -1345,7 +1159,6 @@
           state.files[filename] = { name: filename, isDir: false, status: 'untracked' };
           appendLog(state.lang === 'ko' ? `'${filename}' 가상 파일이 작업 트리(Working Tree)에 새로 생성되었습니다.` : `Created empty file '${filename}' in Working Tree`, 'success');
         }
-        playBeep(600, 0.05, 'sine');
         updateVisuals();
         checkMissions();
         return;
@@ -1355,7 +1168,6 @@
         const dirname = args[1];
         if (!dirname) {
           appendLog(state.lang === 'ko' ? "에러: 폴더명을 작성해 주세요. (예: mkdir assets)" : "error: Directory name required. (e.g., mkdir assets)", "error");
-          playBeep(220, 0.15, 'sawtooth');
           return;
         }
         const formattedDir = dirname.endsWith('/') ? dirname : dirname + '/';
@@ -1365,7 +1177,6 @@
           state.files[formattedDir] = { name: formattedDir, isDir: true, status: 'untracked' };
           appendLog(state.lang === 'ko' ? `'${dirname}/' 디렉터리가 성공적으로 생성되었습니다.` : `Created directory '${dirname}/'`, 'success');
         }
-        playBeep(600, 0.05, 'sine');
         updateVisuals();
         checkMissions();
         return;
@@ -1375,7 +1186,6 @@
         const target = args[1];
         if (!target) {
           appendLog(state.lang === 'ko' ? "에러: 제거할 가상 파일 혹은 폴더명을 적어주세요." : "error: Filename or directory required to remove.", "error");
-          playBeep(220, 0.15, 'sawtooth');
           return;
         }
         let targetKey = target;
@@ -1389,7 +1199,6 @@
         } else {
           appendLog(state.lang === 'ko' ? `에러: '${target}' 이라는 이름의 자원을 찾을 수 없습니다.` : `error: '${target}' not found.`, 'error');
         }
-        playBeep(400, 0.1, 'sine');
         updateVisuals();
         checkMissions();
         return;
@@ -1409,7 +1218,9 @@
         return;
       }
 
-      // GIT COMMANDS INTREPRETER
+      // -------------------------------------------------------------
+      // 2. Git Ecosystem Commands (init, status, log, add, commit, branch, checkout, merge)
+      // -------------------------------------------------------------
       if (rootCommand === 'git') {
         const action = args[1];
 
@@ -1418,7 +1229,6 @@
           const errTitle = state.lang === 'ko' ? "Git 저장소가 없습니다." : "Repository Not Found";
           const errBody = state.lang === 'ko' ? "먼저 [git init]을 치거나 퀵 단추를 누르세요." : "Please execute [git init] to initialize first.";
           showToast(errTitle, errBody, "error");
-          playBeep(220, 0.15, 'sawtooth');
           return;
         }
 
@@ -1446,10 +1256,12 @@
             
             const untracked = Object.values(state.files).filter(f => f.status === 'untracked');
             const staged = Object.values(state.files).filter(f => f.status === 'staged');
+            const committed = Object.values(state.files).filter(f => f.status === 'committed');
 
             if (staged.length > 0) {
               appendLog(state.lang === 'ko' ? `커밋할 변경 사항:` : `Changes to be committed:`, 'success');
               staged.forEach(f => {
+                appendLog(`  (use "git rm --cached <file>..." to unstage)`);
                 appendLog(`\t<span class="text-brandSuccess">new file:   ${f.name}</span>`, 'info');
               });
             }
@@ -1472,8 +1284,7 @@
               appendLog(state.lang === 'ko' ? "이 브랜치에 기록된 커밋 로그가 아직 존재하지 않습니다." : "No commits logged yet.", 'info');
             } else {
               appendLog(state.lang === 'ko' ? `=== 로컬 커밋 이력 로그 ===` : `=== Local Commit Log ===`, 'success');
-              
-              // Users created commits are output precisely
+              // Sort commits to show newest first, displaying actual custom commit content
               [...state.commits].reverse().forEach(commit => {
                 const pointers = [];
                 Object.keys(state.branches).forEach(b => {
@@ -1485,7 +1296,12 @@
                 appendLog(`<span class="text-yellow-500">commit ${commit.id}</span>${pointerStr}`, 'info');
                 appendLog(`Author: ${commit.author}`);
                 appendLog(`Date:   ${commit.date}`);
-                appendLog(`\n    ${commit.message}\n`, 'success');
+                appendLog(`\n    ${commit.message}`, 'success');
+                if (commit.files && commit.files.length > 0) {
+                  appendLog(`    Files:  ${commit.files.join(', ')}\n`, 'info');
+                } else {
+                  appendLog(`\n`, 'info');
+                }
               });
             }
             break;
@@ -1494,7 +1310,6 @@
             const targetFile = args[2];
             if (!targetFile) {
               appendLog(state.lang === 'ko' ? `에러: git add 뒤에 파일명을 입력해야 합니다. (예: git add . 또는 git add app.js)` : `error: Please specify a file target. (e.g. git add . or git add app.js)`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
 
@@ -1502,7 +1317,6 @@
               const fileKeys = Object.keys(state.files);
               if (fileKeys.length === 0) {
                 appendLog(state.lang === 'ko' ? `스테이징할 파일이 없습니다. 먼저 'touch app.js'를 쳐보세요.` : `No files to stage. Try creating one using 'touch app.js' first.`, 'error');
-                playBeep(220, 0.15, 'sawtooth');
                 return;
               }
               fileKeys.forEach(key => {
@@ -1515,7 +1329,6 @@
             } else {
               if (!state.files[targetFile]) {
                 appendLog(state.lang === 'ko' ? `에러: '${targetFile}' 파일이 가상 디바이스에 존재하지 않습니다. touch로 먼저 생성해 주세요.` : `error: '${targetFile}' does not exist in workspace. Use touch first.`, 'error');
-                playBeep(220, 0.15, 'sawtooth');
                 return;
               }
               state.files[targetFile].status = 'staged';
@@ -1532,12 +1345,10 @@
             if (!stagedExists) {
               appendLog(`nothing to commit, working tree clean (Staging Area is empty)`, 'error');
               showToast(state.lang === 'ko' ? "커밋 실패" : "Commit Aborted", state.lang === 'ko' ? "스테이지가 비어 있습니다. git add를 먼저 완료하세요." : "No staged files to commit. Run git add first.", "error");
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
 
-            // Custom Commit Message extraction from -m parameter
-            let commitMessage = "feat: add assets";
+            let commitMessage = "feat: add resources";
             const mIndex = args.indexOf('-m');
             if (mIndex !== -1 && args[mIndex + 1]) {
               commitMessage = args.slice(mIndex + 1).join(' ').replace(/['"]/g, '');
@@ -1547,22 +1358,17 @@
             const now = new Date();
             const timeStr = now.toLocaleTimeString() + ' ' + now.toLocaleDateString();
             
-            // Files bound in this commit snapshot
+            // Capture list of files being committed
             const committedFiles = Object.keys(state.files).filter(key => state.files[key].status === 'staged');
 
-            // Store parents list to connect branches in SVG Topology
-            const currentLastCommit = state.branches[state.currentBranch];
-            const parents = currentLastCommit ? [currentLastCommit] : [];
-
-            // Full metadata registration
+            // Rich Commit Metadata with author info and captured files
             const newCommit = { 
               id: shortId, 
               message: commitMessage, 
               branch: state.currentBranch,
               author: "SSAFY Dev <dev@ssafy.com>",
               date: timeStr,
-              files: committedFiles,
-              parents: parents
+              files: committedFiles
             };
 
             state.commits.push(newCommit);
@@ -1586,7 +1392,7 @@
           case 'branch':
             const subAction = args[2];
             
-            // Deleting branch safely
+            // Delete branch sub-argument logic (-d)
             if (subAction === '-d') {
               const targetToDelete = args[3];
               if (!targetToDelete) {
@@ -1596,7 +1402,6 @@
               if (targetToDelete === state.currentBranch) {
                 appendLog(`error: Cannot delete branch '${targetToDelete}' checked out at HEAD.`, 'error');
                 showToast("삭제 실패", "현재 사용 중인 브랜치는 삭제할 수 없습니다.", "error");
-                playBeep(220, 0.15, 'sawtooth');
                 return;
               }
               if (!Object.keys(state.branches).includes(targetToDelete)) {
@@ -1611,6 +1416,7 @@
               return;
             }
 
+            // Normal branch command logic
             if (args.length < 3) {
               const branchList = Object.keys(state.branches).map(b => {
                 return b === state.currentBranch ? `* <span class="text-brandGit font-bold">${b}</span>` : `  ${b}`;
@@ -1622,11 +1428,10 @@
             const branchName = args[2];
             if (Object.keys(state.branches).includes(branchName)) {
               appendLog(`fatal: A branch named '${branchName}' already exists.`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
 
-            // Reference last commit of checkout source
+            // Points to current branch's commit
             state.branches[branchName] = state.branches[state.currentBranch];
             appendLog(`Branch '${branchName}' created successfully.`, 'success');
             
@@ -1639,12 +1444,10 @@
             const targetBranch = args[2];
             if (!targetBranch) {
               appendLog(`error: Switch branch target required.`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
             if (!Object.keys(state.branches).includes(targetBranch)) {
               appendLog(`error: pathspec '${targetBranch}' did not match any files or branches.`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
             state.currentBranch = targetBranch;
@@ -1660,40 +1463,29 @@
             const mergeTarget = args[2];
             if (!mergeTarget) {
               appendLog(`error: Merge target branch required. (e.g. git merge feature/dev)`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
             if (!Object.keys(state.branches).includes(mergeTarget)) {
               appendLog(`error: branch '${mergeTarget}' not found.`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
             if (mergeTarget === state.currentBranch) {
               appendLog(`error: Cannot merge branch into itself.`, 'error');
-              playBeep(220, 0.15, 'sawtooth');
               return;
             }
 
-            // Create merge snapshot
+            // Create merge commit simulating actual merge snapshots
             const mergeId = Math.random().toString(16).substring(2, 8);
             const stamp = new Date();
             const logStamp = stamp.toLocaleTimeString() + ' ' + stamp.toLocaleDateString();
             
-            // Multiple parents (3-way merge mapping for graph visualization)
-            const parent1 = state.branches[state.currentBranch];
-            const parent2 = state.branches[mergeTarget];
-            const mergeParents = [];
-            if (parent1) mergeParents.push(parent1);
-            if (parent2) mergeParents.push(parent2);
-
             const mergeCommit = {
               id: mergeId,
               message: `Merge branch '${mergeTarget}' into ${state.currentBranch}`,
               branch: state.currentBranch,
               author: "SSAFY Dev <dev@ssafy.com>",
               date: logStamp,
-              files: [],
-              parents: mergeParents
+              files: [] // Merge captures system merge snapshot
             };
 
             state.commits.push(mergeCommit);
@@ -1716,10 +1508,8 @@
       }
 
       appendLog(state.lang === 'ko' ? `에러: 알 수 없는 루트 명령어 '${rootCommand}'입니다. (지원 명령어: touch, ls, rm, mkdir, git)` : `error: Command '${rootCommand}' not recognized. (Supported commands: touch, ls, rm, mkdir, git)`, 'error');
-      playBeep(220, 0.15, 'sawtooth');
     }
 
-    // Active Mission Controller
     function checkMissions(triggerParticleOnSuccess = false) {
       let completedCount = 0;
       
@@ -1735,10 +1525,10 @@
         if (isPassed) {
           completedCount++;
           uiContainer.classList.remove('opacity-50');
-          uiContainer.className = "flex items-center justify-between p-2.5 rounded-xl border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-950/20 transition-all duration-300";
-          uiBullet.className = 'w-4 h-4 rounded-full bg-brandSuccess text-white flex items-center justify-center text-[9px] font-bold shrink-0 font-mono';
+          uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-950/20 transition-all duration-300";
+          uiBullet.className = 'w-5 h-5 rounded-full bg-brandSuccess text-white flex items-center justify-center text-[10px] font-bold shrink-0 font-mono';
           uiBullet.innerHTML = '<i class="fa-solid fa-check"></i>';
-          uiStatus.className = 'text-[8px] sm:text-[9px] font-mono text-brandSuccess bg-green-100 dark:bg-green-900/30 px-1.5 py-0.5 rounded font-bold shrink-0';
+          uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandSuccess bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '완료' : 'Clear';
 
           if (triggerParticleOnSuccess && !wasPreviouslyPassed) {
@@ -1746,16 +1536,16 @@
           }
         } else if (idx === completedCount) {
           uiContainer.classList.remove('opacity-50');
-          uiContainer.className = "flex items-center justify-between p-2.5 rounded-xl border border-brandAccent/30 dark:border-brandAccent/60 bg-white dark:bg-darkSurface transition-all duration-300";
-          uiBullet.className = 'w-4 h-4 rounded-full bg-brandAccent text-white flex items-center justify-center text-[9px] font-bold success-pulse shrink-0 font-mono';
+          uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-brandAccent/30 dark:border-brandAccent/60 bg-white dark:bg-darkSurface transition-all duration-300";
+          uiBullet.className = 'w-5 h-5 rounded-full bg-brandAccent text-white flex items-center justify-center text-[10px] font-bold success-pulse shrink-0 font-mono';
           uiBullet.innerHTML = `${idx+1}`;
-          uiStatus.className = 'text-[8px] sm:text-[9px] font-mono text-brandAccent bg-brandAccent/10 px-1.5 py-0.5 rounded font-bold shrink-0';
+          uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandAccent bg-brandAccent/10 px-2 py-0.5 rounded font-bold shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '도전중' : 'Active';
         } else {
-          uiContainer.className = "flex items-center justify-between p-2.5 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300";
-          uiBullet.className = 'w-4 h-4 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono';
+          uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300";
+          uiBullet.className = 'w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[10px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono';
           uiBullet.innerHTML = `${idx+1}`;
-          uiStatus.className = 'text-[8px] sm:text-[9px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-1.5 py-0.5 rounded shrink-0';
+          uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '잠금' : 'Locked';
         }
       });
@@ -1782,91 +1572,6 @@
       }
     }
 
-    // Dynamic 2D SVG Graph Lane Generator & Line Connector for git branch visualization
-    function drawGitGraph() {
-      const svg = document.getElementById('git-svg-graph');
-      svg.innerHTML = '';
-      if (state.commits.length === 0) return;
-
-      const colors = ['#F05032', '#6C63FF', '#2E8B57', '#FFA500', '#00BFFF'];
-      const branchLanes = {};
-      let laneCounter = 0;
-
-      // Assign horizontal lane index to each branch based on appearance
-      state.commits.forEach(c => {
-        if (branchLanes[c.branch] === undefined) {
-          branchLanes[c.branch] = laneCounter++;
-        }
-      });
-
-      const nodeRadius = 5.5;
-      const verticalGap = 75; // Matches the dynamically rendered HTML Cards height gap
-      const paddingLeft = 14;
-      const laneWidth = 11;
-
-      // Map commit ID to its coordinate position
-      const commitPositions = {};
-
-      state.commits.forEach((commit, index) => {
-        const lane = branchLanes[commit.branch];
-        const x = paddingLeft + lane * laneWidth;
-        const y = 25 + index * verticalGap;
-        commitPositions[commit.id] = { x, y, color: colors[lane % colors.length] };
-      });
-
-      // 1. Draw connection paths (branches splitting and merging)
-      state.commits.forEach((commit) => {
-        const childPos = commitPositions[commit.id];
-        if (!childPos) return;
-
-        commit.parents.forEach(parentId => {
-          const parentPos = commitPositions[parentId];
-          if (!parentPos) return;
-
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          let d = '';
-
-          if (parentPos.x === childPos.x) {
-            // Straight vertical lane
-            d = `M ${parentPos.x} ${parentPos.y} L ${childPos.x} ${childPos.y}`;
-          } else {
-            // Bezier curving connector
-            const midY = (parentPos.y + childPos.y) / 2;
-            d = `M ${parentPos.x} ${parentPos.y} C ${parentPos.x} ${midY}, ${childPos.x} ${midY}, ${childPos.x} ${childPos.y}`;
-          }
-
-          path.setAttribute('d', d);
-          path.setAttribute('stroke', childPos.color);
-          path.setAttribute('stroke-width', '2');
-          path.setAttribute('fill', 'none');
-          path.setAttribute('stroke-linecap', 'round');
-          svg.appendChild(path);
-        });
-      });
-
-      // 2. Draw nodes (circles) on top of paths
-      state.commits.forEach((commit) => {
-        const pos = commitPositions[commit.id];
-        if (!pos) return;
-
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', pos.x);
-        circle.setAttribute('cy', pos.y);
-        circle.setAttribute('r', nodeRadius);
-        circle.setAttribute('fill', pos.color);
-        circle.setAttribute('stroke', '#fff');
-        circle.setAttribute('stroke-width', '1.5');
-        
-        // Dynamic interaction details on hover
-        const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-        title.textContent = `Commit: ${commit.id}\nBranch: ${commit.branch}\nMessage: "${commit.message}"`;
-        circle.appendChild(title);
-        
-        svg.appendChild(circle);
-      });
-    }
-
-    // Visualizer renderer
     function updateVisuals() {
       // 1. HEAD badge
       const badge = document.getElementById('head-pointer-badge');
@@ -1877,7 +1582,7 @@
         badge.className = 'px-2 py-0.5 bg-brandPrimary dark:bg-darkBg text-white rounded text-[10px] font-mono';
       }
 
-      // 2. Redraw Working Directory Column
+      // 2. Clear & Redraw files in Working Directory Column
       const workingTreeFilesContainer = document.getElementById('working-tree-files');
       const gitAlert = document.getElementById('git-status-alert');
       workingTreeFilesContainer.innerHTML = '';
@@ -1897,7 +1602,7 @@
       } else {
         filesArray.forEach(file => {
           const fileDiv = document.createElement('div');
-          fileDiv.className = "p-2 bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder rounded-lg flex items-center justify-between transition-all duration-300 text-xs";
+          fileDiv.className = "p-2.5 bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder rounded-lg flex items-center justify-between transition-all duration-300 text-xs";
           
           let badgeText = 'Untracked';
           let badgeClass = 'bg-red-100 text-red-600 dark:bg-red-950/30 dark:text-red-400';
@@ -1913,17 +1618,17 @@
           const icon = file.isDir ? '<i class="fa-solid fa-folder text-brandAccent"></i>' : '<i class="fa-solid fa-file-code text-brandSecondary"></i>';
 
           fileDiv.innerHTML = `
-            <div class="flex items-center space-x-1.5 min-w-0">
+            <div class="flex items-center space-x-2 min-w-0">
               ${icon}
-              <span class="font-mono font-bold truncate text-[11px]">${file.name}</span>
+              <span class="font-mono font-bold truncate">${file.name}</span>
             </div>
-            <span class="text-[7px] font-mono px-1 py-0.2 rounded font-bold shrink-0 ${badgeClass}">${badgeText}</span>
+            <span class="text-[8px] font-mono px-1.5 py-0.5 rounded font-bold shrink-0 ${badgeClass}">${badgeText}</span>
           `;
           workingTreeFilesContainer.appendChild(fileDiv);
         });
       }
 
-      // 3. Redraw Stage Area Column
+      // 3. Clear & Redraw Stage Area Column
       const stagedListContainer = document.getElementById('staged-files-list');
       const stagedEmptyAlert = document.getElementById('staged-empty');
       stagedListContainer.innerHTML = '';
@@ -1935,14 +1640,14 @@
         stagedEmptyAlert.classList.add('hidden');
         stagedFiles.forEach(file => {
           const stagedDiv = document.createElement('div');
-          stagedDiv.className = "p-2 bg-white dark:bg-darkSurface border border-brandAccent/30 dark:border-brandAccent/50 shadow-sm rounded-lg flex items-center justify-between transition-all text-xs";
+          stagedDiv.className = "p-2.5 bg-white dark:bg-darkSurface border border-brandAccent/30 dark:border-brandAccent/50 shadow-sm rounded-lg flex items-center justify-between transition-all text-xs";
           
           stagedDiv.innerHTML = `
-            <div class="flex items-center space-x-1.5 min-w-0">
+            <div class="flex items-center space-x-2 min-w-0">
               <i class="fa-solid fa-file-import text-brandAccent"></i>
-              <span class="font-mono font-bold truncate text-[11px] text-brandPrimary dark:text-white">${file.name}</span>
+              <span class="font-mono font-bold truncate text-brandPrimary dark:text-white">${file.name}</span>
             </div>
-            <span class="text-[7px] font-mono bg-brandAccent/15 text-brandAccent px-1 py-0.2 rounded font-bold shrink-0">Staged</span>
+            <span class="text-[8px] font-mono bg-brandAccent/15 text-brandAccent px-1.5 py-0.5 rounded font-bold shrink-0">Staged</span>
           `;
           stagedListContainer.appendChild(stagedDiv);
         });
@@ -1960,7 +1665,7 @@
           const isActive = branch === state.currentBranch;
           const pill = document.createElement('div');
           
-          pill.className = `px-2 py-1 rounded-lg border font-mono text-[10px] flex items-center space-x-1.5 transition-all ${
+          pill.className = `px-3 py-1.5 rounded-lg border font-mono text-[11px] flex items-center space-x-2 transition-all ${
             isActive 
               ? 'bg-brandGit/10 border-brandGit text-brandGit font-bold shadow-sm' 
               : 'bg-white dark:bg-darkSurface border-brandPrimary/10 dark:border-darkBorder text-brandSecondary'
@@ -1968,30 +1673,34 @@
 
           pill.innerHTML = `
             <span>${isActive ? '★' : '○'} ${branch}</span>
-            <span class="text-[8px] opacity-60 bg-brandPrimary/5 dark:bg-white/5 px-1 py-0.2 rounded">${commitTarget}</span>
+            <span class="text-[9px] opacity-60 bg-brandPrimary/5 dark:bg-white/5 px-1 py-0.2 rounded">${commitTarget}</span>
           `;
           branchPointersList.appendChild(pill);
         });
       } else {
         activeBranchDesc.textContent = 'none';
-        branchPointersList.innerHTML = `<span class="text-xs font-mono italic text-brandSecondary text-center w-full" data-i18n="no_branches">저장소 비활성 상태</span>`;
+        branchPointersList.innerHTML = `<span class="text-xs font-mono italic text-brandSecondary" data-i18n="no_branches">저장소 비활성 상태</span>`;
       }
 
-      // 5. Redraw Commits containing user-provided custom commit message
+      // 5. Redraw Commits with Enhanced Memo Metadata and exact Committed files representation
       const repoEmpty = document.getElementById('repo-empty');
-      const graphViewport = document.getElementById('graph-viewport');
-      const commitCardsList = document.getElementById('commit-cards-list');
+      const commitTree = document.getElementById('commit-tree');
       
       if (state.commits.length > 0) {
         repoEmpty.classList.add('hidden');
-        graphViewport.classList.remove('hidden');
-        commitCardsList.innerHTML = '';
+        commitTree.classList.remove('hidden');
+        commitTree.innerHTML = '';
         
-        state.commits.forEach((commit) => {
-          const commitCard = document.createElement('div');
-          commitCard.className = 'w-full min-h-[62px] flex flex-col justify-between bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder text-brandPrimary dark:text-white p-2.5 rounded-xl text-[9px] font-mono shadow-sm hover:scale-[1.01] transition-transform';
+        state.commits.forEach((commit, i) => {
+          const commitNode = document.createElement('div');
+          commitNode.className = 'w-full flex flex-col items-center relative';
+          
+          let lineHtml = '';
+          if (i > 0) {
+            lineHtml = `<div class="w-0.5 h-4 bg-brandPrimary/20 dark:bg-white/20 mb-1"></div>`;
+          }
 
-          // Which branches are pointing here
+          // Check which branch pointers are pointing to this commit
           const pointingBranches = [];
           Object.keys(state.branches).forEach(br => {
             if (state.branches[br] === commit.id) {
@@ -2001,40 +1710,51 @@
 
           const branchTagsHtml = pointingBranches.map(br => {
             const isHead = br === state.currentBranch;
-            return `<span class="${isHead ? 'bg-brandGit text-white font-bold' : 'bg-brandAccent/20 text-brandAccent dark:bg-brandAccent/45 dark:text-white'} px-1 py-0.2 rounded text-[7px] font-mono">${isHead ? 'HEAD -> ' : ''}${br}</span>`;
+            return `<span class="${isHead ? 'bg-brandGit text-white font-bold' : 'bg-brandAccent/20 text-brandAccent dark:bg-brandAccent/45 dark:text-white'} px-1 py-0.5 rounded text-[8px] font-mono">${isHead ? 'HEAD -> ' : ''}${br}</span>`;
           }).join(' ');
 
+          // Generate file snapshot pill lists inside the commit representation
           const filesCapturedHtml = commit.files && commit.files.length > 0
-            ? `<div class="mt-1 pt-1 border-t border-brandPrimary/5 dark:border-darkBorder/30 flex flex-wrap gap-1 items-center">
-                 ${commit.files.map(f => `<span class="bg-brandBg dark:bg-darkBg text-brandPrimary dark:text-gray-300 px-1 rounded text-[7px] font-mono border border-brandPrimary/5">${f}</span>`).join('')}
+            ? `<div class="mt-2 pt-1.5 border-t border-brandPrimary/5 dark:border-darkBorder/30 flex flex-wrap gap-1 items-center">
+                 <span class="text-[8px] opacity-60 text-brandSecondary uppercase tracking-wider">Snapshot:</span>
+                 ${commit.files.map(f => `<span class="bg-brandBg dark:bg-darkBg text-brandPrimary dark:text-gray-300 px-1 py-0.2 rounded text-[8px] font-mono border border-brandPrimary/5">${f}</span>`).join('')}
                </div>`
             : '';
 
-          commitCard.innerHTML = `
-            <div>
-              <div class="flex justify-between items-center opacity-60">
+          commitNode.innerHTML = `
+            ${lineHtml}
+            <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder text-brandPrimary dark:text-white p-3 rounded-xl text-[10px] font-mono w-full shadow-sm hover:scale-[1.02] transition-transform">
+              <div class="flex justify-between items-center opacity-60 pb-1.5 border-b border-brandPrimary/5 dark:border-darkBorder">
                 <span class="font-bold text-brandAccent">ID: ${commit.id}</span>
-                <span class="text-[7px]">${commit.date.split(' ')[0]}</span>
+                <span class="text-[8px]">${commit.date}</span>
               </div>
-              <p class="font-bold text-[10px] text-brandPrimary dark:text-white mt-1 break-keep">"${commit.message}"</p>
+              
+              <!-- Commit Message (Memo) -->
+              <p class="font-bold text-xs text-brandPrimary dark:text-white mt-2 mb-1">"${commit.message}"</p>
+              
+              <!-- Author Metadata -->
+              <div class="text-[9px] opacity-70 flex items-center gap-1 mt-1 text-brandSecondary dark:text-gray-400">
+                <i class="fa-solid fa-user-pen text-[8px]"></i>
+                <span>${commit.author}</span>
+              </div>
+
+              <!-- Snapshot Files Rendered -->
               ${filesCapturedHtml}
-            </div>
-            <div class="flex flex-wrap gap-1 mt-1.5">
-              ${branchTagsHtml}
+
+              <!-- Pointers & Tags container -->
+              <div class="flex flex-wrap gap-1 mt-2.5">
+                ${branchTagsHtml}
+              </div>
             </div>
           `;
-          commitCardsList.appendChild(commitCard);
+          commitTree.appendChild(commitNode);
         });
-
-        // Trigger dynamic SVG connector redrawing
-        setTimeout(drawGitGraph, 50);
       } else {
         repoEmpty.classList.remove('hidden');
-        graphViewport.classList.add('hidden');
+        commitTree.classList.add('hidden');
       }
     }
 
-    // Fully reset sandbox environments
     function resetSandbox() {
       state.isInitialized = false;
       state.commitCount = 0;
@@ -2060,7 +1780,6 @@
         showToast("Environment Reset", "Virtual workspace cleaned successfully.", "info");
       }
       
-      playBeep(300, 0.25, 'triangle');
       updateVisuals();
       checkMissions();
     }
@@ -2069,76 +1788,12 @@
       document.getElementById('success-overlay').classList.add('hidden');
     }
 
-    // Explode celebration burst at specific button location upon valid email subscription
     function handleSubscribe(e) {
       e.preventDefault();
-      const emailInput = document.getElementById('subscriber-email');
-      const emailVal = emailInput.value.trim();
-      
-      if (!emailVal || !emailVal.includes('@')) {
-        showToast("오류", "올바른 메일 주소 형식이 아닙니다.", "error");
-        return;
-      }
-
-      // Calculate dynamic button coordinates to explode precisely from its screen location
-      const btn = e.target.querySelector('button');
-      const rect = btn.getBoundingClientRect();
-      const clickX = rect.left + rect.width / 2;
-      const clickY = rect.top + rect.height / 2;
-
-      triggerBurstAt(clickX, clickY);
-
-      const thanksMsg = state.lang === 'ko' 
-        ? "구독해 주셔서 대단히 감사합니다! 축하 폭죽 세레머니가 작동되었습니다." 
-        : "Subscription complete! Celebration sparks launched successfully.";
-      showToast(state.lang === 'ko' ? "구독 대성공" : "Subscription Success", thanksMsg, "success");
-      
+      const thanksMsg = state.lang === 'ko' ? "구독해 주셔서 대단히 감사합니다! 정기 개발 가이드가 발송됩니다." : "Subscription complete! Advanced Cheat Sheets are on your way.";
+      showToast(state.lang === 'ko' ? "구독 성공" : "Subscription Success", thanksMsg, "success");
       e.target.reset();
     }
-
-    // Dynamic Custom Cursor Trailing Loop
-    const cursorDot = document.getElementById('cursor-dot');
-    const cursorRing = document.getElementById('cursor-ring');
-    let mX = -100, mY = -100;
-    let rX = -100, rY = -100;
-
-    window.addEventListener('mousemove', (e) => {
-      mX = e.clientX;
-      mY = e.clientY;
-      cursorDot.style.left = mX + 'px';
-      cursorDot.style.top = mY + 'px';
-    });
-
-    function updateCursorPhysics() {
-      // Interpolated trailing delay (LERP)
-      rX += (mX - rX) * 0.18;
-      rY += (mY - rY) * 0.18;
-      cursorRing.style.left = rX + 'px';
-      cursorRing.style.top = rY + 'px';
-      requestAnimationFrame(updateCursorPhysics);
-    }
-    requestAnimationFrame(updateCursorPhysics);
-
-    // Event delegation for custom cursor interactive morphing
-    document.addEventListener('mouseover', (e) => {
-      const target = e.target;
-      const interactive = target.closest('a, button, input, select, textarea, [onclick]');
-      if (interactive) {
-        if (interactive.id === 'terminal-input' || interactive.closest('#terminal-form')) {
-          document.body.classList.add('cursor-terminal');
-        } else {
-          document.body.classList.add('cursor-hover');
-        }
-      }
-    });
-
-    document.addEventListener('mouseout', (e) => {
-      const target = e.target;
-      const interactive = target.closest('a, button, input, select, textarea, [onclick]');
-      if (interactive) {
-        document.body.classList.remove('cursor-hover', 'cursor-terminal');
-      }
-    });
 
     window.onload = function() {
       updateLanguageUI();
