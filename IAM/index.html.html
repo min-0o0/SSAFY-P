@@ -11,7 +11,7 @@
   <link rel="stylesheet" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons for modern aesthetic -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,7 +33,7 @@
             darkBorder: '#2E2E2E',
           },
           fontFamily: {
-            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
             sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
           }
@@ -85,7 +85,6 @@
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: .7; transform: scale(1.04); }
     }
-    /* Particle canvas layer */
     #particle-canvas {
       position: fixed;
       top: 0;
@@ -107,14 +106,13 @@
       <div class="flex items-center space-x-3">
         <a href="#" class="text-xl sm:text-2xl font-bold tracking-tight text-brandPrimary dark:text-white flex items-center gap-2">
           <span class="w-3 h-3 bg-brandGit rounded-full"></span>
-          <span>git<span class="font-light text-brandSecondary">.flow</span></span>
+          <span class="font-sans">git<span class="font-light text-brandSecondary">.flow</span></span>
         </a>
         <span class="hidden md:inline-block px-2.5 py-0.5 text-[10px] uppercase font-mono tracking-widest bg-brandPrimary dark:bg-darkSurface text-brandBg dark:text-gray-300 rounded-full">
           SSAFY Interactive Edition
         </span>
       </div>
       
-      <!-- Quick utility toggles (Language & Dark/Light mode) -->
       <div class="flex items-center space-x-2 sm:space-x-4">
         <!-- Translate Switch Button -->
         <button onclick="toggleLanguage()" class="p-2 border border-brandPrimary/10 dark:border-darkBorder rounded-lg hover:bg-brandPrimary/5 dark:hover:bg-white/5 transition-all text-sm font-mono flex items-center gap-1.5" title="Translate language">
@@ -142,7 +140,7 @@
         <span class="text-brandPrimary dark:text-gray-300" data-i18n="hero_tag">Git & CLI Journey from Ground Zero</span>
       </div>
       
-      <!-- Editorial Title with Instrument Serif font -->
+      <!-- Editorial Title with Cormorant Garamond font -->
       <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif leading-[1.05] tracking-tight text-brandPrimary dark:text-white">
         <span data-i18n="hero_title_1">명령어가 아닌,</span><br>
         <span class="italic text-brandAccent" data-i18n="hero_title_2">Git의 흐름</span><span data-i18n="hero_title_3">을 배우다.</span>
@@ -163,7 +161,7 @@
         </a>
       </div>
 
-      <!-- Quick Social Proof / Stats inside responsive columns -->
+      <!-- Quick Stats inside responsive columns -->
       <div class="pt-8 border-t border-brandPrimary/10 dark:border-darkBorder flex items-center space-x-6 sm:space-x-8">
         <div>
           <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_1_val">3단계</span>
@@ -182,7 +180,7 @@
       </div>
     </div>
 
-    <!-- Right Side: Beautiful Editorial Illustration of Git Graphic -->
+    <!-- Right Side: Editorial Illustration of Git Graphic -->
     <div class="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0">
       <div class="absolute inset-0 bg-gradient-to-tr from-brandAccent/10 to-transparent rounded-3xl filter blur-3xl -z-10"></div>
       <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder rounded-2xl p-6 sm:p-8 w-full max-w-md shadow-xl relative overflow-hidden transition-colors duration-300">
@@ -258,7 +256,7 @@
         </div>
       </div>
 
-      <!-- Right Column: Editorial Paragraphs representing growth stages -->
+      <!-- Right Column: Growth Stages -->
       <div class="lg:col-span-7 space-y-10 sm:space-y-12">
         
         <!-- Stage 01 -->
@@ -313,11 +311,11 @@
       </h2>
       <p class="text-xs sm:text-sm md:text-base text-brandSecondary dark:text-gray-400 font-light leading-relaxed" data-i18n="sandbox_desc">
         아래 가상 터미널에 직접 명령어를 입력하거나 퀵 단추를 눌러보세요.<br>
-        CLI 파일 생성부터 Git 영역 변동, 브랜치 전환까지 완벽히 에뮬레이트됩니다!
+        CLI 파일 생성부터 Git 영역 변동, 브랜치 전환 및 머지까지 완벽히 에뮬레이트됩니다!
       </p>
     </div>
 
-    <!-- Playground Grid Layout (Responsive: Stack on mobile, side-by-side on lg) -->
+    <!-- Playground Grid Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       
       <!-- Left Column: Challenge list and Terminal -->
@@ -344,7 +342,7 @@
             <div id="mission-2-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
               <div class="flex items-center space-x-3 min-w-0">
                 <div id="mission-2-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0">2</div>
-                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m2_text">파일 생성 및 스테이징 (<code>touch main.js</code> & <code>git add</code>)</span>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m2_text">파일 생성 및 스테이징 (<code>touch [파일명]</code> & <code>git add</code>)</span>
               </div>
               <span id="mission-2-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
@@ -378,7 +376,7 @@
           </div>
         </div>
 
-        <div class="bg-[#18191a] text-[#F8F8F6] p-4 sm:p-6 rounded-2xl flex-1 flex flex-col justify-between shadow-xl min-h-[360px] border border-white/5 relative">
+        <div class="bg-[#18191a] text-[#F8F8F6] p-4 sm:p-6 rounded-2xl flex-1 flex flex-col justify-between shadow-xl min-h-[380px] border border-white/5 relative">
           <div class="flex justify-between items-center border-b border-white/5 pb-3 mb-4">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 bg-red-500 rounded-full inline-block"></span>
@@ -392,7 +390,7 @@
           </div>
 
           <!-- Output Log Block -->
-          <div id="terminal-log" class="font-mono text-[11px] text-brandBg/90 overflow-y-auto max-h-[220px] min-h-[160px] space-y-2 flex-1 custom-scroll pr-2 mb-4">
+          <div id="terminal-log" class="font-mono text-[11px] text-brandBg/90 overflow-y-auto max-h-[220px] min-h-[180px] space-y-2 flex-1 custom-scroll pr-2 mb-4">
             <div class="text-[#6B7280]" data-i18n="t_welcome_1">&lt; git.flow 터미널 시뮬레이터에 오신 것을 환영합니다! &gt;</div>
             <div class="text-[#6B7280]" data-i18n="t_welcome_2">우측의 Git 3대 요소를 보며 명령어를 연습하세요.</div>
             <div class="text-[#6B7280]" data-i18n="t_welcome_3">실제 리눅스 CLI 명령어(ls, touch, mkdir, rm)도 함께 지원됩니다.</div>
@@ -416,26 +414,30 @@
             <button onclick="triggerShortcut('git init')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git init</span>
             </button>
-            <button onclick="triggerShortcut('touch main.js')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
-              <span>touch main.js</span>
+            <button onclick="triggerShortcut('touch app.js')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
+              <span>touch app.js</span>
             </button>
             <button onclick="triggerShortcut('git add')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
-              <span>git add main.js</span>
+              <span>git add app.js</span>
             </button>
             <button onclick="triggerShortcut('git commit -m')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git commit</span>
             </button>
             <button onclick="triggerShortcut('git branch')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
-              <span>git branch feature/auth</span>
+              <span>git branch feature/dev</span>
             </button>
             <button onclick="triggerShortcut('git checkout')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git checkout</span>
+            </button>
+            <button onclick="triggerShortcut('git merge')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
+              <span>git merge</span>
             </button>
           </div>
         </div>
 
       </div>
 
+      <!-- Right Column: Visualizer panel -->
       <div class="lg:col-span-7 bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-6 sm:p-8 rounded-2xl shadow-sm flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
         
         <!-- Interactive Success Celebration Overlay -->
@@ -455,7 +457,7 @@
 
         <div>
           <!-- Visualization Header -->
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-brandPrimary/5 dark:border-darkBorder pb-4 mb-6 sm:mb-8">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-brandPrimary/5 dark:border-darkBorder pb-4 mb-4">
             <div>
               <span class="text-[9px] uppercase font-mono tracking-widest text-brandGit font-bold" data-i18n="v_badge">Real-time Runtime Graph</span>
               <h3 class="text-lg sm:text-xl font-semibold tracking-tight text-brandPrimary dark:text-white mt-0.5" data-i18n="v_title">Git 3단계 영역 시각화</h3>
@@ -466,11 +468,23 @@
             </div>
           </div>
 
-          <!-- Interactive Columns (Responsive: 1 col on mobile, 3 cols on tablet+) -->
+          <!-- Branch Topology Visualization -->
+          <div class="mb-6 p-4 bg-brandBg/60 dark:bg-darkBg/60 rounded-xl border border-brandPrimary/5 dark:border-darkBorder">
+            <h4 class="text-[10px] font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 mb-2 flex items-center justify-between">
+              <span data-i18n="branch_topology_title">Branch Pointer Map (활성 브랜치 구조)</span>
+              <span class="text-[9px] text-brandAccent font-bold">Active: <span id="active-branch-desc">none</span></span>
+            </h4>
+            <div id="branch-pointers-list" class="flex flex-wrap gap-2">
+              <!-- Dynamically rendered branch nodes -->
+              <span class="text-xs font-mono italic text-brandSecondary" data-i18n="no_branches">저장소 비활성 상태</span>
+            </div>
+          </div>
+
+          <!-- Interactive Columns -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
             
             <!-- Column 1: Working Tree & File System -->
-            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[260px] transition-all">
+            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px] transition-all">
               <div>
                 <div class="flex items-center space-x-1.5 mb-2">
                   <span class="w-2.5 h-2.5 bg-brandGit rounded-full"></span>
@@ -481,7 +495,7 @@
 
               <!-- File System Representation -->
               <div class="space-y-2 mt-auto">
-                <div id="working-tree-files" class="space-y-2 max-h-[140px] overflow-y-auto custom-scroll">
+                <div id="working-tree-files" class="space-y-2 max-h-[180px] overflow-y-auto custom-scroll">
                   <!-- Dynamically populated files via touch -->
                 </div>
                 
@@ -492,7 +506,7 @@
             </div>
 
             <!-- Column 2: Staging Area -->
-            <div id="stage-col" class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[260px] transition-all">
+            <div id="stage-col" class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px] transition-all">
               <div>
                 <div class="flex items-center space-x-1.5 mb-2">
                   <span class="w-2.5 h-2.5 bg-brandAccent rounded-full"></span>
@@ -503,7 +517,7 @@
 
               <!-- Staged Items -->
               <div class="space-y-2 mt-auto">
-                <div id="staged-files-list" class="space-y-2 max-h-[140px] overflow-y-auto custom-scroll">
+                <div id="staged-files-list" class="space-y-2 max-h-[180px] overflow-y-auto custom-scroll">
                   <!-- Staged files populated here -->
                 </div>
                 <div id="staged-empty" class="p-4 bg-dashed border border-brandPrimary/10 dark:border-darkBorder rounded-lg text-center text-[10px] text-brandSecondary dark:text-gray-400 italic font-mono" data-i18n="stage_empty">
@@ -513,7 +527,7 @@
             </div>
 
             <!-- Column 3: Local Repository -->
-            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[260px] transition-all">
+            <div class="border border-brandPrimary/5 dark:border-darkBorder bg-brandBg/30 dark:bg-darkBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px] transition-all">
               <div>
                 <div class="flex items-center space-x-1.5 mb-2">
                   <span class="w-2.5 h-2.5 bg-brandPrimary dark:bg-white rounded-full"></span>
@@ -523,14 +537,14 @@
               </div>
 
               <!-- Commits Graph Container -->
-              <div id="repo-canvas" class="flex-1 flex flex-col justify-center items-center relative py-4 min-h-[120px]">
+              <div id="repo-canvas" class="flex-1 flex flex-col justify-center items-center relative py-4 min-h-[160px]">
                 <div id="repo-empty" class="text-center text-[10px] text-brandSecondary dark:text-gray-400 italic font-mono" data-i18n="repo_empty">
                   기록된 커밋 히스토리가 아직 없습니다.
                 </div>
                 
                 <!-- Commit tree container dynamically injected -->
-                <div id="commit-tree" class="hidden w-full flex flex-col items-center justify-center space-y-3 max-h-[160px] overflow-y-auto custom-scroll pr-1">
-                  <!-- Active Commits -->
+                <div id="commit-tree" class="hidden w-full flex flex-col items-center justify-center space-y-3 max-h-[220px] overflow-y-auto custom-scroll pr-1">
+                  <!-- Active Commits with Memo & Metadata -->
                 </div>
               </div>
             </div>
@@ -676,30 +690,28 @@
     const state = {
       isInitialized: false,
       commitCount: 0,
-      commits: [],
-      branches: ['main'],
+      commits: [], // Stores fully enriched commit metadata
+      branches: {
+        'main': null // maps branch name to commit ID
+      },
       currentBranch: 'main',
       head: 'none',
       missionStatus: [false, false, false, false, false],
       
       // Virtual File System (VFS)
-      // Flat dictionary containing metadata like staged state, tracking state
       files: {
-        // e.g. "main.js": { name: "main.js", isDir: false, status: "untracked" }
+        // e.g. "app.js": { name: "app.js", isDir: false, status: "untracked" }
       },
 
-      // Language setting
       lang: 'ko',
-
-      // Theme setting
       theme: 'light',
 
-      // Missions defined for the challenge runner
+      // General-purpose missions checking any file targets instead of hardcoding "main.js"
       missions: [
         { id: 1, check: () => state.isInitialized },
         { id: 2, check: () => Object.values(state.files).some(f => f.status === 'staged') },
         { id: 3, check: () => state.commitCount > 0 },
-        { id: 4, check: () => state.branches.length > 1 },
+        { id: 4, check: () => Object.keys(state.branches).length > 1 },
         { id: 5, check: () => state.currentBranch !== 'main' }
       ]
     };
@@ -737,13 +749,13 @@
         sandbox_badge: "핵심 경험 (CORE EXPERIENCE)",
         sandbox_title_1: "직접 타이핑하며 확인하는",
         sandbox_title_2: "Git 샌드박스",
-        sandbox_desc: "아래 가상 터미널에 직접 명령어를 입력하거나 퀵 단추를 눌러보세요. CLI 파일 생성부터 Git 영역 변동, 브랜치 전환까지 완벽히 에뮬레이트됩니다!",
+        sandbox_desc: "아래 가상 터미널에 직접 명령어를 입력하거나 퀵 단추를 눌러보세요. CLI 파일 생성부터 Git 영역 변동, 브랜치 전환 및 머지까지 완벽히 에뮬레이트됩니다!",
         quest_board: "퀘스트 보드",
-        m1_text: "Git 저장소 시작하기 (git init)",
-        m2_text: "파일 생성 및 스테이징 (touch 및 git add)",
-        m3_text: "버전 기록 저장 (git commit -m \"...\")",
-        m4_text: "새 평행 우주 생성 (git branch [이름])",
-        m5_text: "새 우주로 차원 이동 (git checkout [이름])",
+        m1_text: "Git 저장소 시작하기 (<code>git init</code>)",
+        m2_text: "파일 생성 및 스테이징 (<code>touch [파일명]</code> & <code>git add</code>)",
+        m3_text: "버전 기록 저장 (<code>git commit -m \"...\"</code>)",
+        m4_text: "새 평행 우주 생성 (<code>git branch [이름]</code>)",
+        m5_text: "새 우주로 차원 이동 (<code>git checkout [이름]</code>)",
         status_ready: "준비",
         status_locked: "잠금",
         status_clear: "완료",
@@ -756,6 +768,8 @@
         smart_btn_title: "퀵 스마트 단추 (터미널 자동 입력)",
         v_badge: "실시간 런타임 그래프",
         v_title: "Git 3단계 영역 시각화",
+        branch_topology_title: "Branch Pointer Map (활성 브랜치 구조)",
+        no_branches: "저장소 비활성 상태",
         col1_title: "Working Tree",
         col1_desc: "내 로컬 가상 드라이브에 존재하는 파일 목록",
         col2_title: "Staging Area",
@@ -769,7 +783,7 @@
         win_title: "Git 흐름 탐험 미션 완수",
         win_desc: "축하합니다! Git의 기본 주기와 로컬 아키텍처를 완벽히 정복하셨습니다. 이제 어떤 협업 환경에서도 자신감 있게 나아가세요!",
         win_return: "시각화 샌드박스로 돌아가기",
-        feat_badge: "왜 git.flow 인가?",
+        feat_badge: "왜 git.flow인가?",
         feat_title_1: "어렵기만 한 버전을",
         feat_title_2: "가장",
         feat_title_3: "아름답게 관찰",
@@ -826,11 +840,11 @@
         sandbox_title_2: "Git Sandbox Space",
         sandbox_desc: "Type actual commands in the virtual terminal below or click quick shortcuts. File creation, Git tracking, staging, and branch switching are simulated in real time!",
         quest_board: "Quest Board",
-        m1_text: "Initialize Repository (git init)",
-        m2_text: "File Creation & Staging (touch & git add)",
-        m3_text: "Record Version History (git commit -m \"...\")",
-        m4_text: "Branch Out (git branch [name])",
-        m5_text: "Dimension Leap to Branch (git checkout [name])",
+        m1_text: "Initialize Repository (<code>git init</code>)",
+        m2_text: "File Creation & Staging (<code>touch [filename]</code> & <code>git add</code>)",
+        m3_text: "Record Version History (<code>git commit -m \"...\"</code>)",
+        m4_text: "Branch Out (<code>git branch [name]</code>)",
+        m5_text: "Dimension Leap to Branch (<code>git checkout [name]</code>)",
         status_ready: "Ready",
         status_locked: "Locked",
         status_clear: "Cleared",
@@ -843,6 +857,8 @@
         smart_btn_title: "Smart Shortcuts (Auto-inputs into terminal)",
         v_badge: "Real-time Runtime Graph",
         v_title: "Git 3-Stage Visualization",
+        branch_topology_title: "Branch Pointer Map (Active Structures)",
+        no_branches: "Repository inactive",
         col1_title: "Working Tree",
         col1_desc: "List of files existing on your virtual local disk",
         col2_title: "Staging Area",
@@ -881,23 +897,22 @@
       }
     };
 
-    // Learning tips by levels (Localized in updateMissionsUI)
     const tipsDictionary = {
       ko: [
         { title: "준비 운동", desc: "가상 터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git init</code>을 치거나 퀵 단추를 눌러 저장소를 만드세요." },
-        { title: "첫 파일 생성 및 추적하기", desc: "먼저 터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch main.js</code>를 쳐서 파일을 만들고, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add main.js</code>로 대기 영역에 올리세요." },
+        { title: "첫 파일 생성 및 추적하기", desc: "먼저 터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch [파일명]</code>을 입력해 파일을 만들고, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add [파일명]</code>으로 대기 영역에 올리세요." },
         { title: "정식 버전 스냅샷 남기기", desc: "영구 기록할 준비가 되었습니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git commit -m \"작성한 커밋 메시지\"</code>를 통해 첫 스냅샷을 생성하십시오." },
-        { title: "새로운 우주(가지) 뻗기", desc: "기존 main 브랜치 외에 평행 세계를 만듭니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git branch feature/auth</code>를 쳐서 새 브랜치를 만드세요." },
-        { title: "새 우주로 차원 이동", desc: "방금 만든 가지로 작업 머리를 이동합니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git checkout feature/auth</code>를 입력하면 헤드 포인터가 순간이동합니다." },
-        { title: "탐험 달성 완료!", desc: "축하합니다! 로컬 Git의 핵심 동작 원리 5대 흐름을 모두 정복하셨습니다. 화면 위의 성공 창을 확인해 보세요!" }
+        { title: "새로운 우주(가지) 뻗기", desc: "기존 main 브랜치 외에 평행 세계를 만듭니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git branch feature/dev</code>를 쳐서 새 브랜치를 만드세요." },
+        { title: "새 우주로 차원 이동", desc: "방금 만든 가지로 작업 머리를 이동합니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git checkout feature/dev</code>를 입력하면 헤드 포인터가 순간이동합니다." },
+        { title: "탐험 달성 완료!", desc: "축하합니다! 로컬 Git의 핵심 동작 원리 5대 흐름을 모두 정복하셨습니다. 이제 새로운 파일들을 다루거나 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git status</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git log</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git merge</code> 등 심화 단계를 자유롭게 연습해보세요!" }
       ],
       en: [
         { title: "Warm Up", desc: "Type <code class='font-mono bg-white dark:bg-darkSurface px-1'>git init</code> inside the terminal or click the quick shortcut to spawn your repository." },
-        { title: "File Creation & Tracking", desc: "Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch main.js</code> to create a file, then stage it using <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add main.js</code>." },
+        { title: "File Creation & Tracking", desc: "Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch [filename]</code> to create any file, then stage it using <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add [filename]</code>." },
         { title: "Record a Version Snapshot", desc: "Ready to log permanently. Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>git commit -m \"your commit message\"</code> to record your very first snapshot." },
-        { title: "Spawn a Parallel Universe", desc: "Let's create a feature branch beside main. Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>git branch feature/auth</code> to branch out." },
-        { title: "Dimension Leap to Feature", desc: "Now hop over to the newly made branch. Type <code class='font-mono bg-white dark:bg-darkSurface px-1'>git checkout feature/auth</code> to teleport your HEAD pointer." },
-        { title: "Expeditions Cleared!", desc: "Fantastic! You have successfully mastered the 5 core local git milestones. Check out the trophy overlay!" }
+        { title: "Spawn a Parallel Universe", desc: "Let's create a feature branch beside main. Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>git branch feature/dev</code> to branch out." },
+        { title: "Dimension Leap to Feature", desc: "Now hop over to the newly made branch. Type <code class='font-mono bg-white dark:bg-darkSurface px-1'>git checkout feature/dev</code> to teleport your HEAD pointer." },
+        { title: "Expeditions Cleared!", desc: "Fantastic! You have successfully mastered the 5 core local git milestones. Now feel free to create more files, check <code class='font-mono bg-white dark:bg-darkSurface px-1'>git status</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git log</code>, or perform <code class='font-mono bg-white dark:bg-darkSurface px-1'>git merge</code>!" }
       ]
     };
 
@@ -943,7 +958,6 @@
           el.innerHTML = dictionary[state.lang][key];
         }
       });
-      // Refresh current active missions and tip box matching selected language
       checkMissions();
     }
 
@@ -951,7 +965,6 @@
     const ctx = canvas.getContext('2d');
     let particles = [];
 
-    // Resize canvas to match screen
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -1053,15 +1066,17 @@
       input.focus();
       
       if (cmd === 'git commit -m') {
-        input.value = 'git commit -m "feat: first setup"';
+        input.value = 'git commit -m "feat: complete active layout"';
       } else if (cmd === 'git branch') {
-        input.value = 'git branch feature/auth';
+        input.value = 'git branch feature/dev';
       } else if (cmd === 'git checkout') {
-        if (state.branches.includes('feature/auth')) {
-          input.value = 'git checkout feature/auth';
+        if (Object.keys(state.branches).includes('feature/dev')) {
+          input.value = 'git checkout feature/dev';
         } else {
-          input.value = 'git checkout feature/auth';
+          input.value = 'git checkout feature/dev';
         }
+      } else if (cmd === 'git merge') {
+        input.value = 'git merge feature/dev';
       }
     }
 
@@ -1109,12 +1124,12 @@
       }
 
       // -------------------------------------------------------------
-      // 1. Virtual Standard Filesystem CLI Commands (touch, ls, rm, mkdir)
+      // 1. Virtual Standard Filesystem CLI Commands
       // -------------------------------------------------------------
       if (rootCommand === 'touch') {
         const filename = args[1];
         if (!filename) {
-          appendLog(state.lang === 'ko' ? "에러: 터치할 파일명을 기재해 주십시오. (예: touch main.js)" : "error: Touch filename required. (e.g., touch main.js)", "error");
+          appendLog(state.lang === 'ko' ? "에러: 터치할 파일명을 기재해 주십시오. (예: touch app.js)" : "error: Touch filename required. (e.g., touch app.js)", "error");
           return;
         }
         if (state.files[filename]) {
@@ -1153,7 +1168,6 @@
           return;
         }
         let targetKey = target;
-        // checking both directories and files
         if (!state.files[targetKey] && state.files[targetKey + '/']) {
           targetKey = targetKey + '/';
         }
@@ -1176,15 +1190,15 @@
         } else {
           fileList.forEach(name => {
             const file = state.files[name];
-            const colorClass = file.isDir ? 'text-brandAccent' : 'text-brandPrimary dark:text-white';
-            appendLog(`- <span class="${colorClass}">${name}</span> (${file.status})`, 'info');
+            const colorClass = file.isDir ? 'text-brandAccent font-bold' : 'text-brandPrimary dark:text-white';
+            appendLog(`- <span class="${colorClass}">${name}</span> [${file.status}]`, 'info');
           });
         }
         return;
       }
 
       // -------------------------------------------------------------
-      // 2. Git Ecosystem Commands (init, add, commit, branch, checkout)
+      // 2. Git Ecosystem Commands (init, status, log, add, commit, branch, checkout, merge)
       // -------------------------------------------------------------
       if (rootCommand === 'git') {
         const action = args[1];
@@ -1204,27 +1218,79 @@
             } else {
               state.isInitialized = true;
               state.head = 'main';
+              state.branches['main'] = null;
+              state.currentBranch = 'main';
               appendLog(`Initialized empty Git repository in /workspace/.git/`, 'success');
               
               const scTitle = state.lang === 'ko' ? "완료: git init" : "Cleared: git init";
               const scBody = state.lang === 'ko' ? "로컬 저장소가 시작되었습니다. 이제 파일들을 추적할 수 있습니다." : "Local Git repository set up. Ready to track and stage files!";
               showToast(scTitle, scBody, "success");
               updateVisuals();
-              checkMissions(true); // trigger particle on step pass
+              checkMissions(true);
+            }
+            break;
+
+          case 'status':
+            appendLog(state.lang === 'ko' ? `현재 브랜치: ${state.currentBranch}` : `On branch ${state.currentBranch}`, 'success');
+            
+            const untracked = Object.values(state.files).filter(f => f.status === 'untracked');
+            const staged = Object.values(state.files).filter(f => f.status === 'staged');
+            const committed = Object.values(state.files).filter(f => f.status === 'committed');
+
+            if (staged.length > 0) {
+              appendLog(state.lang === 'ko' ? `커밋할 변경 사항:` : `Changes to be committed:`, 'success');
+              staged.forEach(f => {
+                appendLog(`  (use "git rm --cached <file>..." to unstage)`);
+                appendLog(`\t<span class="text-brandSuccess">new file:   ${f.name}</span>`, 'info');
+              });
+            }
+
+            if (untracked.length > 0) {
+              appendLog(state.lang === 'ko' ? `추적하지 않는 파일:` : `Untracked files:`, 'error');
+              appendLog(`  (use "git add <file>..." to include in what will be committed)`);
+              untracked.forEach(f => {
+                appendLog(`\t<span class="text-brandGit">${f.name}</span>`, 'info');
+              });
+            }
+
+            if (staged.length === 0 && untracked.length === 0) {
+              appendLog(state.lang === 'ko' ? `무실적. 작업 디렉터리가 깨끗합니다.` : `nothing to commit, working tree clean`, 'info');
+            }
+            break;
+
+          case 'log':
+            if (state.commits.length === 0) {
+              appendLog(state.lang === 'ko' ? "이 브랜치에 기록된 커밋 로그가 아직 존재하지 않습니다." : "No commits logged yet.", 'info');
+            } else {
+              appendLog(state.lang === 'ko' ? `=== 로컬 커밋 이력 로그 ===` : `=== Local Commit Log ===`, 'success');
+              // Sort commits to show newest first
+              [...state.commits].reverse().forEach(commit => {
+                const pointers = [];
+                Object.keys(state.branches).forEach(b => {
+                  if (state.branches[b] === commit.id) {
+                    pointers.push(b === state.currentBranch ? `HEAD -> ${b}` : b);
+                  }
+                });
+                const pointerStr = pointers.length > 0 ? ` (<span class="text-brandAccent font-bold">${pointers.join(', ')}</span>)` : '';
+                appendLog(`<span class="text-yellow-500">commit ${commit.id}</span>${pointerStr}`, 'info');
+                appendLog(`Author: ${commit.author}`);
+                appendLog(`Date:   ${commit.date}`);
+                appendLog(`\n    ${commit.message}\n`, 'success');
+              });
             }
             break;
 
           case 'add':
             const targetFile = args[2];
             if (!targetFile) {
-              appendLog(state.lang === 'ko' ? `에러: git add 뒤에 파일명을 입력해야 합니다. (예: git add . 또는 git add main.js)` : `error: Please specify a file target. (e.g. git add . or git add main.js)`, 'error');
+              appendLog(state.lang === 'ko' ? `에러: git add 뒤에 파일명을 입력해야 합니다. (예: git add . 또는 git add app.js)` : `error: Please specify a file target. (e.g. git add . or git add app.js)`, 'error');
               return;
             }
 
             if (targetFile === '.') {
               const fileKeys = Object.keys(state.files);
               if (fileKeys.length === 0) {
-                appendLog(state.lang === 'ko' ? `스테이징할 파일이 없습니다. 먼저 'touch main.js'를 쳐보세요.` : `No files to stage. Try creating one using 'touch main.js' first.`, 'error');
+                appendLog(state.lang === 'ko' ? `스테이징할 파일이 없습니다. 먼저 'touch app.js'를 쳐보세요.` : `No files to stage. Try creating one using 'touch app.js' first.`, 'error');
                 return;
               }
               fileKeys.forEach(key => {
@@ -1249,7 +1315,6 @@
             break;
 
           case 'commit':
-            // Check if there is anything in staged area
             const stagedExists = Object.values(state.files).some(f => f.status === 'staged');
             if (!stagedExists) {
               appendLog(`nothing to commit, working tree clean (Staging Area is empty)`, 'error');
@@ -1257,14 +1322,27 @@
               return;
             }
 
-            let commitMessage = "feat: add main.js";
+            let commitMessage = "feat: add resources";
             const mIndex = args.indexOf('-m');
             if (mIndex !== -1 && args[mIndex + 1]) {
               commitMessage = args.slice(mIndex + 1).join(' ').replace(/['"]/g, '');
             }
 
             const shortId = Math.random().toString(16).substring(2, 8);
-            state.commits.push({ id: shortId, message: commitMessage, branch: state.currentBranch });
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString() + ' ' + now.toLocaleDateString();
+            
+            // Rich Commit Metadata with author info and detailed stamp
+            const newCommit = { 
+              id: shortId, 
+              message: commitMessage, 
+              branch: state.currentBranch,
+              author: "SSAFY Dev <dev@ssafy.com>",
+              date: timeStr
+            };
+
+            state.commits.push(newCommit);
+            state.branches[state.currentBranch] = shortId;
             state.commitCount++;
             
             // Mark staged files as committed
@@ -1274,7 +1352,7 @@
               }
             });
 
-            appendLog(`[${state.currentBranch} (root-commit) ${shortId}] ${commitMessage}`, 'success');
+            appendLog(`[${state.currentBranch} ${shortId}] ${commitMessage}`, 'success');
             showToast(state.lang === 'ko' ? "버전 생성 완료" : "Commit Successful", `[${shortId}] - ${commitMessage}`, "success");
             
             updateVisuals();
@@ -1282,16 +1360,49 @@
             break;
 
           case 'branch':
-            if (args.length < 3) {
-              appendLog(`* ${state.currentBranch}\n${state.branches.filter(b => b !== state.currentBranch).join('\n')}`, 'info');
+            const subAction = args[2];
+            
+            // Delete branch sub-argument logic (-d)
+            if (subAction === '-d') {
+              const targetToDelete = args[3];
+              if (!targetToDelete) {
+                appendLog(`error: Branch name required to delete. (e.g. git branch -d feature/auth)`, 'error');
+                return;
+              }
+              if (targetToDelete === state.currentBranch) {
+                appendLog(`error: Cannot delete branch '${targetToDelete}' checked out at HEAD.`, 'error');
+                showToast("삭제 실패", "현재 사용 중인 브랜치는 삭제할 수 없습니다.", "error");
+                return;
+              }
+              if (!Object.keys(state.branches).includes(targetToDelete)) {
+                appendLog(`error: branch '${targetToDelete}' not found.`, 'error');
+                return;
+              }
+              delete state.branches[targetToDelete];
+              appendLog(`Deleted branch '${targetToDelete}' successfully.`, 'success');
+              showToast(state.lang === 'ko' ? "브랜치 삭제" : "Branch Deleted", `'${targetToDelete}' 브랜치가 정상 삭제되었습니다.`, "success");
+              updateVisuals();
+              checkMissions(true);
               return;
             }
+
+            // Normal branch command logic
+            if (args.length < 3) {
+              const branchList = Object.keys(state.branches).map(b => {
+                return b === state.currentBranch ? `* <span class="text-brandGit font-bold">${b}</span>` : `  ${b}`;
+              }).join('\n');
+              appendLog(branchList, 'info');
+              return;
+            }
+
             const branchName = args[2];
-            if (state.branches.includes(branchName)) {
+            if (Object.keys(state.branches).includes(branchName)) {
               appendLog(`fatal: A branch named '${branchName}' already exists.`, 'error');
               return;
             }
-            state.branches.push(branchName);
+
+            // Points to current branch's commit
+            state.branches[branchName] = state.branches[state.currentBranch];
             appendLog(`Branch '${branchName}' created successfully.`, 'success');
             
             showToast(state.lang === 'ko' ? "브랜치 신설" : "Branch Created", state.lang === 'ko' ? `'${branchName}' 평행 세계가 활성화되었습니다.` : `Spawned '${branchName}' branch successfully.`, "success");
@@ -1305,7 +1416,7 @@
               appendLog(`error: Switch branch target required.`, 'error');
               return;
             }
-            if (!state.branches.includes(targetBranch)) {
+            if (!Object.keys(state.branches).includes(targetBranch)) {
               appendLog(`error: pathspec '${targetBranch}' did not match any files or branches.`, 'error');
               return;
             }
@@ -1318,8 +1429,49 @@
             checkMissions(true);
             break;
 
+          case 'merge':
+            const mergeTarget = args[2];
+            if (!mergeTarget) {
+              appendLog(`error: Merge target branch required. (e.g. git merge feature/dev)`, 'error');
+              return;
+            }
+            if (!Object.keys(state.branches).includes(mergeTarget)) {
+              appendLog(`error: branch '${mergeTarget}' not found.`, 'error');
+              return;
+            }
+            if (mergeTarget === state.currentBranch) {
+              appendLog(`error: Cannot merge branch into itself.`, 'error');
+              return;
+            }
+
+            // Create merge commit simulating actual merge snapshots
+            const mergeId = Math.random().toString(16).substring(2, 8);
+            const stamp = new Date();
+            const logStamp = stamp.toLocaleTimeString() + ' ' + stamp.toLocaleDateString();
+            
+            const mergeCommit = {
+              id: mergeId,
+              message: `Merge branch '${mergeTarget}' into ${state.currentBranch}`,
+              branch: state.currentBranch,
+              author: "SSAFY Dev <dev@ssafy.com>",
+              date: logStamp
+            };
+
+            state.commits.push(mergeCommit);
+            state.branches[state.currentBranch] = mergeId;
+            state.commitCount++;
+
+            appendLog(`Updating ${state.branches[mergeTarget] || 'none'}..${mergeId}`, 'info');
+            appendLog(`Fast-forward simulated / 3-way merge auto-recorded.`, 'info');
+            appendLog(`[${state.currentBranch} ${mergeId}] Merge branch '${mergeTarget}' into ${state.currentBranch}`, 'success');
+            showToast(state.lang === 'ko' ? "병합 성공" : "Merge Successful", `'${mergeTarget}'의 수정 본이 '${state.currentBranch}'로 안전하게 결합되었습니다.`, "success");
+            
+            updateVisuals();
+            checkMissions(true);
+            break;
+
           default:
-            appendLog(`Unknown git subcommand. Supported subcommands: init, add, commit, branch, checkout`, 'error');
+            appendLog(`Unknown git subcommand. Supported subcommands: init, status, log, add, commit, branch, checkout, merge`, 'error');
         }
         return;
       }
@@ -1348,12 +1500,10 @@
           uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandSuccess bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '완료' : 'Clear';
 
-          // If this step was newly cleared in this turn, trigger canvas particles
           if (triggerParticleOnSuccess && !wasPreviouslyPassed) {
             triggerBurst();
           }
         } else if (idx === completedCount) {
-          // Active challenge row
           uiContainer.classList.remove('opacity-50');
           uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-brandAccent/30 dark:border-brandAccent/60 bg-white dark:bg-darkSurface transition-all duration-300";
           uiBullet.className = 'w-5 h-5 rounded-full bg-brandAccent text-white flex items-center justify-center text-[10px] font-bold success-pulse shrink-0';
@@ -1361,7 +1511,6 @@
           uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandAccent bg-brandAccent/10 px-2 py-0.5 rounded font-bold shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '도전중' : 'Active';
         } else {
-          // Locked steps
           uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300";
           uiBullet.className = 'w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[10px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0';
           uiBullet.innerHTML = `${idx+1}`;
@@ -1372,7 +1521,6 @@
 
       document.getElementById('quest-progress').textContent = `${completedCount} / 5 Completed`;
 
-      // Update interactive Tips dynamically
       const tipTitle = document.getElementById('tip-title');
       const tipDesc = document.getElementById('tip-desc');
       const tipsList = tipsDictionary[state.lang];
@@ -1385,7 +1533,6 @@
         tipDesc.innerHTML = tipsList[tipsList.length - 1].desc;
       }
 
-      // Final complete action -> Overlay Success trophy
       if (completedCount === 5) {
         setTimeout(() => {
           document.getElementById('success-overlay').classList.remove('hidden');
@@ -1419,7 +1566,7 @@
       if (filesArray.length === 0) {
         const placeholder = document.createElement('div');
         placeholder.className = "text-[9px] text-brandSecondary dark:text-gray-400 italic text-center p-2 border border-dashed border-brandPrimary/10 dark:border-darkBorder rounded-lg";
-        placeholder.textContent = state.lang === 'ko' ? "디렉터리가 비어 있습니다. (touch main.js)" : "Directory is empty. (touch main.js)";
+        placeholder.textContent = state.lang === 'ko' ? "디렉터리가 비어 있습니다. (touch app.js)" : "Directory is empty. (touch app.js)";
         workingTreeFilesContainer.appendChild(placeholder);
       } else {
         filesArray.forEach(file => {
@@ -1475,7 +1622,36 @@
         });
       }
 
-      // 4. Redraw Commits in Local Repo Tree Container
+      // 4. Render Active Pointers Map (브랜치 추가/삭제/체크아웃 동작 시각화 패널)
+      const branchPointersList = document.getElementById('branch-pointers-list');
+      const activeBranchDesc = document.getElementById('active-branch-desc');
+      branchPointersList.innerHTML = '';
+
+      if (state.isInitialized) {
+        activeBranchDesc.textContent = `${state.currentBranch} (HEAD)`;
+        Object.keys(state.branches).forEach(branch => {
+          const commitTarget = state.branches[branch] || 'none';
+          const isActive = branch === state.currentBranch;
+          const pill = document.createElement('div');
+          
+          pill.className = `px-3 py-1.5 rounded-lg border font-mono text-[11px] flex items-center space-x-2 transition-all ${
+            isActive 
+              ? 'bg-brandGit/10 border-brandGit text-brandGit font-bold shadow-sm' 
+              : 'bg-white dark:bg-darkSurface border-brandPrimary/10 dark:border-darkBorder text-brandSecondary'
+          }`;
+
+          pill.innerHTML = `
+            <span>${isActive ? '★' : '○'} ${branch}</span>
+            <span class="text-[9px] opacity-60 bg-brandPrimary/5 dark:bg-white/5 px-1 py-0.2 rounded">${commitTarget}</span>
+          `;
+          branchPointersList.appendChild(pill);
+        });
+      } else {
+        activeBranchDesc.textContent = 'none';
+        branchPointersList.innerHTML = `<span class="text-xs font-mono italic text-brandSecondary" data-i18n="no_branches">저장소 비활성 상태</span>`;
+      }
+
+      // 5. Redraw Commits with Enhanced Memo Metadata
       const repoEmpty = document.getElementById('repo-empty');
       const commitTree = document.getElementById('commit-tree');
       
@@ -1493,19 +1669,39 @@
             lineHtml = `<div class="w-0.5 h-4 bg-brandPrimary/20 dark:bg-white/20 mb-1"></div>`;
           }
 
-          const isHeadHere = state.currentBranch === commit.branch;
-          const headTag = isHeadHere ? `<span class="bg-brandGit text-white text-[8px] font-mono px-1 py-0.5 rounded ml-1 success-pulse font-bold">HEAD</span>` : '';
+          // Check which branch pointers are pointing to this commit
+          const pointingBranches = [];
+          Object.keys(state.branches).forEach(br => {
+            if (state.branches[br] === commit.id) {
+              pointingBranches.push(br);
+            }
+          });
+
+          const branchTagsHtml = pointingBranches.map(br => {
+            const isHead = br === state.currentBranch;
+            return `<span class="${isHead ? 'bg-brandGit text-white font-bold' : 'bg-brandAccent/20 text-brandAccent dark:bg-brandAccent/45 dark:text-white'} px-1 py-0.5 rounded text-[8px] font-mono">${isHead ? 'HEAD -> ' : ''}${br}</span>`;
+          }).join(' ');
 
           commitNode.innerHTML = `
             ${lineHtml}
-            <div class="bg-brandPrimary dark:bg-darkBg text-brandBg dark:text-white p-2 sm:p-2.5 rounded-lg text-[10px] font-mono w-full shadow-sm hover:scale-[1.02] transition-transform">
-              <div class="flex justify-between items-center opacity-60">
-                <span>commit ${commit.id}</span>
-                <span class="bg-white/10 dark:bg-white/5 text-white px-1 rounded text-[7px] font-bold">${commit.branch}</span>
+            <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder text-brandPrimary dark:text-white p-3 rounded-xl text-[10px] font-mono w-full shadow-sm hover:scale-[1.02] transition-transform">
+              <div class="flex justify-between items-center opacity-60 pb-1.5 border-b border-brandPrimary/5 dark:border-darkBorder">
+                <span class="font-bold text-brandAccent">ID: ${commit.id}</span>
+                <span class="text-[8px]">${commit.date}</span>
               </div>
-              <p class="font-bold text-[10px] sm:text-[11px] text-brandGit mt-1 truncate">"${commit.message}"</p>
-              <div class="flex justify-end mt-1">
-                ${headTag}
+              
+              <!-- Commit Message (Memo) -->
+              <p class="font-bold text-xs text-brandPrimary dark:text-white mt-2 mb-1">"${commit.message}"</p>
+              
+              <!-- Author Metadata -->
+              <div class="text-[9px] opacity-70 flex items-center gap-1 mt-1 text-brandSecondary dark:text-gray-400">
+                <i class="fa-solid fa-user-pen text-[8px]"></i>
+                <span>${commit.author}</span>
+              </div>
+
+              <!-- Pointers & Tags container -->
+              <div class="flex flex-wrap gap-1 mt-2.5">
+                ${branchTagsHtml}
               </div>
             </div>
           `;
@@ -1521,7 +1717,7 @@
       state.isInitialized = false;
       state.commitCount = 0;
       state.commits = [];
-      state.branches = ['main'];
+      state.branches = { 'main': null };
       state.currentBranch = 'main';
       state.head = 'none';
       state.files = {};
@@ -1550,7 +1746,6 @@
       document.getElementById('success-overlay').classList.add('hidden');
     }
 
-    // Subscribe action handler
     function handleSubscribe(e) {
       e.preventDefault();
       const thanksMsg = state.lang === 'ko' ? "구독해 주셔서 대단히 감사합니다! 정기 개발 가이드가 발송됩니다." : "Subscription complete! Advanced Cheat Sheets are on your way.";
@@ -1558,10 +1753,8 @@
       e.target.reset();
     }
 
-    // Initialize all triggers on Window Load
     window.onload = function() {
-      updateLanguageUI();
-      // detect default dark theme preference if available
+      updateLanguageUI();g
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         toggleTheme();
       }
