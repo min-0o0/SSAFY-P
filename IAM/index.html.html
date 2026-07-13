@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git.flow — 명령어가 아닌, Git의 흐름을 배우다</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Pretendard CDN -->
+  <link rel="stylesheet" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for modern aesthetic -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBg: '#F8F8F6',
+            brandPrimary: '#111111',
+            brandAccent: '#6C63FF',
+            brandSuccess: '#2E8B57',
+            brandSecondary: '#6B7280',
+            brandGit: '#F05032',
+          },
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Styling custom selection colors and smooth transitions */
+    ::selection {
+      background-color: #111111;
+      color: #F8F8F6;
+    }
+    .text-git-glow {
+      text-shadow: 0 0 10px rgba(240, 80, 50, 0.2);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #1f2022;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #4b5563;
+      border-radius: 2px;
+    }
+    /* Typing cursor animation */
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .cli-cursor::after {
+      content: ' ';
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background-color: #f8f8f6;
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+    }
+    /* Pulse effect for interactive checkpoints */
+    .success-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .7; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body class="bg-brandBg text-brandPrimary font-sans antialiased selection:bg-brandPrimary selection:text-brandBg overflow-x-hidden">
+
+  <!-- HEADER & NAVIGATION -->
+  <header class="border-b border-brandPrimary/10 sticky top-0 bg-brandBg/80 backdrop-blur-md z-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-5 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="#" class="text-2xl font-bold tracking-tight text-brandPrimary flex items-center gap-2">
+          <span class="w-3 h-3 bg-brandGit rounded-full"></span>
+          <span>git<span class="font-light text-brandSecondary">.flow</span></span>
+        </a>
+        <span class="hidden md:inline-block px-2.5 py-0.5 text-[10px] uppercase font-mono tracking-widest bg-brandPrimary text-brandBg rounded-full">
+          SSAFY Special Edition
+        </span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide">
+        <a href="#story" class="hover:text-brandAccent transition-colors">Philosophy</a>
+        <a href="#sandbox" class="hover:text-brandAccent transition-colors flex items-center gap-1.5">
+          <span>Sandbox Explorer</span>
+          <span class="w-1.5 h-1.5 bg-brandGit rounded-full success-pulse"></span>
+        </a>
+        <a href="#strengths" class="hover:text-brandAccent transition-colors">Features</a>
+      </nav>
+      <div>
+        <a href="#sandbox" class="px-5 py-2.5 bg-brandPrimary text-brandBg text-xs font-mono tracking-wider rounded-full hover:bg-brandGit transition-all duration-300 transform hover:scale-105 inline-block">
+          START EXPEDITION
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7 flex flex-col justify-center space-y-8">
+      <!-- Tag Badge -->
+      <div class="inline-flex items-center space-x-2 border border-brandPrimary/15 bg-white/40 self-start px-3.5 py-1.5 rounded-full text-xs font-mono">
+        <i class="fa-solid fa-terminal text-brandGit"></i>
+        <span class="text-brandPrimary">Git & CLI Journey from Ground Zero</span>
+      </div>
+      
+      <!-- Editorial Title -->
+      <h1 class="text-6xl md:text-8xl font-serif leading-[1.05] tracking-tight text-brandPrimary">
+        명령어가 아닌,<br>
+        <span class="italic text-brandAccent">Git의 흐름</span>을 배우다.
+      </h1>
+      
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-brandSecondary font-light leading-relaxed max-w-xl">
+        터미널 창 앞에서 외웠던 명령어들은 늘 머릿속을 맴돌다 사라집니다.<br>
+        <strong class="font-semibold text-brandPrimary">git.flow</strong>는 보이지 않던 Git의 실시간 변화를 눈앞에 시각화하여, 원리부터 이해하도록 돕는 차세대 인터랙티브 런타임 공간입니다.
+      </p>
+
+      <!-- CTA and Metadata -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+        <a href="#sandbox" class="px-8 py-4 bg-brandPrimary text-brandBg font-mono text-sm tracking-wider rounded-xl text-center hover:bg-brandGit transition-all duration-300 shadow-lg hover:shadow-brandGit/20">
+          터미널 실습 시작하기 &rarr;
+        </a>
+        <a href="#story" class="px-8 py-4 border border-brandPrimary/15 bg-white/20 font-mono text-sm tracking-wider text-center rounded-xl hover:bg-white/70 transition-all duration-300">
+          SSAFY 성장 여정 보기
+        </a>
+      </div>
+
+      <!-- Quick Social Proof / Stat -->
+      <div class="pt-8 border-t border-brandPrimary/10 flex items-center space-x-8">
+        <div>
+          <span class="block text-3xl font-serif text-brandPrimary">3단계</span>
+          <span class="text-xs text-brandSecondary uppercase tracking-widest font-mono">영역 완벽 시각화</span>
+        </div>
+        <div class="w-[1px] h-10 bg-brandPrimary/10"></div>
+        <div>
+          <span class="block text-3xl font-serif text-brandPrimary">5가지</span>
+          <span class="text-xs text-brandSecondary uppercase tracking-widest font-mono">코어 CLI 챌린지</span>
+        </div>
+        <div class="w-[1px] h-10 bg-brandPrimary/10"></div>
+        <div>
+          <span class="block text-3xl font-serif text-brandPrimary">0%</span>
+          <span class="text-xs text-brandSecondary uppercase tracking-widest font-mono">진입 장벽 보장</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Clean Concept Graphics of a Git Graph -->
+    <div class="lg:col-span-5 relative flex justify-center">
+      <div class="absolute inset-0 bg-gradient-to-tr from-brandAccent/10 to-transparent rounded-3xl filter blur-3xl -z-10"></div>
+      <div class="bg-white border border-brandPrimary/10 rounded-2xl p-8 w-full max-w-md shadow-xl relative overflow-hidden">
+        <!-- Accent Line -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brandAccent to-brandGit"></div>
+        
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center space-x-1.5">
+            <span class="w-2.5 h-2.5 bg-red-400 rounded-full"></span>
+            <span class="w-2.5 h-2.5 bg-yellow-400 rounded-full"></span>
+            <span class="w-2.5 h-2.5 bg-green-400 rounded-full"></span>
+          </div>
+          <span class="font-mono text-[11px] text-brandSecondary">interactive-canvas.sh</span>
+        </div>
+
+        <div class="space-y-6">
+          <div class="flex items-center justify-between border-b border-brandPrimary/5 pb-4">
+            <span class="text-sm font-semibold tracking-wide">Working Tree</span>
+            <span class="text-[11px] px-2 py-0.5 bg-brandGit/10 text-brandGit font-mono rounded-md">main.js</span>
+          </div>
+          
+          <div class="relative pl-6 border-l-2 border-dashed border-brandAccent/30 py-2 space-y-4">
+            <!-- Stage Node -->
+            <div class="relative flex items-center space-x-3">
+              <span class="absolute -left-[31px] w-4 h-4 bg-brandAccent rounded-full border-4 border-white shadow-sm"></span>
+              <div class="bg-brandBg px-3 py-2 rounded-lg border border-brandPrimary/5 text-xs w-full flex justify-between items-center">
+                <span class="font-mono text-brandPrimary font-semibold">staging area</span>
+                <span class="text-[10px] text-brandSecondary">ready to record</span>
+              </div>
+            </div>
+            
+            <!-- Commit Node -->
+            <div class="relative flex items-center space-x-3 pt-2">
+              <span class="absolute -left-[31px] w-4 h-4 bg-brandGit rounded-full border-4 border-white shadow-sm success-pulse"></span>
+              <div class="bg-brandPrimary text-brandBg px-3 py-2 rounded-lg text-xs w-full flex justify-between items-center shadow-lg">
+                <div>
+                  <span class="font-mono text-[10px] opacity-70">commit (9fa4b2)</span>
+                  <p class="font-mono text-[11px] text-brandGit font-semibold mt-0.5">"feat: first commit"</p>
+                </div>
+                <span class="font-mono text-[10px] bg-brandBg/15 text-white px-1.5 py-0.5 rounded">main</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-center text-brandSecondary italic font-serif">
+            "이해하는 순간, 명령어가 그림으로 펼쳐집니다."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORYTELLING (JOURNEY) SECTION -->
+  <section id="story" class="bg-brandPrimary text-brandBg py-24 md:py-32 relative overflow-hidden">
+    <div class="absolute right-0 bottom-0 w-96 h-96 bg-brandAccent/10 rounded-full filter blur-3xl"></div>
+    <div class="absolute left-0 top-0 w-80 h-80 bg-brandGit/5 rounded-full filter blur-2xl"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      
+      <!-- Left Column: Big Title & Philosophy -->
+      <div class="lg:col-span-5 flex flex-col justify-between">
+        <div>
+          <span class="text-xs uppercase font-mono tracking-widest text-brandGit block mb-4">SSAFY LIFE-CYCLE STORY</span>
+          <h2 class="text-5xl md:text-6xl font-serif leading-tight">
+            처음엔 낯설어도,<br>결국 <span class="italic text-brandAccent">자유롭게</span><br>다루게 된다.
+          </h2>
+        </div>
+        <div class="pt-12 lg:pt-0">
+          <p class="font-mono text-xs text-brandSecondary leading-relaxed border-l-2 border-brandGit pl-4 py-1">
+            "협업 프로젝트 전날 터진 Git conflict에 팀원 모두가 눈앞이 캄캄해졌던 경험, 혹시 있으신가요? 명령어를 단순 암기하면, 예상치 못한 흐름에 무너지게 됩니다."
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Editorial Paragraphs representing growth stages -->
+      <div class="lg:col-span-7 space-y-12">
+        
+        <!-- Stage 01 -->
+        <div class="border-b border-white/10 pb-8">
+          <div class="flex items-start space-x-6">
+            <span class="font-serif text-4xl text-brandAccent italic">01</span>
+            <div class="space-y-2">
+              <h3 class="text-xl font-semibold tracking-wide text-brandBg">알 수 없는 검은 창, CLI의 두려움</h3>
+              <p class="text-sm text-brandSecondary leading-relaxed font-light">
+                SSAFY에 처음 들어와 마주한 터미널 창. 마우스 클릭도 없이 오직 키보드만으로 폴더를 탐색하고 파일을 옮겨야 하는 CLI 환경은 마냥 낯설고 조심스럽기만 합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 02 -->
+        <div class="border-b border-white/10 pb-8">
+          <div class="flex items-start space-x-6">
+            <span class="font-serif text-4xl text-brandGit italic">02</span>
+            <div class="space-y-2">
+              <h3 class="text-xl font-semibold tracking-wide text-brandBg">암기식 Git 명령어의 한계</h3>
+              <p class="text-sm text-brandSecondary leading-relaxed font-light">
+                <code>git add .</code>, <code>git commit -m</code>, <code>git push</code>만 번갈아 기입하다 마주하는 Merge Conflict. 원리조차 모르다 보니 무서워 <code>--force</code> 플래그를 붙이고 말았던 아찔한 경험을 딛고 가야 합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 03 -->
+        <div class="border-b border-white/10 pb-8">
+          <div class="flex items-start space-x-6">
+            <span class="font-serif text-4xl text-white italic">03</span>
+            <div class="space-y-2">
+              <h3 class="text-xl font-semibold tracking-wide text-brandBg">원리를 시각적으로 꿰뚫는 순간</h3>
+              <p class="text-sm text-brandSecondary leading-relaxed font-light">
+                로컬 저장소의 3대 구역을 머릿속에 그림으로 그려낼 수 있다면, 어떤 Conflict가 발생해도 침착하게 히스토리를 정렬하고 협업의 중심으로 나아갈 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE PLAYGROUND (SANDBOX ENGINE) -->
+  <section id="sandbox" class="max-w-7xl mx-auto px-6 md:px-12 py-24">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <span class="text-xs uppercase font-mono tracking-widest text-brandGit px-3 py-1 bg-brandGit/10 rounded-full font-bold">CORE EXPERIENCE</span>
+      <h2 class="text-4xl md:text-6xl font-serif text-brandPrimary">
+        직접 타이핑하며 확인하는 <span class="italic text-brandAccent">Git 샌드박스</span>
+      </h2>
+      <p class="text-sm md:text-base text-brandSecondary font-light leading-relaxed">
+        아래 가상 터미널에 직접 명령어를 입력하거나 추천 캡슐을 눌러보세요.<br>
+        명령어에 따라 우측 영역 그래프가 실시간으로 동적 변환됩니다!
+      </p>
+    </div>
+
+    <!-- Playground Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      
+      <!-- Left Column: Challenge list and Terminal -->
+      <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+        
+        <!-- Challenge Guide Panel -->
+        <div class="bg-white border border-brandPrimary/10 p-6 rounded-2xl shadow-sm">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xs font-mono uppercase tracking-wider text-brandSecondary">Quest Board</h3>
+            <span id="quest-progress" class="text-xs font-mono font-bold text-brandGit">0 / 5 Completed</span>
+          </div>
+          
+          <div class="space-y-2.5">
+            <!-- Mission 1 -->
+            <div id="mission-1-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 bg-brandBg transition-all duration-300">
+              <div class="flex items-center space-x-3">
+                <div id="mission-1-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 flex items-center justify-center text-[10px] font-bold bg-white text-brandSecondary">1</div>
+                <span class="text-xs font-medium text-brandPrimary">Git 저장소 시작하기 (<code class="font-mono bg-brandBg px-1 text-brandGit font-bold">git init</code>)</span>
+              </div>
+              <span id="mission-1-status" class="text-[10px] font-mono text-brandSecondary bg-brandBg/50 px-2 py-0.5 rounded">준비</span>
+            </div>
+            
+            <!-- Mission 2 -->
+            <div id="mission-2-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3">
+                <div id="mission-2-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 flex items-center justify-center text-[10px] font-bold bg-white text-brandSecondary">2</div>
+                <span class="text-xs font-medium text-brandPrimary">파일 추적 및 스테이징 (<code class="font-mono bg-brandBg px-1 text-brandGit font-bold">git add .</code>)</span>
+              </div>
+              <span id="mission-2-status" class="text-[10px] font-mono text-brandSecondary bg-brandBg/50 px-2 py-0.5 rounded">잠금</span>
+            </div>
+
+            <!-- Mission 3 -->
+            <div id="mission-3-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3">
+                <div id="mission-3-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 flex items-center justify-center text-[10px] font-bold bg-white text-brandSecondary">3</div>
+                <span class="text-xs font-medium text-brandPrimary">버전 기록 저장 (<code class="font-mono bg-brandBg px-1 text-brandGit font-bold">git commit -m "..."</code>)</span>
+              </div>
+              <span id="mission-3-status" class="text-[10px] font-mono text-brandSecondary bg-brandBg/50 px-2 py-0.5 rounded">잠금</span>
+            </div>
+
+            <!-- Mission 4 -->
+            <div id="mission-4-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3">
+                <div id="mission-4-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 flex items-center justify-center text-[10px] font-bold bg-white text-brandSecondary">4</div>
+                <span class="text-xs font-medium text-brandPrimary">새 평행 우주 생성 (<code class="font-mono bg-brandBg px-1 text-brandGit font-bold">git branch [이름]</code>)</span>
+              </div>
+              <span id="mission-4-status" class="text-[10px] font-mono text-brandSecondary bg-brandBg/50 px-2 py-0.5 rounded">잠금</span>
+            </div>
+
+            <!-- Mission 5 -->
+            <div id="mission-5-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3">
+                <div id="mission-5-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 flex items-center justify-center text-[10px] font-bold bg-white text-brandSecondary">5</div>
+                <span class="text-xs font-medium text-brandPrimary">새 우주로 차원 이동 (<code class="font-mono bg-brandBg px-1 text-brandGit font-bold">git checkout [이름]</code>)</span>
+              </div>
+              <span id="mission-5-status" class="text-[10px] font-mono text-brandSecondary bg-brandBg/50 px-2 py-0.5 rounded">잠금</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Console UI -->
+        <div class="bg-[#18191a] text-[#F8F8F6] p-6 rounded-2xl flex-1 flex flex-col justify-between shadow-xl min-h-[340px] border border-white/5">
+          <div class="flex justify-between items-center border-b border-white/5 pb-3 mb-4">
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
+              <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
+              <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+              <span class="text-xs font-mono text-brandSecondary pl-2">ssafy-terminal@git-flow</span>
+            </div>
+            <button onclick="resetSandbox()" class="text-xs text-brandSecondary hover:text-brandGit font-mono flex items-center gap-1">
+              <i class="fa-solid fa-rotate-right"></i> Reset
+            </button>
+          </div>
+
+          <!-- Output Log Block -->
+          <div id="terminal-log" class="font-mono text-xs text-brandBg/90 overflow-y-auto max-h-[180px] space-y-2 flex-1 custom-scroll pr-2 mb-4">
+            <div class="text-[#6B7280]">&lt; git.flow 터미널 시뮬레이터에 오신 것을 환영합니다! &gt;</div>
+            <div class="text-[#6B7280]">우측의 Git 3대 요소를 시각적으로 보면서 명령어를 익히세요.</div>
+            <div class="text-[#6B7280]">직접 키보드로 입력하거나 아래의 원클릭 캡슐 단추를 사용할 수 있습니다.</div>
+            <div class="text-brandAccent">준비 완료. git init 을 수행해 가상 저장소를 초기화하십시오.</div>
+          </div>
+
+          <!-- Input Bar -->
+          <div class="border-t border-white/5 pt-3">
+            <form id="terminal-form" onsubmit="handleCommand(event)" class="flex items-center">
+              <span class="font-mono text-brandGit text-xs mr-2 font-bold select-none">ssafy:workspace$</span>
+              <input id="terminal-input" type="text" autocomplete="off" autofocus class="bg-transparent border-none outline-none focus:ring-0 text-xs font-mono text-[#F8F8F6] flex-1 min-w-0" placeholder="명령어를 입력하세요...">
+              <button type="submit" class="px-3 py-1 bg-brandGit hover:bg-opacity-90 rounded text-[10px] font-mono tracking-wider font-semibold">ENTER</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Quick Shortcut Actions/Capsules -->
+        <div class="bg-white border border-brandPrimary/10 p-5 rounded-2xl">
+          <span class="text-[10px] uppercase font-mono tracking-widest text-brandSecondary block mb-3 font-semibold">퀵 스마트 단추 (터미널 자동 입력)</span>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="triggerShortcut('git init')" class="px-3 py-1.5 border border-brandPrimary/10 hover:border-brandGit/30 text-xs font-mono bg-brandBg rounded-lg hover:text-brandGit transition-all flex items-center gap-1.5">
+              <span>git init</span>
+            </button>
+            <button onclick="triggerShortcut('git add .')" class="px-3 py-1.5 border border-brandPrimary/10 hover:border-brandGit/30 text-xs font-mono bg-brandBg rounded-lg hover:text-brandGit transition-all flex items-center gap-1.5">
+              <span>git add .</span>
+            </button>
+            <button onclick="triggerShortcut('git commit -m')" class="px-3 py-1.5 border border-brandPrimary/10 hover:border-brandGit/30 text-xs font-mono bg-brandBg rounded-lg hover:text-brandGit transition-all flex items-center gap-1.5">
+              <span>git commit -m</span>
+            </button>
+            <button onclick="triggerShortcut('git branch')" class="px-3 py-1.5 border border-brandPrimary/10 hover:border-brandGit/30 text-xs font-mono bg-brandBg rounded-lg hover:text-brandGit transition-all flex items-center gap-1.5">
+              <span>git branch feature/auth</span>
+            </button>
+            <button onclick="triggerShortcut('git checkout')" class="px-3 py-1.5 border border-brandPrimary/10 hover:border-brandGit/30 text-xs font-mono bg-brandBg rounded-lg hover:text-brandGit transition-all flex items-center gap-1.5">
+              <span>git checkout feature/auth</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Visual Git Flow Graph Representation -->
+      <div class="lg:col-span-7 bg-white border border-brandPrimary/10 p-8 rounded-2xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+        
+        <!-- Interactive Success Celebration overlay -->
+        <div id="success-overlay" class="hidden absolute inset-0 bg-white/95 z-40 flex flex-col items-center justify-center text-center p-6 transition-all duration-500">
+          <div class="w-16 h-16 bg-brandSuccess/10 text-brandSuccess rounded-full flex items-center justify-center text-3xl mb-4 success-pulse">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <span class="text-xs uppercase font-mono tracking-widest text-brandSuccess font-bold">Congratulation!</span>
+          <h3 class="text-3xl font-serif text-brandPrimary mt-1">Git 흐름 탐험 미션 완수</h3>
+          <p class="text-sm text-brandSecondary max-w-sm mt-2 leading-relaxed">
+            축하합니다! Git의 기본 주기를 꿰뚫어 보셨습니다. 이제 3대 영역에 데이터가 저장되고 이동하는 흐름을 완벽히 정복하셨습니다.
+          </p>
+          <button onclick="closeSuccessOverlay()" class="mt-6 px-6 py-2.5 bg-brandPrimary text-brandBg text-xs font-mono rounded-lg hover:bg-brandAccent transition-all">
+            시각화 샌드박스로 돌아가기
+          </button>
+        </div>
+
+        <div>
+          <!-- Title block -->
+          <div class="flex justify-between items-start border-b border-brandPrimary/5 pb-4 mb-8">
+            <div>
+              <span class="text-[10px] uppercase font-mono tracking-widest text-brandGit font-bold">Real-time Runtime Graph</span>
+              <h3 class="text-xl font-semibold tracking-tight text-brandPrimary mt-0.5">Git 3단계 영역 시각화</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-mono text-brandSecondary">HEAD pointer:</span>
+              <span id="head-pointer-badge" class="px-2 py-0.5 bg-brandPrimary text-white rounded text-[10px] font-mono">none</span>
+            </div>
+          </div>
+
+          <!-- Main columns representation -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+            
+            <!-- Column 1: Working Tree -->
+            <div class="border border-brandPrimary/5 bg-brandBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px]">
+              <div>
+                <div class="flex items-center space-x-1.5 mb-3">
+                  <span class="w-2.5 h-2.5 bg-brandGit rounded-full"></span>
+                  <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-brandPrimary">Working Tree</h4>
+                </div>
+                <p class="text-[10px] text-brandSecondary leading-relaxed mb-4">내 로컬 PC 하드디스크의 원본 파일이 위치하는 공간</p>
+              </div>
+
+              <!-- File representation inside Working tree -->
+              <div class="space-y-2 mt-auto">
+                <div id="file-main" class="p-3 bg-white border border-brandPrimary/10 rounded-lg flex items-center justify-between transition-all duration-300">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-file-code text-brandSecondary"></i>
+                    <span class="text-xs font-mono font-bold">main.js</span>
+                  </div>
+                  <span id="file-main-badge" class="text-[9px] font-mono bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-bold">Untracked</span>
+                </div>
+                <div id="git-status-alert" class="p-2.5 bg-white/70 border border-brandPrimary/5 rounded-lg text-[10px] text-brandSecondary italic font-mono text-center">
+                  레포지토리가 초기화되지 않았습니다.
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Staging Area -->
+            <div id="stage-col" class="border border-brandPrimary/5 bg-brandBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px]">
+              <div>
+                <div class="flex items-center space-x-1.5 mb-3">
+                  <span class="w-2.5 h-2.5 bg-brandAccent rounded-full"></span>
+                  <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-brandPrimary">Staging Area</h4>
+                </div>
+                <p class="text-[10px] text-brandSecondary leading-relaxed mb-4">커밋(기록)을 남기기 전, 임시로 대기시키는 가상 인덱스 영역</p>
+              </div>
+
+              <!-- Staged Item representation -->
+              <div class="space-y-2 mt-auto">
+                <div id="staged-file" class="hidden p-3 bg-white border border-brandAccent/30 shadow-sm rounded-lg flex items-center justify-between transition-all duration-300">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-file-import text-brandAccent"></i>
+                    <span class="text-xs font-mono font-bold">main.js</span>
+                  </div>
+                  <span class="text-[9px] font-mono bg-brandAccent/15 text-brandAccent px-1.5 py-0.5 rounded font-bold">Staged</span>
+                </div>
+                <div id="staged-empty" class="p-4 bg-dashed border border-brandPrimary/10 rounded-lg text-center text-[10px] text-brandSecondary italic font-mono">
+                  대기 중인 파일 없음
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Local Repository -->
+            <div class="border border-brandPrimary/5 bg-brandBg/30 p-4 rounded-xl flex flex-col justify-between min-h-[300px]">
+              <div>
+                <div class="flex items-center space-x-1.5 mb-3">
+                  <span class="w-2.5 h-2.5 bg-brandPrimary rounded-full"></span>
+                  <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-brandPrimary">Local Repo</h4>
+                </div>
+                <p class="text-[10px] text-brandSecondary leading-relaxed mb-4">스냅샷들이 정식 영구 버전으로 안전하게 기록되는 공간 (.git)</p>
+              </div>
+
+              <!-- Graph visual node container -->
+              <div id="repo-canvas" class="flex-1 flex flex-col justify-center items-center relative py-4 min-h-[160px]">
+                <div id="repo-empty" class="text-center text-[10px] text-brandSecondary italic font-mono">
+                  기록된 커밋 히스토리가 아직 없습니다.
+                </div>
+                
+                <!-- Commit tree container dynamically injected -->
+                <div id="commit-tree" class="hidden w-full flex flex-col items-center justify-center space-y-4">
+                  <!-- Active Commits will be pushed here -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tip Box underneath -->
+        <div id="learning-tip" class="mt-8 p-4 bg-brandBg rounded-xl border border-brandPrimary/5 flex items-start space-x-3.5">
+          <div class="w-8 h-8 bg-brandAccent/10 text-brandAccent rounded-full flex items-center justify-center flex-shrink-0 text-sm">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-xs font-semibold text-brandPrimary" id="tip-title">준비 운동</h4>
+            <p class="text-[11px] text-brandSecondary leading-relaxed" id="tip-desc">왼쪽의 스마트 단추에서 [git init] 단추를 누르거나 터미널에 <code class="font-mono bg-white px-1">git init</code>을 치세요.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CORE STRENGTHS / VALUES SECTION -->
+  <section id="strengths" class="border-t border-brandPrimary/10 py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      
+      <!-- Sub-headline -->
+      <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-16">
+        <div class="max-w-xl space-y-4">
+          <span class="text-xs uppercase font-mono tracking-widest text-brandGit font-bold block">Why git.flow?</span>
+          <h2 class="text-4xl md:text-6xl font-serif text-brandPrimary leading-tight">
+            어렵기만 한 버전을<br>
+            가장 <span class="italic text-brandAccent">아름답게 관찰</span>하는 세 가지 방법.
+          </h2>
+        </div>
+        <div>
+          <p class="text-sm text-brandSecondary max-w-sm leading-relaxed font-light">
+            명령어를 암기하지 않고도 자연스럽게 협업 흐름을 장악하는 비전 제시.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="bg-white border border-brandPrimary/5 p-8 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="w-12 h-12 bg-brandBg rounded-xl flex items-center justify-center text-lg text-brandPrimary mb-6">
+              <i class="fa-solid fa-eye text-brandGit"></i>
+            </div>
+            <h3 class="text-lg font-semibold tracking-wide text-brandPrimary mb-3">내부의 3단계 흐름 시각화</h3>
+            <p class="text-xs text-brandSecondary leading-relaxed font-light">
+              로컬 폴더에서 수정한 코드가 어떤 경로를 통해 박제에 이르기까지 저장되는지, 징검다리 3대 영역을 명료하게 구조화해 이해를 도우며 불완전한 상태 정렬을 방지합니다.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-brandPrimary/40 block mt-8 font-semibold">01 / VISUALIZATION</span>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white border border-brandPrimary/5 p-8 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="w-12 h-12 bg-brandBg rounded-xl flex items-center justify-center text-lg text-brandPrimary mb-6">
+              <i class="fa-solid fa-gamepad text-brandAccent"></i>
+            </div>
+            <h3 class="text-lg font-semibold tracking-wide text-brandPrimary mb-3">게임처럼 즐거운 퀘스트 달성</h3>
+            <p class="text-xs text-brandSecondary leading-relaxed font-light">
+              스토리 라인을 따라 진행되는 점진적인 난이도와 직관적인 알림, 보상 시스템을 통해, CLI 사용법을 오락 게임을 클리어하는 것 같은 자연스럽고 다정한 성취감으로 바꿉니다.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-brandPrimary/40 block mt-8 font-semibold">02 / INTERACTIVITY</span>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white border border-brandPrimary/5 p-8 rounded-2xl flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="w-12 h-12 bg-brandBg rounded-xl flex items-center justify-center text-lg text-brandPrimary mb-6">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <h3 class="text-lg font-semibold tracking-wide text-brandPrimary mb-3">동작 방식의 본질적 통찰</h3>
+            <p class="text-xs text-brandSecondary leading-relaxed font-light">
+              가지치기와 같은 복잡한 병렬 브랜치 개발 모델을 눈으로 직접 보며 손가락으로 가볍게 실시간 변화를 주입해 보아, 팀 프로젝트 시 협업 효율과 수평적 커뮤니케이션을 가속시킵니다.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-brandPrimary/40 block mt-8 font-semibold">03 / REAL MECHANISM</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pb-24 md:pb-32">
+    <div class="bg-brandPrimary text-brandBg rounded-3xl p-8 md:p-16 relative overflow-hidden flex flex-col items-center justify-center text-center">
+      <div class="absolute inset-0 bg-gradient-to-br from-brandAccent/20 to-transparent -z-10"></div>
+      
+      <div class="max-w-2xl space-y-6 relative">
+        <span class="text-xs font-mono uppercase tracking-widest text-brandGit font-bold block">SSAFY 13th & ALL JUNIORS</span>
+        <h2 class="text-4xl md:text-5xl font-serif leading-tight">
+          더 이상의 머뭇거림은 필요 없습니다.<br>
+          지금 Git의 진짜 원리로 깊게 스며드세요.
+        </h2>
+        <p class="text-xs md:text-sm text-brandSecondary leading-relaxed font-light">
+          이메일을 구독하고, 가상 샌드박스의 추가 퀘스트(Rebase, Merge, Stash) 패키지 업데이트 알림을 가장 먼저 받아보세요.
+        </p>
+
+        <!-- Newsletter Sub Form -->
+        <div class="pt-6 max-w-md mx-auto">
+          <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-stretch gap-3">
+            <input type="email" required placeholder="name@ssafy.com" class="px-4 py-3 bg-white/10 text-white rounded-xl outline-none focus:ring-2 focus:ring-brandGit text-xs font-mono placeholder:text-gray-500 flex-1 border border-white/5">
+            <button type="submit" class="px-6 py-3 bg-brandGit hover:bg-opacity-95 text-xs font-mono rounded-xl tracking-wider hover:scale-105 transition-all text-white font-bold">SUBSCRIBE</button>
+          </form>
+          <p class="text-[10px] text-brandSecondary mt-2">우리는 영리적인 목적으로 이메일을 오용하지 않으며 언제든 구독을 철회할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brandPrimary/10 py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:justify-between items-center gap-6">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 bg-brandGit rounded-full"></span>
+        <span class="text-sm font-semibold tracking-wide text-brandPrimary font-mono">git.flow</span>
+        <span class="text-xs text-brandSecondary">| SSAFY 교육 수강생 및 주니어 개발자를 위한 실감형 기재소</span>
+      </div>
+      
+      <div class="flex items-center space-x-8 text-xs font-mono text-brandSecondary">
+        <a href="#" class="hover:text-brandPrimary transition-colors">이용약관</a>
+        <a href="#" class="hover:text-brandPrimary transition-colors">개인정보처리방침</a>
+        <a href="#sandbox" class="hover:text-brandPrimary transition-colors text-brandGit font-bold">오프라인 학습 공간</a>
+      </div>
+      
+      <div class="text-xs text-brandSecondary font-mono text-center md:text-right">
+        &copy; 2026 git.flow. Built lovingly for SSAFY Devs. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- CORE JAVASCRIPT STATE ENGINE -->
+  <script>
+    // State management for Git Simulator
+    const state = {
+      isInitialized: false,
+      isStaged: false,
+      commitCount: 0,
+      commits: [],
+      branches: ['main'],
+      currentBranch: 'main',
+      head: 'none',
+      missionStatus: [false, false, false, false, false],
+      // Mission list with strict validation logic
+      missions: [
+        { id: 1, title: 'git init', check: () => state.isInitialized },
+        { id: 2, title: 'git add', check: () => state.isStaged },
+        { id: 3, title: 'git commit', check: () => state.commitCount > 0 },
+        { id: 4, title: 'git branch', check: () => state.branches.length > 1 },
+        { id: 5, title: 'git checkout', check: () => state.currentBranch !== 'main' }
+      ]
+    };
+
+    // System templates
+    const tips = [
+      {
+        title: "준비 운동",
+        desc: "왼쪽의 스마트 단추에서 [git init] 단추를 누르거나 터미널에 <code class='font-mono bg-white px-1'>git init</code>을 치세요."
+      },
+      {
+        title: "추적 및 스테이징",
+        desc: "로컬 파일 <code class='font-mono bg-white px-1'>main.js</code>가 감지되었습니다. <code class='font-mono bg-white px-1'>git add .</code>으로 다음 버전에 등록하세요."
+      },
+      {
+        title: "정식 버전을 영구히 보관하기",
+        desc: "준비가 완료되었습니다. <code class='font-mono bg-white px-1'>git commit -m \"커밋메시지\"</code>를 통해 영구 버전 스냅샷을 생성하세요."
+      },
+      {
+        title: "또 다른 평행 세계 만들기",
+        desc: "새로운 기능을 테스트하고 싶군요. <code class='font-mono bg-white px-1'>git branch [브랜치명]</code> (예: <code class='font-mono bg-white px-1'>git branch feature/auth</code>)을 만들어 새로운 줄기를 뻗으세요."
+      },
+      {
+        title: "평행 우주로 직접 이동",
+        desc: "방금 새로 만든 기능 전용 브랜치로 이사 갑시다. <code class='font-mono bg-white px-1'>git checkout [브랜치명]</code>을 치면 안전하게 이동합니다!"
+      },
+      {
+        title: "위대한 여정의 완료",
+        desc: "훌륭합니다! 기본 주기를 마스터했습니다. 이제 당신은 어떤 협업 환경에서도 당당하게 브랜치를 가꾸고 소통할 수 있는 준비가 되었습니다."
+      }
+    ];
+
+    // Helper functions for system notification
+    function showToast(title, message, type = 'info') {
+      const toastContainer = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `p-4 rounded-xl shadow-lg border text-xs flex items-start space-x-3 bg-white pointer-events-auto transform transition-all duration-300 translate-x-12 opacity-0`;
+      
+      let iconColor = 'text-brandAccent';
+      let icon = '<i class="fa-solid fa-circle-info"></i>';
+      if (type === 'success') {
+        iconColor = 'text-brandSuccess';
+        icon = '<i class="fa-solid fa-circle-check"></i>';
+      } else if (type === 'error') {
+        iconColor = 'text-brandGit';
+        icon = '<i class="fa-solid fa-circle-exclamation"></i>';
+      }
+
+      toast.innerHTML = `
+        <div class="text-base ${iconColor}">${icon}</div>
+        <div>
+          <h4 class="font-bold text-brandPrimary">${title}</h4>
+          <p class="text-brandSecondary mt-0.5 leading-relaxed">${message}</p>
+        </div>
+      `;
+
+      toastContainer.appendChild(toast);
+      
+      // Animate entry
+      setTimeout(() => {
+        toast.classList.remove('translate-x-12', 'opacity-0');
+      }, 50);
+
+      // Dismiss timer
+      setTimeout(() => {
+        toast.classList.add('translate-x-12', 'opacity-0');
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 4000);
+    }
+
+    // Trigger Smart Quick Buttons
+    function triggerShortcut(cmd) {
+      const input = document.getElementById('terminal-input');
+      input.value = cmd;
+      input.focus();
+      
+      // If short-form, append helpful placeholders
+      if (cmd === 'git commit -m') {
+        input.value = 'git commit -m "feat: main.js setup"';
+      } else if (cmd === 'git branch') {
+        input.value = 'git branch feature/auth';
+      } else if (cmd === 'git checkout') {
+        // Switch contextual checking
+        if (state.branches.includes('feature/auth')) {
+          input.value = 'git checkout feature/auth';
+        } else {
+          input.value = 'git checkout feature/auth';
+        }
+      }
+    }
+
+    // Handle Custom Terminal Submissions
+    function handleCommand(event) {
+      event.preventDefault();
+      const input = document.getElementById('terminal-input');
+      const cmdText = input.value.trim();
+      input.value = '';
+
+      if (!cmdText) return;
+
+      appendLog(`ssafy:workspace$ ${cmdText}`, 'command');
+      processCommand(cmdText);
+    }
+
+    function appendLog(text, type = 'info') {
+      const log = document.getElementById('terminal-log');
+      const wrapper = document.createElement('div');
+      
+      if (type === 'command') {
+        wrapper.className = 'text-white font-semibold flex items-center gap-1.5 mt-2';
+        wrapper.innerHTML = `<span class="text-brandGit">ssafy:workspace$</span> ${text.replace('ssafy:workspace$', '')}`;
+      } else if (type === 'success') {
+        wrapper.className = 'text-[#2E8B57] font-semibold pl-4 border-l border-[#2E8B57]/30';
+        wrapper.innerHTML = text;
+      } else if (type === 'error') {
+        wrapper.className = 'text-[#F05032] font-semibold pl-4 border-l border-[#F05032]/30';
+        wrapper.innerHTML = text;
+      } else {
+        wrapper.className = 'text-brandSecondary pl-4';
+        wrapper.innerHTML = text;
+      }
+
+      log.appendChild(wrapper);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // Core business logic to check sandbox actions
+    function processCommand(cmd) {
+      const args = cmd.split(' ').map(s => s.trim()).filter(Boolean);
+      
+      if (args[0] !== 'git') {
+        appendLog(`에러: 알 수 없는 명령어입니다. git으로 시작하는 핵심 명령어를 입력하세요.`, 'error');
+        return;
+      }
+
+      const action = args[1];
+
+      // Block any git actions if not initialized (except for init itself)
+      if (!state.isInitialized && action !== 'init') {
+        appendLog(`fatal: Not a git repository (or any of the parent directories): .git`, 'error');
+        showToast("Git 레포지토리가 없습니다.", "먼저 [git init]을 입력하여 로컬 저장소를 만드세요.", "error");
+        return;
+      }
+
+      switch(action) {
+        case 'init':
+          if (state.isInitialized) {
+            appendLog(`Reinitialized existing Git repository in /workspace/.git/`, 'info');
+          } else {
+            state.isInitialized = true;
+            state.head = 'main';
+            appendLog(`Initialized empty Git repository in /workspace/.git/`, 'success');
+            showToast("완료: git init", "로컬 저장소(.git)가 무사히 성립되었습니다! 파일을 추적할 수 있습니다.", "success");
+            updateVisuals();
+            checkMissions();
+          }
+          break;
+
+        case 'add':
+          if (args[2] === '.' || args[2] === 'main.js') {
+            state.isStaged = true;
+            appendLog(`A  main.js added to staging area.`, 'success');
+            appendLog(`준비 영역(Staging Area)에 스냅샷이 적재되었습니다.`, 'info');
+            showToast("완료: git add", "main.js 파일이 Staging Area에 등재되어 기록될 준비를 마쳤습니다.", "success");
+            updateVisuals();
+            checkMissions();
+          } else {
+            appendLog(`사용법: 'git add .' 또는 'git add main.js'를 적어서 바뀐 파일을 추적하십시오.`, 'error');
+          }
+          break;
+
+        case 'commit':
+          if (!state.isStaged) {
+            appendLog(`nothing to commit, working tree clean (Staging Area가 비어 있습니다)`, 'error');
+            showToast("커밋 실패", "커밋할 대상이 없습니다. 먼저 'git add'를 사용하세요.", "error");
+            return;
+          }
+          // Read message
+          let msg = "feat: add main.js";
+          const mIndex = args.indexOf('-m');
+          if (mIndex !== -1 && args[mIndex + 1]) {
+            msg = args.slice(mIndex + 1).join(' ').replace(/['"]/g, '');
+          }
+
+          const shortId = Math.random().toString(16).substring(2, 8);
+          state.commits.push({ id: shortId, message: msg, branch: state.currentBranch });
+          state.commitCount++;
+          state.isStaged = false; // reset staging after commit
+          
+          appendLog(`[${state.currentBranch} (root-commit) ${shortId}] ${msg}`, 'success');
+          appendLog(`1 file changed, 1 insertion(+)`, 'info');
+          showToast("완료: git commit", `새로운 스냅샷 [${shortId}]이 기록되었습니다.`, "success");
+          
+          updateVisuals();
+          checkMissions();
+          break;
+
+        case 'branch':
+          if (args.length < 3) {
+            appendLog(`* ${state.currentBranch}\n${state.branches.filter(b => b !== state.currentBranch).join('\n')}`, 'info');
+            return;
+          }
+          const branchName = args[2];
+          if (state.branches.includes(branchName)) {
+            appendLog(`fatal: A branch named '${branchName}' already exists.`, 'error');
+            return;
+          }
+          state.branches.push(branchName);
+          appendLog(`Branch '${branchName}' created successfully.`, 'success');
+          showToast("브랜치 개설 완료", `이제 평행우주 [${branchName}]이 활성화되었습니다. checkout 명령어로 순간이동하세요.`, "success");
+          
+          updateVisuals();
+          checkMissions();
+          break;
+
+        case 'checkout':
+          const targetBranch = args[2];
+          if (!targetBranch) {
+            appendLog(`error: Branch name required. (e.g. git checkout feature/auth)`, 'error');
+            return;
+          }
+          if (!state.branches.includes(targetBranch)) {
+            appendLog(`error: pathspec '${targetBranch}' did not match any file(s) known to git`, 'error');
+            showToast("존재하지 않는 브랜치", "먼저 브랜치를 만드셔야 checkout을 하실 수 있습니다.", "error");
+            return;
+          }
+          state.currentBranch = targetBranch;
+          state.head = targetBranch;
+          appendLog(`Switched to branch '${targetBranch}'`, 'success');
+          showToast("차원 이동 성공", `현재 활성화된 우주가 [${targetBranch}]로 변경되었습니다.`, "success");
+          
+          updateVisuals();
+          checkMissions();
+          break;
+
+        default:
+          appendLog(`기능 에뮬레이터 제한: 지원하지 않거나 잘못된 git 서브인자입니다. (init, add, commit, branch, checkout 가능)`, 'error');
+      }
+    }
+
+    // Check each scenario milestone
+    function checkMissions() {
+      let completedCount = 0;
+      
+      state.missions.forEach((m, idx) => {
+        const isPassed = m.check();
+        state.missionStatus[idx] = isPassed;
+        
+        const uiContainer = document.getElementById(`mission-${idx+1}-ui`);
+        const uiBullet = document.getElementById(`mission-${idx+1}-bullet`);
+        const uiStatus = document.getElementById(`mission-${idx+1}-status`);
+        
+        if (isPassed) {
+          completedCount++;
+          uiContainer.classList.remove('opacity-50');
+          uiContainer.classList.add('bg-green-50', 'border-green-300');
+          uiBullet.className = 'w-5 h-5 rounded-full bg-brandSuccess text-white flex items-center justify-center text-[10px] font-bold';
+          uiBullet.innerHTML = '<i class="fa-solid fa-check"></i>';
+          uiStatus.className = 'text-[10px] font-mono text-brandSuccess bg-green-100 px-2 py-0.5 rounded font-bold';
+          uiStatus.textContent = '완료';
+        } else if (idx === completedCount) {
+          // Current active unlockable mission
+          uiContainer.classList.remove('opacity-50');
+          uiContainer.classList.add('bg-white', 'border-brandAccent/30');
+          uiBullet.className = 'w-5 h-5 rounded-full border border-brandAccent flex items-center justify-center text-[10px] font-bold bg-brandAccent text-white success-pulse';
+          uiStatus.className = 'text-[10px] font-mono text-brandAccent bg-brandAccent/10 px-2 py-0.5 rounded font-bold';
+          uiStatus.textContent = '도전중';
+        } else {
+          // Locked missions
+          uiContainer.classList.add('opacity-50');
+          uiContainer.classList.remove('bg-green-50', 'border-green-300', 'bg-white', 'border-brandAccent/30');
+          uiBullet.className = 'w-5 h-5 rounded-full border border-brandPrimary/20 flex items-center justify-center text-[10px] font-bold bg-white text-brandSecondary';
+          uiBullet.textContent = `${idx + 1}`;
+          uiStatus.className = 'text-[10px] font-mono text-brandSecondary bg-brandBg/50 px-2 py-0.5 rounded';
+          uiStatus.textContent = '잠금';
+        }
+      });
+
+      document.getElementById('quest-progress').textContent = `${completedCount} / 5 Completed`;
+
+      // Show Tip guide contextualized
+      const tipTitle = document.getElementById('tip-title');
+      const tipDesc = document.getElementById('tip-desc');
+      if (completedCount < tips.length) {
+        tipTitle.textContent = tips[completedCount].title;
+        tipDesc.innerHTML = tips[completedCount].desc;
+      }
+
+      // Final complete action
+      if (completedCount === 5) {
+        setTimeout(() => {
+          document.getElementById('success-overlay').classList.remove('hidden');
+        }, 1200);
+      }
+    }
+
+    // Re-render whole graphics matching with runtime state
+    function updateVisuals() {
+      // 1. HEAD badge
+      const badge = document.getElementById('head-pointer-badge');
+      badge.textContent = state.head;
+      if (state.head !== 'none') {
+        badge.className = 'px-2 py-0.5 bg-brandGit text-white rounded text-[10px] font-mono font-bold uppercase';
+      } else {
+        badge.className = 'px-2 py-0.5 bg-brandPrimary text-white rounded text-[10px] font-mono';
+      }
+
+      // 2. File Status in Working Tree
+      const fileBadge = document.getElementById('file-main-badge');
+      const gitAlert = document.getElementById('git-status-alert');
+      
+      if (!state.isInitialized) {
+        fileBadge.textContent = 'Untracked';
+        fileBadge.className = 'text-[9px] font-mono bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-bold';
+        gitAlert.style.display = 'block';
+      } else {
+        gitAlert.style.display = 'none';
+        if (state.isStaged) {
+          fileBadge.textContent = 'Staged';
+          fileBadge.className = 'text-[9px] font-mono bg-brandAccent/15 text-brandAccent px-1.5 py-0.5 rounded font-bold';
+        } else if (state.commitCount > 0) {
+          fileBadge.textContent = 'Committed';
+          fileBadge.className = 'text-[9px] font-mono bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold';
+        } else {
+          fileBadge.textContent = 'Untracked';
+          fileBadge.className = 'text-[9px] font-mono bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-bold';
+        }
+      }
+
+      // 3. Staged block state
+      const stagedFile = document.getElementById('staged-file');
+      const stagedEmpty = document.getElementById('staged-empty');
+      
+      if (state.isStaged) {
+        stagedFile.classList.remove('hidden');
+        stagedEmpty.classList.add('hidden');
+      } else {
+        stagedFile.classList.add('hidden');
+        stagedEmpty.classList.remove('hidden');
+      }
+
+      // 4. Commits Graph Drawing
+      const repoEmpty = document.getElementById('repo-empty');
+      const commitTree = document.getElementById('commit-tree');
+      
+      if (state.commits.length > 0) {
+        repoEmpty.classList.add('hidden');
+        commitTree.classList.remove('hidden');
+        commitTree.innerHTML = ''; // clear first
+        
+        state.commits.forEach((commit, i) => {
+          const commitNode = document.createElement('div');
+          commitNode.className = 'w-full flex flex-col items-center relative';
+          
+          // Connect line if not first
+          let lineHtml = '';
+          if (i > 0) {
+            lineHtml = `<div class="w-0.5 h-6 bg-brandPrimary/20 mb-1"></div>`;
+          }
+
+          // Active branch tag inside commit bubble
+          const isHeadHere = state.currentBranch === commit.branch;
+          const headTag = isHeadHere ? `<span class="bg-brandGit text-white text-[8px] font-mono px-1 py-0.5 rounded ml-1 success-pulse font-bold">HEAD</span>` : '';
+
+          commitNode.innerHTML = `
+            ${lineHtml}
+            <div class="bg-brandPrimary text-brandBg p-2.5 rounded-lg text-[10px] font-mono w-full shadow-sm hover:scale-102 transition-transform">
+              <div class="flex justify-between items-center opacity-60">
+                <span>commit ${commit.id}</span>
+                <span class="bg-white/10 text-white px-1 rounded text-[8px]">${commit.branch}</span>
+              </div>
+              <p class="font-bold text-[11px] text-brandGit mt-1 truncate">"${commit.message}"</p>
+              <div class="flex justify-end mt-1">
+                ${headTag}
+              </div>
+            </div>
+          `;
+          commitTree.appendChild(commitNode);
+        });
+      } else {
+        repoEmpty.classList.remove('hidden');
+        commitTree.classList.add('hidden');
+      }
+    }
+
+    // Reset whole scenario to retry
+    function resetSandbox() {
+      state.isInitialized = false;
+      state.isStaged = false;
+      state.commitCount = 0;
+      state.commits = [];
+      state.branches = ['main'];
+      state.currentBranch = 'main';
+      state.head = 'none';
+      state.missionStatus = [false, false, false, false, false];
+
+      const log = document.getElementById('terminal-log');
+      log.innerHTML = `
+        <div class="text-[#6B7280]">&lt; 초기화되었습니다. &gt;</div>
+        <div class="text-[#6B7280]">git init을 입력하여 다시 깨끗한 상태에서 여정을 시작하십시오.</div>
+      `;
+      
+      showToast("샌드박스 리셋 완료", "모든 로컬 가상 레포지토리와 스테이지가 초기화되었습니다.", "info");
+      updateVisuals();
+      checkMissions();
+    }
+
+    function closeSuccessOverlay() {
+      document.getElementById('success-overlay').classList.add('hidden');
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      showToast("구독 감사드립니다!", "기입하신 메일로 git.flow 주니어 가이드 시리즈가 정기 발송됩니다.", "success");
+      e.target.reset();
+    }
+
+    // Initial load configurations
+    window.onload = function() {
+      updateVisuals();
+      checkMissions();
+    };
+  </script>
+</body>
+</html>
