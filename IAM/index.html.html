@@ -7,13 +7,14 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts & Pretendard CDN -->
+  <!-- Pretendard CDN for flawless Korean body text -->
   <link rel="stylesheet" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css" />
+  <!-- Google Fonts: Cormorant Garamond for elegant editorial titles, JetBrains Mono for terminals -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons for modern aesthetic -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -98,7 +99,6 @@
 </head>
 <body class="bg-brandBg dark:bg-darkBg text-brandPrimary dark:text-gray-100 font-sans antialiased selection:bg-brandPrimary selection:text-brandBg transition-colors duration-300 overflow-x-hidden">
 
-  <!-- Particle Effects Canvas overlay -->
   <canvas id="particle-canvas"></canvas>
 
   <header class="border-b border-brandPrimary/10 dark:border-darkBorder sticky top-0 bg-brandBg/80 dark:bg-darkBg/80 backdrop-blur-md z-50 transition-colors duration-300">
@@ -116,8 +116,8 @@
       <div class="flex items-center space-x-2 sm:space-x-4">
         <!-- Translate Switch Button -->
         <button onclick="toggleLanguage()" class="p-2 border border-brandPrimary/10 dark:border-darkBorder rounded-lg hover:bg-brandPrimary/5 dark:hover:bg-white/5 transition-all text-sm font-mono flex items-center gap-1.5" title="Translate language">
-          <span id="lang-flag" class="text-base">🇰🇷</span>
-          <span id="lang-label" class="text-[11px] font-bold uppercase">KO</span>
+          <span id="lang-flag" class="text-base font-normal">🇰🇷</span>
+          <span id="lang-label" class="text-[11px] font-bold uppercase tracking-wider">KO</span>
         </button>
 
         <!-- Theme Mode Switch Button -->
@@ -132,26 +132,26 @@
     </div>
   </header>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
     <div class="lg:col-span-7 flex flex-col justify-center space-y-6 md:space-y-8">
       <!-- Tag Badge -->
-      <div class="inline-flex items-center space-x-2 border border-brandPrimary/15 dark:border-darkBorder bg-white/40 dark:bg-darkSurface/40 self-start px-3.5 py-1.5 rounded-full text-xs font-mono">
+      <div class="inline-flex items-center space-x-2 border border-brandPrimary/15 dark:border-darkBorder bg-white/40 dark:bg-darkSurface/40 self-start px-4 py-2 rounded-full text-xs font-mono">
         <i class="fa-solid fa-terminal text-brandGit"></i>
         <span class="text-brandPrimary dark:text-gray-300" data-i18n="hero_tag">Git & CLI Journey from Ground Zero</span>
       </div>
       
-      <!-- Editorial Title with Cormorant Garamond font -->
-      <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif leading-[1.05] tracking-tight text-brandPrimary dark:text-white">
+      <!-- Editorial Title using Cormorant Garamond for premium typography -->
+      <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif leading-[1.1] tracking-tight text-brandPrimary dark:text-white">
         <span data-i18n="hero_title_1">명령어가 아닌,</span><br>
         <span class="italic text-brandAccent" data-i18n="hero_title_2">Git의 흐름</span><span data-i18n="hero_title_3">을 배우다.</span>
       </h1>
       
-      <!-- Subtitle -->
-      <p class="text-base sm:text-lg md:text-xl text-brandSecondary dark:text-gray-400 font-light leading-relaxed max-w-xl" data-i18n="hero_desc">
+      <!-- Subtitle with adjusted padding and line height -->
+      <p class="text-base sm:text-lg md:text-xl text-brandSecondary dark:text-gray-400 font-light leading-relaxed max-w-xl my-4" data-i18n="hero_desc">
         터미널 창 앞에서 외웠던 명령어들은 늘 머릿속을 맴돌다 사라집니다. <strong>git.flow</strong>는 보이지 않던 Git의 실시간 변화를 눈앞에 시각화하여, 원리부터 이해하도록 돕는 차세대 인터랙티브 런타임 공간입니다.
       </p>
 
-      <!-- CTA and Metadata buttons -->
+      <!-- CTA buttons with proper margins -->
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
         <a href="#sandbox" class="px-8 py-4 bg-brandPrimary dark:bg-white text-brandBg dark:text-brandPrimary font-mono text-sm tracking-wider rounded-xl text-center hover:bg-brandGit dark:hover:bg-brandGit dark:hover:text-white transition-all duration-300 shadow-lg" data-i18n="hero_cta_terminal">
           터미널 실습 시작하기 &rarr;
@@ -161,26 +161,26 @@
         </a>
       </div>
 
-      <!-- Quick Stats inside responsive columns -->
-      <div class="pt-8 border-t border-brandPrimary/10 dark:border-darkBorder flex items-center space-x-6 sm:space-x-8">
+      <!-- Quick Stats inside responsive columns with elegant line separators -->
+      <div class="pt-8 mt-6 border-t border-brandPrimary/10 dark:border-darkBorder flex items-center space-x-6 sm:space-x-8">
         <div>
           <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_1_val">3단계</span>
-          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono" data-i18n="stat_1_lbl">영역 완벽 시각화</span>
+          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_1_lbl">영역 완벽 시각화</span>
         </div>
         <div class="w-[1px] h-10 bg-brandPrimary/10 dark:bg-darkBorder"></div>
         <div>
-          <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_2_val">5가지</span>
-          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono" data-i18n="stat_2_lbl">코어 CLI 챌린지</span>
+          <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_2_val">6가지</span>
+          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_2_lbl">코어 CLI 챌린지</span>
         </div>
         <div class="w-[1px] h-10 bg-brandPrimary/10 dark:bg-darkBorder"></div>
         <div>
           <span class="block text-2xl sm:text-3xl font-serif text-brandPrimary dark:text-white" data-i18n="stat_3_val">0%</span>
-          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono" data-i18n="stat_3_lbl">진입 장벽 보장</span>
+          <span class="text-[10px] sm:text-xs text-brandSecondary uppercase tracking-widest font-mono block mt-1" data-i18n="stat_3_lbl">진입 장벽 보장</span>
         </div>
       </div>
     </div>
 
-    <!-- Right Side: Editorial Illustration of Git Graphic -->
+    <!-- Right Side Illustration Box -->
     <div class="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0">
       <div class="absolute inset-0 bg-gradient-to-tr from-brandAccent/10 to-transparent rounded-3xl filter blur-3xl -z-10"></div>
       <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder rounded-2xl p-6 sm:p-8 w-full max-w-md shadow-xl relative overflow-hidden transition-colors duration-300">
@@ -225,7 +225,7 @@
             </div>
           </div>
 
-          <div class="text-[11px] text-center text-brandSecondary italic font-serif" data-i18n="concept_quote">
+          <div class="text-[11px] text-center text-brandSecondary italic font-serif mt-4 block" data-i18n="concept_quote">
             "이해하는 순간, 명령어가 그림으로 펼쳐집니다."
           </div>
         </div>
@@ -239,8 +239,8 @@
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       
-      <!-- Left Column: Big Title & Philosophy -->
-      <div class="lg:col-span-5 flex flex-col justify-between">
+      <!-- Left Column: Philosophy Description -->
+      <div class="lg:col-span-5 flex flex-col justify-between space-y-8 lg:space-y-0">
         <div class="space-y-4">
           <span class="text-xs uppercase font-mono tracking-widest text-brandGit block font-bold" data-i18n="story_badge">SSAFY LIFE-CYCLE STORY</span>
           <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif leading-tight text-white">
@@ -256,7 +256,7 @@
         </div>
       </div>
 
-      <!-- Right Column: Growth Stages -->
+      <!-- Right Column: Growth Milestones -->
       <div class="lg:col-span-7 space-y-10 sm:space-y-12">
         
         <!-- Stage 01 -->
@@ -305,34 +305,34 @@
   <section id="sandbox" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 md:py-24">
     <!-- Section Header -->
     <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4">
-      <span class="text-xs uppercase font-mono tracking-widest text-brandGit px-3 py-1 bg-brandGit/10 rounded-full font-bold" data-i18n="sandbox_badge">CORE EXPERIENCE</span>
-      <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif text-brandPrimary dark:text-white">
+      <span class="text-xs uppercase font-mono tracking-widest text-brandGit px-3 py-1 bg-brandGit/10 rounded-full font-bold inline-block" data-i18n="sandbox_badge">CORE EXPERIENCE</span>
+      <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif text-brandPrimary dark:text-white leading-normal">
         <span data-i18n="sandbox_title_1">직접 타이핑하며 확인하는</span> <span class="italic text-brandAccent" data-i18n="sandbox_title_2">Git 샌드박스</span>
       </h2>
-      <p class="text-xs sm:text-sm md:text-base text-brandSecondary dark:text-gray-400 font-light leading-relaxed" data-i18n="sandbox_desc">
+      <p class="text-xs sm:text-sm md:text-base text-brandSecondary dark:text-gray-400 font-light leading-relaxed my-2" data-i18n="sandbox_desc">
         아래 가상 터미널에 직접 명령어를 입력하거나 퀵 단추를 눌러보세요.<br>
         CLI 파일 생성부터 Git 영역 변동, 브랜치 전환 및 머지까지 완벽히 에뮬레이트됩니다!
       </p>
     </div>
 
-    <!-- Playground Grid Layout -->
+    <!-- Playground Grid Layout with generous grid gap and item stretches -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       
-      <!-- Left Column: Challenge list and Terminal -->
+      <!-- Left Column: Challenge lists and Interactive Virtual Terminal -->
       <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
         
         <!-- Challenge Guide Panel -->
         <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-5 sm:p-6 rounded-2xl shadow-sm transition-colors duration-300">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400" data-i18n="quest_board">Quest Board</h3>
-            <span id="quest-progress" class="text-xs font-mono font-bold text-brandGit">0 / 5 Completed</span>
+            <h3 class="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 font-bold" data-i18n="quest_board">Quest Board</h3>
+            <span id="quest-progress" class="text-xs font-mono font-bold text-brandGit">0 / 6 Completed</span>
           </div>
           
           <div class="space-y-2.5">
             <!-- Mission 1 -->
             <div id="mission-1-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder bg-brandBg dark:bg-darkBg transition-all duration-300">
               <div class="flex items-center space-x-3 min-w-0">
-                <div id="mission-1-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0">1</div>
+                <div id="mission-1-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">1</div>
                 <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m1_text">Git 저장소 시작하기 (<code>git init</code>)</span>
               </div>
               <span id="mission-1-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_ready">준비</span>
@@ -341,8 +341,8 @@
             <!-- Mission 2 -->
             <div id="mission-2-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
               <div class="flex items-center space-x-3 min-w-0">
-                <div id="mission-2-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0">2</div>
-                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m2_text">파일 생성 및 스테이징 (<code>touch [파일명]</code> & <code>git add</code>)</span>
+                <div id="mission-2-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">2</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m2_text">가상 파일 생성하기 (<code>touch [파일명]</code>)</span>
               </div>
               <span id="mission-2-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
@@ -350,8 +350,8 @@
             <!-- Mission 3 -->
             <div id="mission-3-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
               <div class="flex items-center space-x-3 min-w-0">
-                <div id="mission-3-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0">3</div>
-                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m3_text">버전 기록 저장 (<code>git commit -m "..."</code>)</span>
+                <div id="mission-3-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">3</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m3_text">파일 스테이징하기 (<code>git add [파일명]</code>)</span>
               </div>
               <span id="mission-3-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
@@ -359,8 +359,8 @@
             <!-- Mission 4 -->
             <div id="mission-4-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
               <div class="flex items-center space-x-3 min-w-0">
-                <div id="mission-4-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0">4</div>
-                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m4_text">새 평행 우주 생성 (<code>git branch [이름]</code>)</span>
+                <div id="mission-4-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">4</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m4_text">버전 기록 저장 (<code>git commit -m "..."</code>)</span>
               </div>
               <span id="mission-4-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
@@ -368,10 +368,19 @@
             <!-- Mission 5 -->
             <div id="mission-5-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
               <div class="flex items-center space-x-3 min-w-0">
-                <div id="mission-5-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0">5</div>
-                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m5_text">새 우주로 차원 이동 (<code>git checkout [이름]</code>)</span>
+                <div id="mission-5-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">5</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m5_text">새 평행 우주 생성 (<code>git branch [이름]</code>)</span>
               </div>
               <span id="mission-5-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
+            </div>
+
+            <!-- Mission 6 -->
+            <div id="mission-6-ui" class="flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div id="mission-6-bullet" class="w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[9px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono">6</div>
+                <span class="text-xs font-medium text-brandPrimary dark:text-gray-200 truncate" data-i18n="m6_text">새 우주로 차원 이동 (<code>git checkout [이름]</code>)</span>
+              </div>
+              <span id="mission-6-status" class="text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0" data-i18n="status_locked">잠금</span>
             </div>
           </div>
         </div>
@@ -407,11 +416,10 @@
           </div>
         </div>
 
-        <!-- Quick Shortcut Actions/Capsules -->
         <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder p-4 sm:p-5 rounded-2xl transition-colors duration-300">
           <span class="text-[9px] uppercase font-mono tracking-widest text-brandSecondary dark:text-gray-400 block mb-3 font-semibold" data-i18n="smart_btn_title">퀵 스마트 단추 (터미널 자동 입력)</span>
           <div class="flex flex-wrap gap-1.5">
-            <button onclick="triggerShortcut('git init')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
+            <button onclick="triggerShortcut('git init')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1 font-bold">
               <span>git init</span>
             </button>
             <button onclick="triggerShortcut('touch app.js')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
@@ -431,6 +439,13 @@
             </button>
             <button onclick="triggerShortcut('git merge')" class="px-2.5 py-1.5 border border-brandPrimary/10 dark:border-darkBorder hover:border-brandGit/30 text-[11px] font-mono bg-brandBg dark:bg-darkBg rounded-lg hover:text-brandGit dark:text-white transition-all flex items-center gap-1">
               <span>git merge</span>
+            </button>
+            <!-- NEW Status Verification Buttons added -->
+            <button onclick="triggerShortcut('git status')" class="px-2.5 py-1.5 border border-brandAccent/25 hover:border-brandAccent text-[11px] font-mono bg-brandAccent/5 rounded-lg text-brandAccent font-semibold transition-all flex items-center gap-1">
+              <i class="fa-solid fa-circle-question text-[10px]"></i> <span>git status</span>
+            </button>
+            <button onclick="triggerShortcut('git log')" class="px-2.5 py-1.5 border border-brandSuccess/25 hover:border-brandSuccess text-[11px] font-mono bg-brandSuccess/5 rounded-lg text-brandSuccess font-semibold transition-all flex items-center gap-1">
+              <i class="fa-solid fa-clock-rotate-left text-[10px]"></i> <span>git log</span>
             </button>
           </div>
         </div>
@@ -470,7 +485,7 @@
 
           <!-- Branch Topology Visualization -->
           <div class="mb-6 p-4 bg-brandBg/60 dark:bg-darkBg/60 rounded-xl border border-brandPrimary/5 dark:border-darkBorder">
-            <h4 class="text-[10px] font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 mb-2 flex items-center justify-between">
+            <h4 class="text-[10px] font-mono uppercase tracking-wider text-brandSecondary dark:text-gray-400 mb-2 flex items-center justify-between font-bold">
               <span data-i18n="branch_topology_title">Branch Pointer Map (활성 브랜치 구조)</span>
               <span class="text-[9px] text-brandAccent font-bold">Active: <span id="active-branch-desc">none</span></span>
             </h4>
@@ -480,7 +495,7 @@
             </div>
           </div>
 
-          <!-- Interactive Columns -->
+          <!-- Interactive Columns with Proper Spacing -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
             
             <!-- Column 1: Working Tree & File System -->
@@ -542,9 +557,9 @@
                   기록된 커밋 히스토리가 아직 없습니다.
                 </div>
                 
-                <!-- Commit tree container dynamically injected -->
-                <div id="commit-tree" class="hidden w-full flex flex-col items-center justify-center space-y-3 max-h-[220px] overflow-y-auto custom-scroll pr-1">
-                  <!-- Active Commits with Memo & Metadata -->
+                <!-- Commit tree container dynamically injected with explicit scroll heights -->
+                <div id="commit-tree" class="hidden w-full flex flex-col items-center justify-start space-y-3 max-h-[220px] overflow-y-auto custom-scroll pr-1">
+                  <!-- Active Commits with Memo & Metadata & Snapshots included -->
                 </div>
               </div>
             </div>
@@ -570,17 +585,17 @@
   <section id="strengths" class="border-t border-brandPrimary/10 dark:border-darkBorder py-20 md:py-28 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
       
-      <!-- Sub-headline -->
+      <!-- Sub-headline layout with relaxed padding -->
       <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12 sm:mb-16">
         <div class="max-w-xl space-y-4">
           <span class="text-xs uppercase font-mono tracking-widest text-brandGit font-bold block" data-i18n="feat_badge">Why git.flow?</span>
-          <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif text-brandPrimary dark:text-white leading-tight">
+          <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif text-brandPrimary dark:text-white leading-normal">
             <span data-i18n="feat_title_1">어렵기만 한 버전을</span><br>
             <span data-i18n="feat_title_2">가장</span> <span class="italic text-brandAccent" data-i18n="feat_title_3">아름답게 관찰</span><span data-i18n="feat_title_4">하는 세 가지 방법.</span>
           </h2>
         </div>
         <div>
-          <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 max-w-sm leading-relaxed font-light" data-i18n="feat_subtitle">
+          <p class="text-xs sm:text-sm text-brandSecondary dark:text-gray-400 max-w-sm leading-relaxed font-light mt-2" data-i18n="feat_subtitle">
             명령어를 기계적으로 외우지 않고도 자연스럽게 분산 관리 협업 흐름을 완전히 내 것으로 만드는 비전 제시.
           </p>
         </div>
@@ -642,7 +657,7 @@
       
       <div class="max-w-2xl space-y-6 relative">
         <span class="text-xs font-mono uppercase tracking-widest text-brandGit font-bold block" data-i18n="cta_badge">SSAFY 13th & ALL JUNIORS</span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif leading-tight text-white">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif leading-normal text-white">
           <span data-i18n="cta_title_1">더 이상의 머뭇거림은 필요 없습니다.</span><br>
           <span data-i18n="cta_title_2">지금 Git의 진짜 원리로 깊게 스며드세요.</span>
         </h2>
@@ -656,7 +671,7 @@
             <input type="email" required placeholder="name@ssafy.com" class="px-4 py-3 bg-white/10 dark:bg-white/5 text-white rounded-xl outline-none focus:ring-2 focus:ring-brandGit text-xs font-mono placeholder:text-gray-500 flex-1 border border-white/5">
             <button type="submit" class="px-6 py-3 bg-brandGit hover:bg-opacity-95 text-xs font-mono rounded-xl tracking-wider hover:scale-105 transition-all text-white font-bold active:scale-95" data-i18n="sub_btn">SUBSCRIBE</button>
           </form>
-          <p class="text-[10px] text-brandSecondary dark:text-gray-500 mt-2" data-i18n="cta_disclaimer">우리는 영리적인 목적으로 이메일을 오용하지 않으며 언제든 구독을 철회할 수 있습니다.</p>
+          <p class="text-[10px] text-brandSecondary dark:text-gray-500 mt-3" data-i18n="cta_disclaimer">우리는 영리적인 목적으로 이메일을 오용하지 않으며 언제든 구독을 철회할 수 있습니다.</p>
         </div>
       </div>
     </div>
@@ -690,13 +705,13 @@
     const state = {
       isInitialized: false,
       commitCount: 0,
-      commits: [], // Stores fully enriched commit metadata
+      commits: [], // Stores { id, message, branch, author, date, files: [] }
       branches: {
         'main': null // maps branch name to commit ID
       },
       currentBranch: 'main',
       head: 'none',
-      missionStatus: [false, false, false, false, false],
+      missionStatus: [false, false, false, false, false, false], // Expanded to 6 stages
       
       // Virtual File System (VFS)
       files: {
@@ -706,13 +721,14 @@
       lang: 'ko',
       theme: 'light',
 
-      // General-purpose missions checking any file targets instead of hardcoding "main.js"
+      // General-purpose missions checking ANY arbitrary custom file names / branch names instead of hardcoded ones
       missions: [
-        { id: 1, check: () => state.isInitialized },
-        { id: 2, check: () => Object.values(state.files).some(f => f.status === 'staged') },
-        { id: 3, check: () => state.commitCount > 0 },
-        { id: 4, check: () => Object.keys(state.branches).length > 1 },
-        { id: 5, check: () => state.currentBranch !== 'main' }
+        { id: 1, check: () => state.isInitialized }, // Git Init
+        { id: 2, check: () => Object.keys(state.files).length > 0 }, // Touch (Any custom file name)
+        { id: 3, check: () => Object.values(state.files).some(f => f.status === 'staged' || f.status === 'committed') }, // Git Add (Any file)
+        { id: 4, check: () => state.commitCount > 0 }, // Git Commit
+        { id: 5, check: () => Object.keys(state.branches).length > 1 }, // Git Branch created (Any custom name)
+        { id: 6, check: () => state.currentBranch !== 'main' } // Git Checkout (Moved to any custom branch)
       ]
     };
 
@@ -728,7 +744,7 @@
         hero_cta_story: "SSAFY 성장 여정 보기",
         stat_1_val: "3단계",
         stat_1_lbl: "영역 완벽 시각화",
-        stat_2_val: "5가지",
+        stat_2_val: "6가지",
         stat_2_lbl: "코어 CLI 챌린지",
         stat_3_val: "0%",
         stat_3_lbl: "진입 장벽 보장",
@@ -752,10 +768,11 @@
         sandbox_desc: "아래 가상 터미널에 직접 명령어를 입력하거나 퀵 단추를 눌러보세요. CLI 파일 생성부터 Git 영역 변동, 브랜치 전환 및 머지까지 완벽히 에뮬레이트됩니다!",
         quest_board: "퀘스트 보드",
         m1_text: "Git 저장소 시작하기 (<code>git init</code>)",
-        m2_text: "파일 생성 및 스테이징 (<code>touch [파일명]</code> & <code>git add</code>)",
-        m3_text: "버전 기록 저장 (<code>git commit -m \"...\"</code>)",
-        m4_text: "새 평행 우주 생성 (<code>git branch [이름]</code>)",
-        m5_text: "새 우주로 차원 이동 (<code>git checkout [이름]</code>)",
+        m2_text: "가상 파일 생성하기 (<code>touch [파일명]</code>)",
+        m3_text: "파일 스테이징하기 (<code>git add [파일명]</code>)",
+        m4_text: "버전 기록 저장 (<code>git commit -m \"...\"</code>)",
+        m5_text: "새 평행 우주 생성 (<code>git branch [이름]</code>)",
+        m6_text: "새 우주로 차원 이동 (<code>git checkout [이름]</code>)",
         status_ready: "준비",
         status_locked: "잠금",
         status_clear: "완료",
@@ -817,7 +834,7 @@
         hero_cta_story: "View SSAFY Journey",
         stat_1_val: "3 Stages",
         stat_1_lbl: "Visual Architecture",
-        stat_2_val: "5 Steps",
+        stat_2_val: "6 Steps",
         stat_2_lbl: "Core CLI Challenges",
         stat_3_val: "0%",
         stat_3_lbl: "Entry Barrier Promised",
@@ -841,10 +858,11 @@
         sandbox_desc: "Type actual commands in the virtual terminal below or click quick shortcuts. File creation, Git tracking, staging, and branch switching are simulated in real time!",
         quest_board: "Quest Board",
         m1_text: "Initialize Repository (<code>git init</code>)",
-        m2_text: "File Creation & Staging (<code>touch [filename]</code> & <code>git add</code>)",
-        m3_text: "Record Version History (<code>git commit -m \"...\"</code>)",
-        m4_text: "Branch Out (<code>git branch [name]</code>)",
-        m5_text: "Dimension Leap to Branch (<code>git checkout [name]</code>)",
+        m2_text: "Create Virtual File (<code>touch [filename]</code>)",
+        m3_text: "Stage Target File (<code>git add [filename]</code>)",
+        m4_text: "Record Version History (<code>git commit -m \"...\"</code>)",
+        m5_text: "Branch Out (<code>git branch [name]</code>)",
+        m6_text: "Dimension Leap to Branch (<code>git checkout [name]</code>)",
         status_ready: "Ready",
         status_locked: "Locked",
         status_clear: "Cleared",
@@ -870,7 +888,7 @@
         repo_empty: "No commit history found.",
         win_tag: "CONGRATULATIONS!",
         win_title: "Git Expeditions Complete",
-        win_desc: "Bravo! You've successfully completed all five core milestones of local Git workflow. You are ready for collaboration!",
+        win_desc: "Bravo! You've successfully completed all six core milestones of local Git workflow. You are ready for collaboration!",
         win_return: "Back to Interactive Sandbox",
         feat_badge: "Why git.flow?",
         feat_title_1: "Three Ways",
@@ -897,22 +915,25 @@
       }
     };
 
+    // Expanded tips for 6 distinct stages
     const tipsDictionary = {
       ko: [
         { title: "준비 운동", desc: "가상 터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git init</code>을 치거나 퀵 단추를 눌러 저장소를 만드세요." },
-        { title: "첫 파일 생성 및 추적하기", desc: "먼저 터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch [파일명]</code>을 입력해 파일을 만들고, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add [파일명]</code>으로 대기 영역에 올리세요." },
-        { title: "정식 버전 스냅샷 남기기", desc: "영구 기록할 준비가 되었습니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git commit -m \"작성한 커밋 메시지\"</code>를 통해 첫 스냅샷을 생성하십시오." },
+        { title: "첫 파일 생성하기", desc: "터미널에 <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch [파일명]</code>을 입력해 가상 디스크 공간에 자유롭게 새 파일을 생성해 보세요." },
+        { title: "작성 파일 대기 영역에 올리기", desc: "방금 만든 파일을 기록용 준비 영역에 등록합니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add [파일명]</code> 혹은 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add .</code>을 입력하세요." },
+        { title: "정식 버전 스냅샷 남기기", desc: "영구 기록할 준비가 되었습니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git commit -m \"커밋 메시지\"</code>를 통해 첫 스냅샷을 생성하십시오." },
         { title: "새로운 우주(가지) 뻗기", desc: "기존 main 브랜치 외에 평행 세계를 만듭니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git branch feature/dev</code>를 쳐서 새 브랜치를 만드세요." },
         { title: "새 우주로 차원 이동", desc: "방금 만든 가지로 작업 머리를 이동합니다. <code class='font-mono bg-white dark:bg-darkSurface px-1'>git checkout feature/dev</code>를 입력하면 헤드 포인터가 순간이동합니다." },
-        { title: "탐험 달성 완료!", desc: "축하합니다! 로컬 Git의 핵심 동작 원리 5대 흐름을 모두 정복하셨습니다. 이제 새로운 파일들을 다루거나 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git status</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git log</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git merge</code> 등 심화 단계를 자유롭게 연습해보세요!" }
+        { title: "탐험 달성 완료!", desc: "축하합니다! 로컬 Git의 핵심 동작 원리 6대 흐름을 모두 정복하셨습니다. 이제 새로운 파일들을 다루거나 <code class='font-mono bg-white dark:bg-darkSurface px-1'>git status</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git log</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git merge</code> 등 심화 단계를 자유롭게 연습해보세요!" }
       ],
       en: [
         { title: "Warm Up", desc: "Type <code class='font-mono bg-white dark:bg-darkSurface px-1'>git init</code> inside the terminal or click the quick shortcut to spawn your repository." },
-        { title: "File Creation & Tracking", desc: "Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch [filename]</code> to create any file, then stage it using <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add [filename]</code>." },
+        { title: "Create Virtual File", desc: "Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>touch [filename]</code> to create any custom resource file in your working workspace." },
+        { title: "Stage Target File", desc: "Register the created file into the staging index. Use <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add [filename]</code> or <code class='font-mono bg-white dark:bg-darkSurface px-1'>git add .</code>." },
         { title: "Record a Version Snapshot", desc: "Ready to log permanently. Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>git commit -m \"your commit message\"</code> to record your very first snapshot." },
         { title: "Spawn a Parallel Universe", desc: "Let's create a feature branch beside main. Run <code class='font-mono bg-white dark:bg-darkSurface px-1'>git branch feature/dev</code> to branch out." },
         { title: "Dimension Leap to Feature", desc: "Now hop over to the newly made branch. Type <code class='font-mono bg-white dark:bg-darkSurface px-1'>git checkout feature/dev</code> to teleport your HEAD pointer." },
-        { title: "Expeditions Cleared!", desc: "Fantastic! You have successfully mastered the 5 core local git milestones. Now feel free to create more files, check <code class='font-mono bg-white dark:bg-darkSurface px-1'>git status</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git log</code>, or perform <code class='font-mono bg-white dark:bg-darkSurface px-1'>git merge</code>!" }
+        { title: "Expeditions Cleared!", desc: "Fantastic! You have successfully mastered the 6 core local git milestones. Now feel free to create more files, check <code class='font-mono bg-white dark:bg-darkSurface px-1'>git status</code>, <code class='font-mono bg-white dark:bg-darkSurface px-1'>git log</code>, or perform <code class='font-mono bg-white dark:bg-darkSurface px-1'>git merge</code>!" }
       ]
     };
 
@@ -1129,7 +1150,7 @@
       if (rootCommand === 'touch') {
         const filename = args[1];
         if (!filename) {
-          appendLog(state.lang === 'ko' ? "에러: 터치할 파일명을 기재해 주십시오. (예: touch app.js)" : "error: Touch filename required. (e.g., touch app.js)", "error");
+          appendLog(state.lang === 'ko' ? "에러: 생성할 파일명을 기재해 주십시오. (예: touch app.js)" : "error: Touch filename required. (e.g., touch app.js)", "error");
           return;
         }
         if (state.files[filename]) {
@@ -1263,7 +1284,7 @@
               appendLog(state.lang === 'ko' ? "이 브랜치에 기록된 커밋 로그가 아직 존재하지 않습니다." : "No commits logged yet.", 'info');
             } else {
               appendLog(state.lang === 'ko' ? `=== 로컬 커밋 이력 로그 ===` : `=== Local Commit Log ===`, 'success');
-              // Sort commits to show newest first
+              // Sort commits to show newest first, displaying actual custom commit content
               [...state.commits].reverse().forEach(commit => {
                 const pointers = [];
                 Object.keys(state.branches).forEach(b => {
@@ -1275,7 +1296,12 @@
                 appendLog(`<span class="text-yellow-500">commit ${commit.id}</span>${pointerStr}`, 'info');
                 appendLog(`Author: ${commit.author}`);
                 appendLog(`Date:   ${commit.date}`);
-                appendLog(`\n    ${commit.message}\n`, 'success');
+                appendLog(`\n    ${commit.message}`, 'success');
+                if (commit.files && commit.files.length > 0) {
+                  appendLog(`    Files:  ${commit.files.join(', ')}\n`, 'info');
+                } else {
+                  appendLog(`\n`, 'info');
+                }
               });
             }
             break;
@@ -1332,13 +1358,17 @@
             const now = new Date();
             const timeStr = now.toLocaleTimeString() + ' ' + now.toLocaleDateString();
             
-            // Rich Commit Metadata with author info and detailed stamp
+            // Capture list of files being committed
+            const committedFiles = Object.keys(state.files).filter(key => state.files[key].status === 'staged');
+
+            // Rich Commit Metadata with author info and captured files
             const newCommit = { 
               id: shortId, 
               message: commitMessage, 
               branch: state.currentBranch,
               author: "SSAFY Dev <dev@ssafy.com>",
-              date: timeStr
+              date: timeStr,
+              files: committedFiles
             };
 
             state.commits.push(newCommit);
@@ -1454,7 +1484,8 @@
               message: `Merge branch '${mergeTarget}' into ${state.currentBranch}`,
               branch: state.currentBranch,
               author: "SSAFY Dev <dev@ssafy.com>",
-              date: logStamp
+              date: logStamp,
+              files: [] // Merge captures system merge snapshot
             };
 
             state.commits.push(mergeCommit);
@@ -1495,7 +1526,7 @@
           completedCount++;
           uiContainer.classList.remove('opacity-50');
           uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-950/20 transition-all duration-300";
-          uiBullet.className = 'w-5 h-5 rounded-full bg-brandSuccess text-white flex items-center justify-center text-[10px] font-bold shrink-0';
+          uiBullet.className = 'w-5 h-5 rounded-full bg-brandSuccess text-white flex items-center justify-center text-[10px] font-bold shrink-0 font-mono';
           uiBullet.innerHTML = '<i class="fa-solid fa-check"></i>';
           uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandSuccess bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '완료' : 'Clear';
@@ -1506,20 +1537,20 @@
         } else if (idx === completedCount) {
           uiContainer.classList.remove('opacity-50');
           uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-brandAccent/30 dark:border-brandAccent/60 bg-white dark:bg-darkSurface transition-all duration-300";
-          uiBullet.className = 'w-5 h-5 rounded-full bg-brandAccent text-white flex items-center justify-center text-[10px] font-bold success-pulse shrink-0';
+          uiBullet.className = 'w-5 h-5 rounded-full bg-brandAccent text-white flex items-center justify-center text-[10px] font-bold success-pulse shrink-0 font-mono';
           uiBullet.innerHTML = `${idx+1}`;
           uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandAccent bg-brandAccent/10 px-2 py-0.5 rounded font-bold shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '도전중' : 'Active';
         } else {
           uiContainer.className = "flex items-center justify-between p-3 rounded-xl border border-brandPrimary/5 dark:border-darkBorder opacity-50 transition-all duration-300";
-          uiBullet.className = 'w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[10px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0';
+          uiBullet.className = 'w-5 h-5 rounded-full border border-brandPrimary/20 dark:border-darkBorder flex items-center justify-center text-[10px] font-bold bg-white dark:bg-darkSurface text-brandSecondary shrink-0 font-mono';
           uiBullet.innerHTML = `${idx+1}`;
           uiStatus.className = 'text-[9px] sm:text-[10px] font-mono text-brandSecondary bg-brandBg/50 dark:bg-darkSurface/50 px-2 py-0.5 rounded shrink-0';
           uiStatus.textContent = state.lang === 'ko' ? '잠금' : 'Locked';
         }
       });
 
-      document.getElementById('quest-progress').textContent = `${completedCount} / 5 Completed`;
+      document.getElementById('quest-progress').textContent = `${completedCount} / 6 Completed`;
 
       const tipTitle = document.getElementById('tip-title');
       const tipDesc = document.getElementById('tip-desc');
@@ -1533,7 +1564,7 @@
         tipDesc.innerHTML = tipsList[tipsList.length - 1].desc;
       }
 
-      if (completedCount === 5) {
+      if (completedCount === 6) {
         setTimeout(() => {
           document.getElementById('success-overlay').classList.remove('hidden');
           triggerBurst();
@@ -1622,7 +1653,7 @@
         });
       }
 
-      // 4. Render Active Pointers Map (브랜치 추가/삭제/체크아웃 동작 시각화 패널)
+      // 4. Render Active Pointers Map
       const branchPointersList = document.getElementById('branch-pointers-list');
       const activeBranchDesc = document.getElementById('active-branch-desc');
       branchPointersList.innerHTML = '';
@@ -1651,7 +1682,7 @@
         branchPointersList.innerHTML = `<span class="text-xs font-mono italic text-brandSecondary" data-i18n="no_branches">저장소 비활성 상태</span>`;
       }
 
-      // 5. Redraw Commits with Enhanced Memo Metadata
+      // 5. Redraw Commits with Enhanced Memo Metadata and exact Committed files representation
       const repoEmpty = document.getElementById('repo-empty');
       const commitTree = document.getElementById('commit-tree');
       
@@ -1682,6 +1713,14 @@
             return `<span class="${isHead ? 'bg-brandGit text-white font-bold' : 'bg-brandAccent/20 text-brandAccent dark:bg-brandAccent/45 dark:text-white'} px-1 py-0.5 rounded text-[8px] font-mono">${isHead ? 'HEAD -> ' : ''}${br}</span>`;
           }).join(' ');
 
+          // Generate file snapshot pill lists inside the commit representation
+          const filesCapturedHtml = commit.files && commit.files.length > 0
+            ? `<div class="mt-2 pt-1.5 border-t border-brandPrimary/5 dark:border-darkBorder/30 flex flex-wrap gap-1 items-center">
+                 <span class="text-[8px] opacity-60 text-brandSecondary uppercase tracking-wider">Snapshot:</span>
+                 ${commit.files.map(f => `<span class="bg-brandBg dark:bg-darkBg text-brandPrimary dark:text-gray-300 px-1 py-0.2 rounded text-[8px] font-mono border border-brandPrimary/5">${f}</span>`).join('')}
+               </div>`
+            : '';
+
           commitNode.innerHTML = `
             ${lineHtml}
             <div class="bg-white dark:bg-darkSurface border border-brandPrimary/10 dark:border-darkBorder text-brandPrimary dark:text-white p-3 rounded-xl text-[10px] font-mono w-full shadow-sm hover:scale-[1.02] transition-transform">
@@ -1698,6 +1737,9 @@
                 <i class="fa-solid fa-user-pen text-[8px]"></i>
                 <span>${commit.author}</span>
               </div>
+
+              <!-- Snapshot Files Rendered -->
+              ${filesCapturedHtml}
 
               <!-- Pointers & Tags container -->
               <div class="flex flex-wrap gap-1 mt-2.5">
@@ -1721,7 +1763,7 @@
       state.currentBranch = 'main';
       state.head = 'none';
       state.files = {};
-      state.missionStatus = [false, false, false, false, false];
+      state.missionStatus = [false, false, false, false, false, false];
 
       const log = document.getElementById('terminal-log');
       if (state.lang === 'ko') {
@@ -1754,7 +1796,7 @@
     }
 
     window.onload = function() {
-      updateLanguageUI();g
+      updateLanguageUI();
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         toggleTheme();
       }
